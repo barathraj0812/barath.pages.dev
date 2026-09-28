@@ -238,7 +238,7 @@ section+section::before{content:'';position:absolute;top:-1px;left:0;right:0;hei
 html.has-custom-cursor,html.has-custom-cursor *{cursor:none!important}
 html.has-custom-cursor input,html.has-custom-cursor textarea,
 html.has-custom-cursor select,html.has-custom-cursor [contenteditable]{cursor:text!important}
-#cc-dot,#cc-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9998;
+#cc-dot,#cc-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:10001;
   border-radius:50%;will-change:transform;transform:translate3d(-100px,-100px,0)}
 #cc-dot{width:6px;height:6px;margin:-3px 0 0 -3px;background:var(--blue);
   transition:opacity .2s ease}
@@ -6557,6 +6557,12 @@ if(_sb)_sb.addEventListener('click',function(){sharePortfolio(this);});
     var ring=document.createElement('div');ring.id='cc-ring';
     document.body.appendChild(dot);document.body.appendChild(ring);
     var cx=0,cy=0,rx=0,ry=0,cvisible=false;
+    // Fullscreen puts the lightbox in the browser top layer, above everything
+    // outside it. Re-parent the cursor into the fullscreen element so it stays visible.
+    document.addEventListener('fullscreenchange',function(){
+      var host=document.fullscreenElement||document.body;
+      host.appendChild(dot);host.appendChild(ring);
+    });
     window.addEventListener('mousemove',function(e){
       cx=e.clientX;cy=e.clientY;
       if(!cvisible){cvisible=true;dot.classList.remove('cc-hidden');ring.classList.remove('cc-hidden');}
