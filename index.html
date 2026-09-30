@@ -1124,15 +1124,8 @@ footer{border-top:1px solid var(--border);padding:28px 32px;position:relative;z-
   radial-gradient(ellipse at 50% 40%,rgba(59,130,246,.08),transparent 70%),var(--bg2)}
 .at-shot-soon{position:absolute;top:7px;left:9px;z-index:2;font-family:'JetBrains Mono',monospace;
   font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text3)}
-.at-shots-7{grid-template-columns:repeat(7,1fr)}
-.at-shot.at-shot-logo{background:radial-gradient(ellipse at 50% 50%,rgba(59,130,246,.10),transparent 75%),var(--bg2)}
-.at-shot-logo img{object-fit:contain;padding:14px 16px 22px;filter:none;box-sizing:border-box}
-.at-shot-logo:hover img{transform:scale(1.04);filter:none}
-@media(max-width:900px){
-  .at-shots-7{grid-template-columns:repeat(3,1fr)}
-  .at-shots-7 .at-shot-logo{grid-column:1/-1;aspect-ratio:auto;height:96px}
-}
-@media(max-width:640px){.at-shots-7{grid-template-columns:repeat(2,1fr)}}
+.proj-title.has-logo{display:flex;align-items:center;gap:12px}
+.proj-title .proj-logo{height:1.35em;width:auto;max-width:2.4em;flex:none;display:block}
 .proj-link-pending{color:var(--text3);border-bottom:1px dashed var(--border2);cursor:default}
 .proj-link-pending:hover{border-color:var(--border2);gap:7px}
 #hc-live-link[hidden],#hc-live-pending[hidden],#ec-live-link[hidden],#ec-live-pending[hidden]{display:none}
@@ -2581,7 +2574,7 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
     <div class="solar-featured reveal" id="hyperbola-card">
       <div class="solar-info">
         <p class="proj-cat">Interactive Mathematics · Conic Sections · JEE Tool</p>
-        <h3 class="proj-title">Hyperbola Calculator</h3>
+        <h3 class="proj-title has-logo"><img class="proj-logo" src="hyperbolasvg.svg" alt="" decoding="async" onerror="this.style.display='none'"/><span>Hyperbola Calculator</span></h3>
         <p class="proj-desc">An interactive workbench for hyperbolas, built around the JEE Main &amp; Advanced syllabus. Enter a standard, translated, general or rotated equation and it classifies the conic, computes its geometry in exact and decimal form, and plots it on a graph you can pan, zoom and inspect point by point.</p>
         <div class="proj-tags">
           <span class="ptag hi">JavaScript</span><span class="ptag hi">Canvas API</span>
@@ -2611,7 +2604,7 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
           </button>
         </div>
       </div>
-      <div class="at-shots at-shots-7" data-gallery-group="hyperbola-calculator">
+      <div class="at-shots" data-gallery-group="hyperbola-calculator">
         <div class="at-shot" data-gallery-caption="Hyperbola Calculator — Main Interface">
           <img decoding="async" src="https://lh3.googleusercontent.com/d/1tJCScKgEhBCoYGvh_9yUFIsug0RX8eTm" alt="Hyperbola Calculator — Main Interface" loading="lazy"/>
           <span class="at-shot-lbl">Main Interface</span>
@@ -2635,10 +2628,6 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
         <div class="at-shot" data-gallery-caption="Hyperbola Calculator — Formula Sheet">
           <img decoding="async" src="https://lh3.googleusercontent.com/d/1dDFIGfp_bLD2F-4Z1OsmNIQVRYCRks0T" alt="Hyperbola Calculator — Formula Sheet" loading="lazy"/>
           <span class="at-shot-lbl">Formula Sheet</span>
-        </div>
-        <div class="at-shot at-shot-logo" data-gallery-caption="Hyperbola Calculator — Logo">
-          <img decoding="async" src="hyperbolasvg.svg" alt="Hyperbola Calculator — Logo" loading="lazy"/>
-          <span class="at-shot-lbl">Logo</span>
         </div>
       </div>
     </div>
