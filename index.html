@@ -1114,6 +1114,19 @@ footer{border-top:1px solid var(--border);padding:28px 32px;position:relative;z-
   position:absolute;bottom:7px;left:9px;z-index:2;
   font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.1em;
   text-transform:uppercase;color:rgba(59,130,246,.85)}
+/* Visual-pending tile: same footprint as .at-shot. When a screenshot exists, drop the
+   .at-shot-ph class + .at-shot-soon span and put an <img> inside — nothing else changes. */
+.at-shot.at-shot-ph{cursor:default;background:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 62' preserveAspectRatio='xMidYMid slice' fill='none' stroke='%233B82F6'%3E%3Cpath d='M0 0L100 62M100 0L0 62' stroke-opacity='.10' stroke-dasharray='2 3'/%3E%3Cpath d='M30 0C42 20 42 42 30 62M70 0C58 20 58 42 70 62' stroke-opacity='.32' stroke-width='1.2'/%3E%3C/svg%3E") center/cover no-repeat,
+  radial-gradient(ellipse at 50% 40%,rgba(59,130,246,.08),transparent 70%),var(--bg2)}
+.at-shot.at-shot-ph.ell{background:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 62' preserveAspectRatio='xMidYMid slice' fill='none' stroke='%233B82F6'%3E%3Cpath d='M0 31H100M50 0V62' stroke-opacity='.10' stroke-dasharray='2 3'/%3E%3Cellipse cx='50' cy='31' rx='34' ry='19' stroke-opacity='.34' stroke-width='1.2'/%3E%3Ccircle cx='50' cy='31' r='34' stroke-opacity='.10' stroke-dasharray='2 3'/%3E%3C/svg%3E") center/cover no-repeat,
+  radial-gradient(ellipse at 50% 40%,rgba(59,130,246,.08),transparent 70%),var(--bg2)}
+.at-shot-soon{position:absolute;top:7px;left:9px;z-index:2;font-family:'JetBrains Mono',monospace;
+  font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text3)}
+.proj-link-pending{color:var(--text3);border-bottom:1px dashed var(--border2);cursor:default}
+.proj-link-pending:hover{border-color:var(--border2);gap:7px}
+#hc-live-link[hidden],#hc-live-pending[hidden],#ec-live-link[hidden],#ec-live-pending[hidden]{display:none}
 
 /* Card body */
 .tneb-body{padding:26px 28px;flex:1;display:flex;flex-direction:column;gap:16px}
@@ -2338,7 +2351,7 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
     <div class="sec-hdr reveal">
       <p class="sec-eyebrow">// Featured Work</p>
       <h2 class="sec-title reveal title-reveal">Projects &amp; Experiments</h2>
-      <p class="sec-sub">Full-stack AI applications, civic tech tools, Unity simulations, and generative AI experiments — built independently using Node.js, Gemini API, Chart.js, Canvas API, C#, and HTML/CSS/JS.</p>
+      <p class="sec-sub">Full-stack AI applications, civic tech tools, interactive mathematics software, Unity simulations, and generative AI experiments — built independently using Node.js, Gemini API, Chart.js, Canvas API, C#, and HTML/CSS/JS.</p>
       <div class="divider"></div>
     </div>
 
@@ -2550,6 +2563,132 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
         <div class="at-shot">
           <img decoding="async" src="https://lh3.googleusercontent.com/d/1MtUe4lpB32-EDVuAesWQ1gHaLCxbsifK" alt="AstroTamil Tamil Rasi chakra zodiac wheel visualization" loading="lazy"/>
           <span class="at-shot-lbl">Tamil Rasi Chakram</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HYPERBOLA CALCULATOR — same pattern as AstroTamil (info + labelled visual strip + Learn More).
+         Live URL: set ctaUrl in window.HYPERBOLA_PROJECT_DATA (script near AstroTamil data). -->
+    <div class="solar-featured reveal" id="hyperbola-card">
+      <div class="solar-info">
+        <p class="proj-cat">Interactive Mathematics · Conic Sections · JEE Tool</p>
+        <h3 class="proj-title">Hyperbola Calculator</h3>
+        <p class="proj-desc">An interactive workbench for hyperbolas, built around the JEE Main &amp; Advanced syllabus. Enter a standard, translated, general or rotated equation and it classifies the conic, computes its geometry in exact and decimal form, and plots it on a graph you can pan, zoom and inspect point by point.</p>
+        <div class="proj-tags">
+          <span class="ptag hi">JavaScript</span><span class="ptag hi">Canvas API</span>
+          <span class="ptag hi">Exact &amp; Decimal Maths</span><span class="ptag">Pointer &amp; Touch Input</span>
+          <span class="ptag">LocalStorage</span><span class="ptag">No Backend</span>
+        </div>
+        <div class="proj-chal">
+          <h4>Engineering Highlights</h4>
+          <div class="chal-list">
+            <div class="chal-item">Equation parser for translated, general and rotated (xy-term) conics, with plain-language error messages</div>
+            <div class="chal-item">Exact fractions and surds alongside configurable-precision decimals</div>
+            <div class="chal-item">Interactive JEE tools — tangents, normals, polar, chords, diameters, reflection — constructed live on the graph</div>
+            <div class="chal-item">P (a point on the curve) and Q (a free point) kept in sync between the graph and the inputs</div>
+            <div class="chal-item">Laboratory for parameter sliders, midpoint locus and answer verification, plus step-by-step derivations</div>
+            <div class="chal-item">Presentation mode for classroom use, with mouse, touch and pen input</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:12px">
+          <a id="hc-live-link" href="#" target="_blank" rel="noopener" class="proj-link" hidden>
+            <span class="live-dot blue" style="width:6px;height:6px;margin-right:2px"></span>
+            Try Live App
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+          <span id="hc-live-pending" class="proj-link proj-link-pending" role="note">Live link coming soon</span>
+          <button onclick="window.openProjectModal(window.HYPERBOLA_PROJECT_DATA)" class="btn-secondary" style="padding:8px 16px;font-size:.78rem">
+            Learn More
+          </button>
+        </div>
+      </div>
+      <div class="at-shots" data-gallery-group="hyperbola-calculator">
+        <div class="at-shot at-shot-ph" role="img" aria-label="Equation workspace — project visual coming soon">
+          <span class="at-shot-soon">Visual coming soon</span>
+          <span class="at-shot-lbl">Workspace</span>
+        </div>
+        <div class="at-shot at-shot-ph" role="img" aria-label="Interactive graph — project visual coming soon">
+          <span class="at-shot-soon">Visual coming soon</span>
+          <span class="at-shot-lbl">Graph</span>
+        </div>
+        <div class="at-shot at-shot-ph" role="img" aria-label="P and Q point system — project visual coming soon">
+          <span class="at-shot-soon">Visual coming soon</span>
+          <span class="at-shot-lbl">P &amp; Q Points</span>
+        </div>
+        <div class="at-shot at-shot-ph" role="img" aria-label="Advanced JEE tools — project visual coming soon">
+          <span class="at-shot-soon">Visual coming soon</span>
+          <span class="at-shot-lbl">JEE Tools</span>
+        </div>
+        <div class="at-shot at-shot-ph" role="img" aria-label="Hyperbola laboratory — project visual coming soon">
+          <span class="at-shot-soon">Visual coming soon</span>
+          <span class="at-shot-lbl">Laboratory</span>
+        </div>
+        <div class="at-shot at-shot-ph" role="img" aria-label="Presentation mode — project visual coming soon">
+          <span class="at-shot-soon">Visual coming soon</span>
+          <span class="at-shot-lbl">Presentation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ELLIPSE CALCULATOR — same pattern as Hyperbola Calculator / AstroTamil.
+         Live URL: ctaUrl in window.ELLIPSE_PROJECT_DATA. -->
+    <div class="solar-featured reveal" id="ellipse-card">
+      <div class="solar-info">
+        <p class="proj-cat">Interactive Mathematics · Conic Sections · JEE Tool</p>
+        <h3 class="proj-title">Ellipse Calculator</h3>
+        <p class="proj-desc">The ellipse counterpart to the Hyperbola Calculator, built around the JEE Main &amp; Advanced syllabus. It reads standard, translated, general and rotated equations, works out the full geometry in exact and decimal form, and plots it on an interactive graph alongside the auxiliary and director circles, area and perimeter.</p>
+        <div class="proj-tags">
+          <span class="ptag hi">JavaScript</span><span class="ptag hi">Canvas API</span>
+          <span class="ptag hi">Exact &amp; Decimal Maths</span><span class="ptag">Pointer &amp; Touch Input</span>
+          <span class="ptag">LocalStorage</span><span class="ptag">No Backend</span>
+        </div>
+        <div class="proj-chal">
+          <h4>Engineering Highlights</h4>
+          <div class="chal-list">
+            <div class="chal-item">Parser for translated, general and rotated (xy-term) ellipses, with the circle case handled explicitly</div>
+            <div class="chal-item">Exact fractions and surds alongside configurable-precision decimals</div>
+            <div class="chal-item">Interactive JEE tools — tangents, normals, chords, focal chord, polar, diameters, reflection — constructed live on the graph</div>
+            <div class="chal-item">P (a point on the ellipse, set by eccentric angle θ) and Q (a free point) synced between graph and inputs, both draggable</div>
+            <div class="chal-item">Auxiliary, inner and director circles, plus area and a Ramanujan perimeter approximation</div>
+            <div class="chal-item">Laboratory, step-by-step derivations and a searchable formula sheet, with a presentation mode for the classroom</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:12px">
+          <a id="ec-live-link" href="#" target="_blank" rel="noopener" class="proj-link" hidden>
+            <span class="live-dot blue" style="width:6px;height:6px;margin-right:2px"></span>
+            Try Live App
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+          <span id="ec-live-pending" class="proj-link proj-link-pending" role="note">Live link coming soon</span>
+          <button onclick="window.openProjectModal(window.ELLIPSE_PROJECT_DATA)" class="btn-secondary" style="padding:8px 16px;font-size:.78rem">
+            Learn More
+          </button>
+        </div>
+      </div>
+      <div class="at-shots" data-gallery-group="ellipse-calculator">
+        <div class="at-shot at-shot-ph ell" role="img" aria-label="Equation workspace — project visual coming soon">
+          <span class="at-shot-soon">Visual coming soon</span>
+          <span class="at-shot-lbl">Workspace</span>
+        </div>
+        <div class="at-shot at-shot-ph ell" role="img" aria-label="Interactive graph — project visual coming soon">
+          <span class="at-shot-soon">Visual coming soon</span>
+          <span class="at-shot-lbl">Graph</span>
+        </div>
+        <div class="at-shot at-shot-ph ell" role="img" aria-label="P and Q point system — project visual coming soon">
+          <span class="at-shot-soon">Visual coming soon</span>
+          <span class="at-shot-lbl">P &amp; Q Points</span>
+        </div>
+        <div class="at-shot at-shot-ph ell" role="img" aria-label="Advanced JEE tools — project visual coming soon">
+          <span class="at-shot-soon">Visual coming soon</span>
+          <span class="at-shot-lbl">JEE Tools</span>
+        </div>
+        <div class="at-shot at-shot-ph ell" role="img" aria-label="Auxiliary circles and laboratory — project visual coming soon">
+          <span class="at-shot-soon">Visual coming soon</span>
+          <span class="at-shot-lbl">Circles &amp; Laboratory</span>
+        </div>
+        <div class="at-shot at-shot-ph ell" role="img" aria-label="Presentation mode — project visual coming soon">
+          <span class="at-shot-soon">Visual coming soon</span>
+          <span class="at-shot-lbl">Presentation</span>
         </div>
       </div>
     </div>
@@ -3622,6 +3761,8 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
         <h4>Projects</h4>
         <a href="https://nutrigreenai.pages.dev/" target="_blank" rel="noopener">NutriGreen AI ↗</a>
         <a href="https://astrotamil.pages.dev/" target="_blank" rel="noopener">AstroTamil ↗</a>
+        <a href="#projects">Hyperbola Calculator</a>
+        <a href="#projects">Ellipse Calculator</a>
         <a href="#projects">Solar System Sim</a>
         <a href="#projects">TNEB Calculator</a>
         <a href="#projects">AI Movie Teaser</a>
@@ -4364,7 +4505,8 @@ document.querySelectorAll('[data-tneb-idx]').forEach(el=>{
     fillList(highEl, data.highlights);
     fillChips(techEl, data.tech);
     cta.textContent = data.ctaText || 'Visit Website';
-    cta.href = data.ctaUrl || '#';
+    if(data.ctaUrl){ cta.href = data.ctaUrl; cta.style.display = ''; }
+    else { cta.removeAttribute('href'); cta.style.display = 'none'; }
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
     btnClose.focus();
@@ -4448,6 +4590,78 @@ window.ASTROTAMIL_PROJECT_DATA = {
   ctaText: 'Launch AstroTamil',
   ctaUrl: 'https://astrotamil.pages.dev/'
 };
+
+/* Hyperbola Calculator "Learn More" dialog content.
+   ctaUrl drives both the card's "Try Live App" link and the dialog's launch button. */
+window.HYPERBOLA_PROJECT_DATA = {
+  eyebrow: 'Interactive Mathematics · Conic Sections · JEE Tool',
+  title: 'Hyperbola Calculator',
+  tagline: 'An Interactive Workspace for Exploring Hyperbolas',
+  overview: 'Hyperbola Calculator is a client-side mathematics application for JEE Main and Advanced preparation and classroom teaching. It reads a hyperbola in several equation forms, computes its geometry exactly, and turns the graph into a workspace where tangents, normals, polars and other constructions can be explored directly.',
+  capabilities: [
+    'Reads standard, translated, general and rotated hyperbolas, including xy = c²',
+    'Exact values (fractions, surds) and decimals, with adjustable precision',
+    'Centre, vertices, foci, asymptotes, directrices, latus rectum and eccentricity',
+    'Pan, zoom and pinch graph with per-element visibility controls',
+    'Persistent point selection, plus P (on the curve) and Q (free point) with synced inputs',
+    'Advanced JEE tools: tangents, normals, chords, polar, diameters, conjugate and reflection',
+    'Laboratory: parameter sliders, midpoint locus, line intersections and answer verification',
+    'Searchable formula sheet and step-by-step derivations',
+    'Built-in examples and a categorised random hyperbola generator',
+    'PNG, SVG and print/PDF export, plus a classroom presentation mode'
+  ],
+  highlights: [
+    'One shared analysis model drives the results, graph, tools and laboratory',
+    'Built-in consistency checks on every analysed and generated hyperbola',
+    'Rotated conics handled by removing the xy term before analysis',
+    'Unified pointer input for mouse, touch and pen',
+    'Equation history with favourites, theme and graph settings saved locally',
+    'Keyboard access, ARIA live status messages and reduced-motion support'
+  ],
+  tech: ['JavaScript', 'Canvas API', 'Exact Arithmetic', 'LocalStorage', 'Pointer Events', 'Responsive Design'],
+  ctaText: 'Launch Hyperbola Calculator',
+  ctaUrl: 'https://hyperbola.pages.dev/'
+};
+
+/* Ellipse Calculator "Learn More" dialog content.
+   ctaUrl drives both the card's "Try Live App" link and the dialog's launch button. */
+window.ELLIPSE_PROJECT_DATA = {
+  eyebrow: 'Interactive Mathematics · Conic Sections · JEE Tool',
+  title: 'Ellipse Calculator',
+  tagline: 'An Interactive Workspace for Exploring Ellipses',
+  overview: 'Ellipse Calculator is a client-side mathematics application for JEE Main and Advanced preparation and classroom teaching, and the ellipse counterpart to the Hyperbola Calculator. It reads an ellipse in several equation forms, computes its geometry exactly, and turns the graph into a workspace for tangents, normals, polars, diameters and the circles associated with the curve.',
+  capabilities: [
+    'Reads standard, translated, general and rotated ellipses, and recognises the circle case',
+    'Exact values (fractions, surds) and decimals, with adjustable precision',
+    'Centre, vertices, co-vertices, foci, directrices, latus rectum and eccentricity',
+    'Auxiliary, inner and director circles, with area and perimeter (Ramanujan approximation)',
+    'Pan, zoom and pinch graph with per-element visibility controls',
+    'Persistent point selection, plus P (on the ellipse) and Q (free point) with synced inputs and eccentric angle θ',
+    'Advanced JEE tools: tangents, normals, chords, focal chord, polar, diameters, slope tangents and reflection',
+    'Laboratory: parameter sliders, midpoint locus, line intersections, second-ellipse comparison and answer verification',
+    'Searchable formula sheet and step-by-step derivations',
+    'Built-in examples and a categorised random ellipse generator',
+    'PNG, SVG and print/PDF export, plus a classroom presentation mode'
+  ],
+  highlights: [
+    'One shared analysis model drives the results, graph, tools and laboratory',
+    'Built-in consistency checks on every analysed and generated ellipse',
+    'Rotated conics handled by removing the xy term before analysis',
+    'Unified pointer input for mouse, touch and pen',
+    'Equation history with favourites, theme and graph settings saved locally',
+    'Keyboard access, ARIA live status messages and reduced-motion support'
+  ],
+  tech: ['JavaScript', 'Canvas API', 'Exact Arithmetic', 'LocalStorage', 'Pointer Events', 'Responsive Design'],
+  ctaText: 'Launch Ellipse Calculator',
+  ctaUrl: 'https://ellipsecalc.pages.dev/'
+};
+
+/* Reveal each project's live link once its ctaUrl is set (card link + "coming soon" note share a prefix). */
+[['hc', window.HYPERBOLA_PROJECT_DATA], ['ec', window.ELLIPSE_PROJECT_DATA]].forEach(function(p){
+  var a = document.getElementById(p[0] + '-live-link'), n = document.getElementById(p[0] + '-live-pending');
+  if(!a || !n || !p[1].ctaUrl) return;
+  a.href = p[1].ctaUrl; a.hidden = false; n.hidden = true;
+});
 
 /* Keyboard support for clickable shot panels */
 (function(){
@@ -6696,7 +6910,7 @@ if(_sb)_sb.addEventListener('click',function(){sharePortfolio(this);});
         ring.classList.add('cc-hidden');dot.classList.add('cc-hidden');return;
       }
       ring.classList.remove('cc-hidden');dot.classList.remove('cc-hidden');
-      if(t.closest('[style*="zoom-in"],.tneb-shot,.at-shot,.cert-view,.ulb-img,#ulb-img')){
+      if(t.closest('[style*="zoom-in"],.tneb-shot,.at-shot:not(.at-shot-ph),.cert-view,.ulb-img,#ulb-img')){
         ring.classList.add('cc-view');ring.classList.remove('cc-hover');
       }else if(t.closest('a,button,[role="button"],.proj-card,.chip,.social-btn')){
         ring.classList.add('cc-hover');ring.classList.remove('cc-view');
