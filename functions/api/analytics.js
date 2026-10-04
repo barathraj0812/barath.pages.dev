@@ -4,18 +4,32 @@ export async function onRequestPost(context) {
 
     const body = await request.json();
 
-    const message = {
-      received: true,
-      receivedData: body,
-      databaseConnected: !!env.DB
-    };
+    const now = new Date().toISOString();
 
-    return new Response(JSON.stringify(message), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json"
+    const visitorId = "test-visitor-001";
+
+    await env.DB.prepare(`
+      INSERT OR IGNORE INTO visitors
+      (visitor_id, first_seen, last_seen)
+      VALUES (?, ?, ?)
+    `)
+      .bind(visitorId, now, now)
+      .run();
+
+    return new Response(
+      JSON.stringify({
+        received: true,
+        savedToDatabase: true,
+        visitorId: visitorId,
+        databaseConnected: !!env.DB
+      }),
+      {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json"
+        }
       }
-    });
+    );
   } catch (error) {
     return new Response(
       JSON.stringify({
