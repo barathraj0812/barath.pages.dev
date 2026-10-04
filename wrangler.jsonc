@@ -1,0 +1,12 @@
+{
+  "name": "barath",
+  "compatibility_date": "2026-10-04",
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "portfolio-analytics",
+      "database_id": "e4af33cd-3e26-4dc4-8e57-a5809a5ae3b1"
+    }
+  ]
+}
