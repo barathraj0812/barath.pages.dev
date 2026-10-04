@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #5c62ee; }
+      .grid-line { stroke: #6f75f3; stroke-width: 9; stroke-dasharray: 14, 14; }
+      .white-ring { fill: none; stroke: #ffffff; stroke-width: 32; }
+      .red-swoosh { fill: #ea3a38; }
+      .yellow-element { fill: #f9b625; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="400" class="bg" />
+
+  <!-- Dashed Axis Lines -->
+  <line x1="250" y1="30" x2="250" y2="370" class="grid-line" />
+  <line x1="80" y1="160" x2="420" y2="160" class="grid-line" />
+
+  <!-- White Elliptical Ring -->
+  <ellipse cx="250" cy="160" rx="180" ry="105" class="white-ring" />
+
+  <!-- Red Swoosh: Top tip precisely anchored to the outer top-left boundary of the white ring -->
+  <path d="M 163 56 
+           C 118 70, 48 118, 48 215 
+           C 48 322, 145 398, 275 398 
+           C 365 398, 428 350, 465 305 
+           C 375 385, 235 388, 130 338 
+           C 66 306, 92 188, 122 138 
+           C 136 115, 150 82, 163 56 Z" 
+        class="red-swoosh" />
+
+  <!-- Center Yellow Shapes -->
+  <rect x="185" y="136" width="130" height="48" rx="24" class="yellow-element" />
+  <circle cx="152" cy="160" r="19" class="yellow-element" />
+  <circle cx="348" cy="160" r="19" class="yellow-element" />
+</svg>

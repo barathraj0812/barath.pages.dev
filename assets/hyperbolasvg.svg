@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%">
+  <!-- Rounded background matching your theme -->
+  <rect width="64" height="64" rx="14" fill="#6366f1" />
+  
+  <!-- Subtle coordinate axes for mathematical context -->
+  <line x1="32" y1="12" x2="32" y2="52" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="2 2" />
+  <line x1="12" y1="32" x2="52" y2="32" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="2 2" />
+
+  <!-- Left Hyperbola Branch (Vertex facing right at x=27, arms opening left to x=15) -->
+  <path d="M 15 14 C 27 22 27 42 15 50" 
+        fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" />
+  
+  <!-- Right Hyperbola Branch (Vertex facing left at x=37, arms opening right to x=49) -->
+  <path d="M 49 14 C 37 22 37 42 49 50" 
+        fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" />
+
+  <!-- Crossbar connecting the two inner vertices to form the letter 'H' in yellow -->
+  <path d="M 27 32 H 37" 
+        fill="none" stroke="#fbbf24" stroke-width="6" stroke-linecap="round" />
+</svg>
