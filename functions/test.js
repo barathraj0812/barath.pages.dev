@@ -1,3 +1,3 @@
-export function onRequet() {
-  return new Response("Pages Functions are working.");
+export function onRequest() {
+    return new Response("Pages Functions are working.");
 }
