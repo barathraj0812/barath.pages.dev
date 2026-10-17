@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
-<link rel="icon" href="/favicon-32.png" type="image/png"/>
-<link rel="apple-touch-icon" href="/favicon-32.png"/>
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"/>
+<link rel="icon" href="/assets/favicon-32.png" type="image/png"/>
+<link rel="apple-touch-icon" href="/assets/favicon-32.png"/>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Barath M — Student Developer · AI Applications | Chennai</title>
 <meta name="description" content="Portfolio of Barath M — Class XI student from Chennai. Student developer building AI applications, IMO International Rank 2, 6 Distinctions & 11 Gold Medals. Built NutriGreen AI with Google Gemini API."/>
-<meta name="keywords" content="Barath M, portfolio, student developer, AI applications, IMO rank 2, olympiad, NutriGreen AI, Gemini API, AstroTamil, Vedic astrology app, Chennai, CBSE, JEE"/>
+<meta name="keywords" content="Barath M, portfolio, student developer, AI applications, IMO rank 2, olympiad, NutriGreen AI, Gemini API, AstroTamil, Vedic astrology app, P&amp;C calculator, hyperbola calculator, ellipse calculator, conic sections, Chennai, CBSE, JEE"/>
 <meta name="author" content="Barath M"/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://barath.pages.dev/"/>
@@ -17,12 +17,12 @@
 <meta property="og:url" content="https://barath.pages.dev/"/>
 <meta property="og:title" content="Barath M — Student Developer · AI Applications"/>
 <meta property="og:description" content="Student developer from Chennai. IMO International Rank 2. Built NutriGreen AI with Google Gemini. 6 Distinctions, 11 Gold Medals."/>
-<meta property="og:image" content="https://barath.pages.dev/og-image.png"/>
+<meta property="og:image" content="https://barath.pages.dev/assets/og-image.png"/>
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Barath M — Student Developer · AI Applications"/>
 <meta name="twitter:description" content="Student developer from Chennai. IMO International Rank 2. NutriGreen AI with Gemini API."/>
-<meta name="twitter:image" content="https://barath.pages.dev/og-image.png"/>
+<meta name="twitter:image" content="https://barath.pages.dev/assets/og-image.png"/>
 <!-- Theme color for mobile browser chrome -->
 <meta name="theme-color" content="#060D1A" id="theme-color-meta"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -1299,6 +1299,199 @@ footer{border-top:1px solid var(--border);padding:28px 32px;position:relative;z-
   .at-shots{grid-template-columns:repeat(2,1fr)}
 }
 
+/* ── P&C QUICK CALCULATOR CARD (violet) — mirrors the TNEB card recipe ── */
+:root{
+  --violet:#A78BFA;--violet2:#8B5CF6;--violet-dim:rgba(167,139,250,.09);
+  --violet-dim2:rgba(167,139,250,.16);--violet-border:rgba(167,139,250,.22);
+  --violet-border2:rgba(167,139,250,.4)
+}
+[data-theme="light"]{--violet:#6D44D9;--violet2:#5B34C4;--violet-dim:rgba(109,68,217,.08);--violet-dim2:rgba(109,68,217,.15);--violet-border:rgba(109,68,217,.24);--violet-border2:rgba(109,68,217,.42)}
+@keyframes live-pulse-violet{0%,100%{box-shadow:0 0 0 0 rgba(167,139,250,.5)}50%{box-shadow:0 0 0 6px rgba(167,139,250,0)}}
+.pc-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);
+  overflow:hidden;transition:border-color .4s,box-shadow .4s,transform .4s;position:relative;
+  display:flex;flex-direction:column}
+.pc-card:hover{border-color:var(--violet-border2);box-shadow:0 24px 60px rgba(0,0,0,.5);transform:translateY(-2px)}
+.pc-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right,transparent,var(--violet),transparent);z-index:2;pointer-events:none}
+
+/* Screenshot strip - clickable gallery */
+.pc-shots{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:2px;
+  background:rgba(167,139,250,.06);border-bottom:1px solid rgba(167,139,250,.1)}
+.pc-shot img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .45s var(--ease),filter .45s;filter:brightness(.88) saturate(1.1)}
+.pc-shot:hover img{transform:scale(1.08);filter:brightness(1) saturate(1.25)}
+.pc-shot-lbl{
+  position:absolute;bottom:7px;left:9px;z-index:2;
+  font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(167,139,250,.8)}
+.pc-shot-zoom{
+  position:absolute;top:7px;right:7px;z-index:2;
+  width:22px;height:22px;border-radius:4px;
+  background:rgba(6,13,26,.7);border:1px solid rgba(167,139,250,.25);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .2s;pointer-events:none}
+.pc-shot:hover .pc-shot-zoom{opacity:1}
+.pc-body{padding:26px 28px;flex:1;display:flex;flex-direction:column;gap:16px}
+.pc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.pc-eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--violet);margin-bottom:6px;
+  display:flex;align-items:center;gap:7px}
+.pc-eyebrow::before{
+  content:'';width:6px;height:6px;border-radius:50%;background:var(--violet);
+  box-shadow:0 0 6px rgba(167,139,250,.55);flex-shrink:0;
+  animation:live-pulse-violet 2s ease-in-out infinite}
+.pc-title{
+  font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:#fff;
+  letter-spacing:-.02em;line-height:1.15;margin-bottom:6px}
+.pc-title .violet{color:var(--violet)}
+.pc-subtitle{font-size:.82rem;color:var(--text2);line-height:1.75;max-width:520px}
+.pc-badge-col{display:flex;flex-direction:column;gap:6px;align-items:flex-end;flex-shrink:0}
+.pc-badge{
+  font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.07em;
+  padding:4px 11px;border-radius:4px;border:1px solid var(--violet-border);
+  color:var(--violet);background:var(--violet-dim);white-space:nowrap;
+  transition:border-color .2s,background .2s}
+.pc-badge:hover{border-color:var(--violet-border2);background:var(--violet-dim2)}
+
+/* Description expandable */
+.pc-desc-wrap{position:relative}
+.pc-desc-full{font-size:.84rem;color:var(--text2);line-height:1.8;max-height:none}
+.pc-read-more{
+  display:inline-flex;align-items:center;gap:5px;margin-top:8px;
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--violet);background:none;border:none;cursor:pointer;padding:0;
+  transition:opacity .2s}
+.pc-read-more:hover{opacity:.7}
+
+/* Stats panel */
+.pc-stats{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:10px;
+  padding:14px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.pc-stat{text-align:center}
+.pc-stat-label{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
+.pc-stat-value{font-size:.75rem;font-weight:600;color:var(--text)}
+.pc-stat-value.violet{color:var(--violet)}
+.pc-stat-value.green{color:#22C55E}
+
+/* Achievement highlights */
+.pc-achievements{display:flex;flex-wrap:wrap;gap:8px}
+.pc-ach{
+  display:flex;align-items:center;gap:6px;
+  font-size:.74rem;color:var(--text2);padding:6px 12px;border-radius:6px;
+  border:1px solid var(--border);background:var(--bg2);
+  transition:border-color .2s,color .2s}
+.pc-ach:hover{border-color:rgba(167,139,250,.25);color:var(--text)}
+.pc-ach-icon{font-size:.85rem}
+
+/* Feature pills */
+.pc-features{display:flex;flex-wrap:wrap;gap:6px}
+.pc-feat{
+  font-size:.72rem;color:var(--text2);padding:5px 12px;border-radius:20px;
+  border:1px solid var(--border);background:var(--bg2);line-height:1;
+  transition:border-color .2s,color .2s,background .2s}
+.pc-feat:hover{border-color:var(--border2);color:var(--text)}
+.pc-feat.lit{color:var(--violet);border-color:var(--violet-border);background:var(--violet-dim)}
+.pc-feat.lit:hover{background:var(--violet-dim2);border-color:var(--violet-border2)}
+
+/* Stack row */
+.pc-stack-wrap{}
+.pc-stack-label{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
+.pc-stack{display:flex;flex-wrap:wrap;gap:6px}
+.pc-tech{
+  font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.05em;
+  color:var(--text3);padding:4px 10px;border-radius:4px;
+  border:1px solid var(--border);background:transparent;
+  transition:color .2s,border-color .2s}
+.pc-tech:hover{color:var(--violet);border-color:rgba(167,139,250,.25)}
+
+/* Timeline */
+.pc-timeline{display:flex;align-items:center;gap:0;overflow-x:auto;padding-bottom:2px}
+.pc-tl-step{display:flex;align-items:center;gap:0;flex-shrink:0}
+.pc-tl-dot{
+  width:28px;height:28px;border-radius:50%;background:var(--violet-dim);
+  border:1px solid var(--violet-border);display:flex;align-items:center;justify-content:center;
+  font-size:.55rem;flex-shrink:0;color:var(--violet)}
+.pc-tl-info{display:flex;flex-direction:column;align-items:center;padding:0 12px}
+.pc-tl-name{font-size:.65rem;color:var(--text2);white-space:nowrap}
+.pc-tl-line{width:40px;height:1px;background:var(--border);flex-shrink:0}
+.pc-tl-line:last-child{display:none}
+
+/* Quick actions */
+.pc-quick-actions{display:flex;flex-wrap:wrap;gap:8px}
+.pc-qa{
+  display:inline-flex;align-items:center;gap:6px;font-size:.7rem;font-weight:600;
+  letter-spacing:.07em;text-transform:uppercase;text-decoration:none;
+  padding:8px 14px;border-radius:5px;transition:background .2s,transform .2s,border-color .2s,color .2s;
+  cursor:pointer;background:none;font-family:inherit}
+.pc-qa.primary{
+  color:var(--violet);border:1px solid var(--violet-border2);background:var(--violet-dim)}
+.pc-qa.primary:hover{background:var(--violet-dim2);transform:translateY(-1px)}
+.pc-qa.secondary{
+  color:var(--text2);border:1px solid var(--border2);background:transparent}
+.pc-qa.secondary:hover{color:var(--text);border-color:var(--border3);background:var(--blue-dim);transform:translateY(-1px)}
+
+/* Bottom bar */
+.pc-foot{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  gap:12px;padding:14px 28px;border-top:1px solid var(--border);
+  background:rgba(6,13,26,.5)}
+.pc-validation{
+  font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.05em;
+  color:var(--text3);line-height:1.7}
+.pc-validation span{color:var(--violet);opacity:.85}
+.pc-demo-btn{
+  display:inline-flex;align-items:center;gap:7px;font-size:.7rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;text-decoration:none;
+  padding:8px 18px;border-radius:5px;transition:background .2s,transform .2s,border-color .2s,box-shadow .2s;
+  color:var(--violet);border:1px solid var(--violet-border2);background:var(--violet-dim);
+  flex-shrink:0}
+.pc-demo-btn:hover{background:var(--violet-dim2);transform:translateY(-1px);box-shadow:0 6px 18px rgba(167,139,250,.15)}
+
+/* Share button */
+.pc-share-btn{
+  display:inline-flex;align-items:center;gap:6px;font-size:.65rem;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--text3);
+  border:1px solid var(--border);background:none;border-radius:5px;
+  padding:7px 13px;cursor:pointer;transition:color .2s,border-color .2s;font-family:inherit}
+.pc-share-btn:hover{color:var(--text);border-color:var(--border2)}
+
+/* Copy button */
+.pc-copy-btn{
+  display:inline-flex;align-items:center;gap:6px;font-size:.65rem;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--text3);
+  border:1px solid var(--border);background:none;border-radius:5px;
+  padding:7px 13px;cursor:pointer;transition:color .2s,border-color .2s;font-family:inherit}
+.pc-copy-btn:hover{color:var(--violet);border-color:var(--violet-border)}
+/* Placeholder tiles — shown until real screenshots are uploaded */
+.pc-shot{
+  overflow:hidden;position:relative;aspect-ratio:16/10;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  background:linear-gradient(135deg,rgba(167,139,250,.07),rgba(167,139,250,.02));
+  outline:1px dashed rgba(167,139,250,.28);outline-offset:-7px;text-align:center;padding:14px}
+.pc-shot::after{display:none}
+.pc-shot-ico{font-family:'JetBrains Mono',monospace;font-size:1.05rem;color:var(--violet);opacity:.85;letter-spacing:.02em}
+.pc-shot-soon{font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);line-height:1.5}
+.pc-shot .pc-shot-lbl{position:static;color:var(--violet)}
+.pc-stat-value.green{color:#22C55E}
+[data-theme="light"] .pc-title{color:var(--text)}
+[data-theme="light"] .pc-foot{background:rgba(240,244,250,.7)}
+@media(max-width:900px){
+  .pc-shots{grid-template-columns:1fr 1fr 1fr}
+  .pc-stats{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:640px){
+  .pc-shots{grid-template-columns:1fr 1fr}
+  .pc-body{padding:20px 18px}
+  .pc-badge-col{align-items:flex-start}
+  .pc-stats{grid-template-columns:repeat(2,1fr)}
+  .pc-foot{flex-direction:column;align-items:flex-start}
+}
+
 /* ── BACK TO TOP ── */
 #back-top{
   position:fixed;bottom:28px;right:28px;z-index:500;
@@ -1806,6 +1999,20 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
 }
 </script>
 
+<!-- Structured data — P&C Quick Calculator (SoftwareApplication) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "P&C Quick Calculator",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Web",
+  "url": "https://pccalc.pages.dev/",
+  "description": "A JEE Mathematics calculator for permutations, combinations and factorials with exact results, alternative forms and identities, and a smartboard mode.",
+  "author": { "@type": "Person", "name": "Barath M" }
+}
+</script>
+
 <!-- Additive structured data for NCC Achievements — does not replace or alter the
      existing SoftwareApplication schema above. No personally identifiable
      information (registration/enrolment numbers, unit, DOB, etc.) is included. -->
@@ -1843,6 +2050,29 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
 }
 </script>
 
+<style>
+/* projects hub */
+.nav-links a[aria-current="page"]{color:var(--blue);font-weight:600}
+.nav-links a[aria-current="page"]::after{left:8px;right:8px}
+.pj-more{margin-top:28px;padding:28px 26px;border:1px solid var(--border2);border-radius:var(--r2);background:var(--surface);text-align:center;position:relative;overflow:hidden}
+.pj-more::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--blue),transparent)}
+.pj-more-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
+.pj-more h3{font-family:'Syne',sans-serif;font-size:1.35rem;margin-bottom:8px}
+.pj-more p{color:var(--text2);font-size:.92rem;max-width:620px;margin:0 auto 18px}
+.pj-more-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.pj-filters{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 34px}
+.pj-chip{all:unset;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;padding:9px 16px;border-radius:999px;border:1px solid var(--border2);color:var(--text2);background:var(--surface);transition:all .25s}
+.pj-chip:hover{border-color:var(--blue);color:var(--text)}
+.pj-chip:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.pj-chip.on{background:var(--blue-dim2);border-color:var(--blue);color:var(--blue)}
+.pj-chip b{font-weight:500;opacity:.6;margin-left:6px}
+.pj-group{margin-bottom:56px}
+.pj-group[hidden]{display:none}
+.pj-cat-head{margin:0 0 22px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.pj-cat-head h3{font-family:'Syne',sans-serif;font-size:1.5rem;margin:4px 0 6px}
+.pj-cat-head p{color:var(--text2);font-size:.92rem;max-width:720px}
+.pj-anchor{scroll-margin-top:90px}
+</style>
 </head>
 <body>
 
@@ -1874,7 +2104,7 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
 <div id="scroll-progress"></div>
 
 <div id="intro-veil" aria-hidden="true">
-  <div class="iv-mark" id="iv-mark"><img decoding="async" src="/logo.svg" alt="Barath M" style="height:1.7rem;width:auto;vertical-align:middle"></div>
+  <div class="iv-mark" id="iv-mark"><img decoding="async" src="/assets/logo.svg" alt="Barath M" style="height:1.7rem;width:auto;vertical-align:middle"></div>
   <p class="iv-line" data-d="0">SYSTEM <b>//</b> PORTFOLIO.EXE</p>
   <p class="iv-line" data-d="1">LOCATING SOLAR ANCHOR<b>…</b></p>
   <p class="iv-line" data-d="2">BARATH M <b>—</b> CHENNAI, IN</p>
@@ -1894,13 +2124,13 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
 <nav id="main-nav">
   <div class="nav-inner">
     <a href="#hero" class="nav-logo" aria-label="Barath M">
-  		<img decoding="async" src="/logo.svg" alt="Barath M">
+  		<img decoding="async" src="/assets/logo.svg" alt="Barath M">
 	</a>
     <ul class="nav-links">
       <li><a href="#hero" class="active">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#achievements">Achievements</a></li>
-      <li><a href="#projects">Projects</a></li>
+      <li><a href="/projects">Projects</a></li>
       <li><a href="#certs">Certifications</a></li>
       <li><a href="#goals">Goals</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -1935,7 +2165,7 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
   <a href="#hero" onclick="closeMob()">Home</a>
   <a href="#about" onclick="closeMob()">About</a>
   <a href="#achievements" onclick="closeMob()">Achievements</a>
-  <a href="#projects" onclick="closeMob()">Projects</a>
+  <a href="/projects" onclick="closeMob()">Projects</a>
   <a href="#certs" onclick="closeMob()">Certifications</a>
   <a href="#goals" onclick="closeMob()">Goals</a>
   <a href="#contact" onclick="closeMob()">Contact</a>
@@ -1967,6 +2197,7 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
           <span class="chip blue">Student Developer · AI Applications</span>
           <span class="chip blue">NutriGreen AI · Gemini API</span>
           <span class="chip">TNEB Calculator · Chart.js · GSAP</span>
+<span class="chip">P&amp;C · Hyperbola · Ellipse · JEE Maths</span>
           <span class="chip">CBSE Class X · 95%+ Official</span>
           <span class="chip">Aryabhata Merit Achiever</span>
         </div>
@@ -2010,7 +2241,7 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
         <div style="position:relative;display:inline-block">
           <div class="hero-planet"></div>
           <div class="hero-photo-wrap" style="position:relative;z-index:2">
-            <div class="hero-photo-fallback" style="display:flex"><img decoding="async" src="/logo.svg" alt="Barath M" style="width:45%;height:auto;opacity:.6"></div>
+            <div class="hero-photo-fallback" style="display:flex"><img decoding="async" src="/assets/logo.svg" alt="Barath M" style="width:45%;height:auto;opacity:.6"></div>
           </div>
           <div class="hero-badge">
             <div class="badge-icon">
@@ -2336,7 +2567,7 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
     <div class="sk-bar-wrap reveal" style="margin-top:28px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:28px 30px">
       <p style="font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);margin-bottom:22px">// Skills, By Evidence</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px 40px">
-        <div class="sk-row"><span class="sk-name">JavaScript / HTML / CSS</span><span class="sk-lvl on" style="font-weight:400">NutriGreen AI · TNEB Calculator · AstroTamil</span></div>
+        <div class="sk-row"><span class="sk-name">JavaScript / HTML / CSS</span><span class="sk-lvl on" style="font-weight:400">NutriGreen AI · TNEB Calculator · P&amp;C Calculator · Hyperbola &amp; Ellipse Calculators · AstroTamil</span></div>
         <div class="sk-row"><span class="sk-name">Node.js / REST APIs</span><span class="sk-lvl on" style="font-weight:400">NutriGreen AI backend</span></div>
         <div class="sk-row"><span class="sk-name">Google Gemini API</span><span class="sk-lvl on" style="font-weight:400">NutriGreen AI</span></div>
         <div class="sk-row"><span class="sk-name">Unity / C#</span><span class="sk-lvl on" style="font-weight:400">Solar System Simulation</span></div>
@@ -2352,8 +2583,8 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
   <div class="container">
     <div class="sec-hdr reveal">
       <p class="sec-eyebrow">// Featured Work</p>
-      <h2 class="sec-title reveal title-reveal">Projects &amp; Experiments</h2>
-      <p class="sec-sub">Full-stack AI applications, civic tech tools, interactive mathematics software, Unity simulations, and generative AI experiments — built independently using Node.js, Gemini API, Chart.js, Canvas API, C#, and HTML/CSS/JS.</p>
+      <h2 class="sec-title reveal title-reveal">Featured Projects</h2>
+      <p class="sec-sub">My two best builds — a full-stack Gemini-powered nutrition platform and a 3D Unity solar system game. Everything else lives on the projects page.</p>
       <div class="divider"></div>
     </div>
 
@@ -2510,192 +2741,6 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
     </div>
 
     <div class="solar-featured reveal">
-      <div class="solar-info">
-        <p class="proj-cat">Web Development · AI-Powered Vedic Astrology Platform</p>
-        <h3 class="proj-title">AstroTamil</h3>
-        <p class="proj-desc">A sidereal Vedic astrology platform that computes real planetary positions, Nakshatra placements, and Vimshottari Dasha timelines directly in the browser, then layers an AI interpretation engine on top to explain them in plain Tamil or English. Supports real-time birthplace search via geocoding, automatic Dosha and Yoga detection, saved birth profiles, and a full dark/light theme system, built independently as an end-to-end astronomical calculation engine.</p>
-        <div class="proj-tags">
-          <span class="ptag hi">JavaScript</span><span class="ptag hi">Astronomical Algorithms</span>
-          <span class="ptag hi">AI Integration</span><span class="ptag">Geocoding API</span>
-          <span class="ptag">Sidereal Calculations</span><span class="ptag">Tamil &amp; English</span>
-        </div>
-        <div class="proj-chal">
-          <h4>Engineering Highlights</h4>
-          <div class="chal-list">
-            <div class="chal-item">Sidereal planetary position &amp; Lagna calculation engine</div>
-            <div class="chal-item">Vimshottari Dasha timeline computation</div>
-            <div class="chal-item">Automated Dosha &amp; Yoga detection across chart combinations</div>
-            <div class="chal-item">AI-assisted horoscope interpretation layer</div>
-            <div class="chal-item">Real-time geocoded birthplace search</div>
-            <div class="chal-item">Bilingual Tamil/English UI with persistent theme &amp; profile storage</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:12px">
-          <a href="https://astrotamil.pages.dev/" target="_blank" rel="noopener" class="proj-link">
-            <span class="live-dot blue" style="width:6px;height:6px;margin-right:2px"></span>
-            Try Live App
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </a>
-          <button onclick="window.openProjectModal(window.ASTROTAMIL_PROJECT_DATA)" class="btn-secondary" style="padding:8px 16px;font-size:.78rem">
-            Learn More
-          </button>
-        </div>
-      </div>
-      <div class="at-shots" data-gallery-group="astrology-app">
-        <div class="at-shot">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1pEK9cFifUPI_fk9YZd-tg3JRGZcyCXRU" alt="AstroTamil detailed astrological prediction and calculation report" loading="lazy"/>
-          <span class="at-shot-lbl">Detailed Prediction</span>
-        </div>
-        <div class="at-shot">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/15r68ZNs57eCCX95SsPCX7kvQiwJSQCY7" alt="AstroTamil Rasi summary panel with sidereal calculations" loading="lazy"/>
-          <span class="at-shot-lbl">Rasi Summary</span>
-        </div>
-        <div class="at-shot">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1R3BPTjOL5oz3LIp5MoE2MpX8dF35_5mu" alt="AstroTamil Panchangam Hindu almanac display" loading="lazy"/>
-          <span class="at-shot-lbl">Panchangam</span>
-        </div>
-        <div class="at-shot">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1Q5t9vrP8nduwuVUMytYMEEbFcK0n5MMS" alt="AstroTamil nakshatra star position details" loading="lazy"/>
-          <span class="at-shot-lbl">Nakshatra Positions</span>
-        </div>
-        <div class="at-shot">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/11IBgEuIPm1Dl2pEY1Zggk3LElm1C_Cvg" alt="AstroTamil planetary Rasi positions chart with sidereal calculations" loading="lazy"/>
-          <span class="at-shot-lbl">Planetary Rasi Positions</span>
-        </div>
-        <div class="at-shot">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1MtUe4lpB32-EDVuAesWQ1gHaLCxbsifK" alt="AstroTamil Tamil Rasi chakra zodiac wheel visualization" loading="lazy"/>
-          <span class="at-shot-lbl">Tamil Rasi Chakram</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- HYPERBOLA CALCULATOR — same pattern as AstroTamil (info + labelled visual strip + Learn More).
-         Live URL: set ctaUrl in window.HYPERBOLA_PROJECT_DATA (script near AstroTamil data). -->
-    <div class="solar-featured reveal" id="hyperbola-card">
-      <div class="solar-info">
-        <p class="proj-cat">Interactive Mathematics · Conic Sections · JEE Tool</p>
-        <h3 class="proj-title has-logo"><img class="proj-logo" src="hyperbolasvg.svg" alt="" decoding="async" onerror="this.style.display='none'"/><span>Hyperbola Calculator</span></h3>
-        <p class="proj-desc">An interactive workbench for hyperbolas, built around the JEE Main &amp; Advanced syllabus. Enter a standard, translated, general or rotated equation and it classifies the conic, computes its geometry in exact and decimal form, and plots it on a graph you can pan, zoom and inspect point by point.</p>
-        <div class="proj-tags">
-          <span class="ptag hi">JavaScript</span><span class="ptag hi">Canvas API</span>
-          <span class="ptag hi">Exact &amp; Decimal Maths</span><span class="ptag">Pointer &amp; Touch Input</span>
-          <span class="ptag">LocalStorage</span><span class="ptag">No Backend</span>
-        </div>
-        <div class="proj-chal">
-          <h4>Engineering Highlights</h4>
-          <div class="chal-list">
-            <div class="chal-item">Equation parser for translated, general and rotated (xy-term) conics, with plain-language error messages</div>
-            <div class="chal-item">Exact fractions and surds alongside configurable-precision decimals</div>
-            <div class="chal-item">Interactive JEE tools — tangents, normals, polar, chords, diameters, reflection — constructed live on the graph</div>
-            <div class="chal-item">P (a point on the curve) and Q (a free point) kept in sync between the graph and the inputs</div>
-            <div class="chal-item">Laboratory for parameter sliders, midpoint locus and answer verification, plus step-by-step derivations</div>
-            <div class="chal-item">Presentation mode for classroom use, with mouse, touch and pen input</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:12px">
-          <a id="hc-live-link" href="#" target="_blank" rel="noopener" class="proj-link" hidden>
-            <span class="live-dot blue" style="width:6px;height:6px;margin-right:2px"></span>
-            Try Live App
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </a>
-          <span id="hc-live-pending" class="proj-link proj-link-pending" role="note">Live link coming soon</span>
-          <button onclick="window.openProjectModal(window.HYPERBOLA_PROJECT_DATA)" class="btn-secondary" style="padding:8px 16px;font-size:.78rem">
-            Learn More
-          </button>
-        </div>
-      </div>
-      <div class="at-shots" data-gallery-group="hyperbola-calculator">
-        <div class="at-shot" data-gallery-caption="Hyperbola Calculator — Main Interface">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1tJCScKgEhBCoYGvh_9yUFIsug0RX8eTm" alt="Hyperbola Calculator — Main Interface" loading="lazy"/>
-          <span class="at-shot-lbl">Main Interface</span>
-        </div>
-        <div class="at-shot" data-gallery-caption="Hyperbola Calculator — Interactive Graph">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1dHfIpoDauXfUUFrEpj3WKvT1aEwVZ2dj" alt="Hyperbola Calculator — Interactive Graph" loading="lazy"/>
-          <span class="at-shot-lbl">Interactive Graph</span>
-        </div>
-        <div class="at-shot" data-gallery-caption="Hyperbola Calculator — Results Panel">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1uCW_5V97gLi0ySz11ut5nPVbHH4QOehk" alt="Hyperbola Calculator — Results Panel" loading="lazy"/>
-          <span class="at-shot-lbl">Results Panel</span>
-        </div>
-        <div class="at-shot" data-gallery-caption="Hyperbola Calculator — Advanced Features">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1VKEi5b3_VQu2webX1uncbD_7d7M2p-7s" alt="Hyperbola Calculator — Advanced Features" loading="lazy"/>
-          <span class="at-shot-lbl">Advanced Features</span>
-        </div>
-        <div class="at-shot" data-gallery-caption="Hyperbola Calculator — Mobile View">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1w8e26JOznVyIONIiFgjtg-LfiPlNi55u" alt="Hyperbola Calculator — Mobile View" loading="lazy"/>
-          <span class="at-shot-lbl">Mobile View</span>
-        </div>
-        <div class="at-shot" data-gallery-caption="Hyperbola Calculator — Formula Sheet">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1dDFIGfp_bLD2F-4Z1OsmNIQVRYCRks0T" alt="Hyperbola Calculator — Formula Sheet" loading="lazy"/>
-          <span class="at-shot-lbl">Formula Sheet</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- ELLIPSE CALCULATOR — same pattern as Hyperbola Calculator / AstroTamil.
-         Live URL: ctaUrl in window.ELLIPSE_PROJECT_DATA. -->
-    <div class="solar-featured reveal" id="ellipse-card">
-      <div class="solar-info">
-        <p class="proj-cat">Interactive Mathematics · Conic Sections · JEE Tool</p>
-        <h3 class="proj-title has-logo"><img class="proj-logo" src="ellipsesvg.svg" alt="" decoding="async" onerror="this.style.display='none'"/><span>Ellipse Calculator</span></h3>
-        <p class="proj-desc">The ellipse counterpart to the Hyperbola Calculator, built around the JEE Main &amp; Advanced syllabus. It reads standard, translated, general and rotated equations, works out the full geometry in exact and decimal form, and plots it on an interactive graph alongside the auxiliary and director circles, area and perimeter.</p>
-        <div class="proj-tags">
-          <span class="ptag hi">JavaScript</span><span class="ptag hi">Canvas API</span>
-          <span class="ptag hi">Exact &amp; Decimal Maths</span><span class="ptag">Pointer &amp; Touch Input</span>
-          <span class="ptag">LocalStorage</span><span class="ptag">No Backend</span>
-        </div>
-        <div class="proj-chal">
-          <h4>Engineering Highlights</h4>
-          <div class="chal-list">
-            <div class="chal-item">Parser for translated, general and rotated (xy-term) ellipses, with the circle case handled explicitly</div>
-            <div class="chal-item">Exact fractions and surds alongside configurable-precision decimals</div>
-            <div class="chal-item">Interactive JEE tools — tangents, normals, chords, focal chord, polar, diameters, reflection — constructed live on the graph</div>
-            <div class="chal-item">P (a point on the ellipse, set by eccentric angle θ) and Q (a free point) synced between graph and inputs, both draggable</div>
-            <div class="chal-item">Auxiliary, inner and director circles, plus area and a Ramanujan perimeter approximation</div>
-            <div class="chal-item">Laboratory, step-by-step derivations and a searchable formula sheet, with a presentation mode for the classroom</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:12px">
-          <a id="ec-live-link" href="#" target="_blank" rel="noopener" class="proj-link" hidden>
-            <span class="live-dot blue" style="width:6px;height:6px;margin-right:2px"></span>
-            Try Live App
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </a>
-          <span id="ec-live-pending" class="proj-link proj-link-pending" role="note">Live link coming soon</span>
-          <button onclick="window.openProjectModal(window.ELLIPSE_PROJECT_DATA)" class="btn-secondary" style="padding:8px 16px;font-size:.78rem">
-            Learn More
-          </button>
-        </div>
-      </div>
-      <div class="at-shots" data-gallery-group="ellipse-calculator">
-        <div class="at-shot" data-gallery-caption="Ellipse Calculator — Main Interface">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1jdl-TmFaKaL6gOz94FrJLhIwMJTzWmLb" alt="Ellipse Calculator — Main Interface" loading="lazy"/>
-          <span class="at-shot-lbl">Main Interface</span>
-        </div>
-        <div class="at-shot" data-gallery-caption="Ellipse Calculator — Interactive Graph">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1Ou-S5VoRYvi4UqGCNHPY0v6Pf36uvlII" alt="Ellipse Calculator — Interactive Graph" loading="lazy"/>
-          <span class="at-shot-lbl">Interactive Graph</span>
-        </div>
-        <div class="at-shot" data-gallery-caption="Ellipse Calculator — Results Panel">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1xehl1aKHyJaxijam_G9H-s2twfB-lOhS" alt="Ellipse Calculator — Results Panel" loading="lazy"/>
-          <span class="at-shot-lbl">Results Panel</span>
-        </div>
-        <div class="at-shot" data-gallery-caption="Ellipse Calculator — Advanced Features">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1sAauN13amXt5cmt6IWQONH7CPrFmnIxE" alt="Ellipse Calculator — Advanced Features" loading="lazy"/>
-          <span class="at-shot-lbl">Advanced Features</span>
-        </div>
-        <div class="at-shot" data-gallery-caption="Ellipse Calculator — Mobile View">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1sbS0PDkSKzBc5ZByKjSzz3YWJjxBoLN5" alt="Ellipse Calculator — Mobile View" loading="lazy"/>
-          <span class="at-shot-lbl">Mobile View</span>
-        </div>
-        <div class="at-shot" data-gallery-caption="Ellipse Calculator — Formula Sheet">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1q5NOWAibnFGVm5NzP2FY3NjjXiarUoAT" alt="Ellipse Calculator — Formula Sheet" loading="lazy"/>
-          <span class="at-shot-lbl">Formula Sheet</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="solar-featured reveal">
       <div class="solar-video-wrap" id="solar-video-wrap">
         <span class="solar-video-label">Featured Project · Unity Simulation · 2023</span>
         <button type="button" class="solar-video-poster" id="solar-video-poster"
@@ -2752,231 +2797,17 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
       </div>
     </div>
 
-    <div class="proj-grid2">
-      <div class="proj-card reveal d1" style="grid-column:1/-1;max-width:520px">
-        <div class="teaser-frames" data-gallery-group="ai-teaser">
-          <div class="tf-frame">
-            <img decoding="async" src="https://lh3.googleusercontent.com/d/1sLJMmmCbRu9c-EnTYVBGE1OqlngJfnQd" alt="AI Movie Teaser Frame 1" loading="lazy"/>
-            <span class="teaser-label">Frame 01</span>
-          </div>
-          <div class="tf-frame">
-            <img decoding="async" src="https://lh3.googleusercontent.com/d/1BD8WHg79ZR5Bmag4mSTYezA6vzJ1KhxO" alt="AI Movie Teaser Frame 2" loading="lazy"/>
-            <span class="teaser-label">Frame 02</span>
-          </div>
-        </div>
-        <div class="pc-body">
-          <p class="proj-cat">AI Creative Pipeline · Storytelling</p>
-          <h3 class="proj-title">AI Movie Teaser</h3>
-          <p class="proj-desc">A ~30 second cinematic short teaser about friendship, survival, and mystical underwater elements — created end-to-end using a generative AI pipeline. Experiments with AI as a storytelling medium.</p>
-          <div class="proj-tags">
-            <span class="ptag hi">Generative AI</span><span class="ptag hi">Krea</span>
-            <span class="ptag">Visual Storytelling</span><span class="ptag">~30s</span>
-          </div>
-        </div>
+    
+    <div class="pj-more reveal">
+      <p class="pj-more-eyebrow">// 6 more projects</p>
+      <h3>See everything I've built</h3>
+      <p>AstroTamil, Hyperbola &amp; Ellipse Calculators, P&amp;C Quick Calculator, TNEB Tariff Calculator and the AI Movie Teaser — organised by category on the projects page.</p>
+      <div class="pj-more-btns">
+        <a href="/projects" class="btn-primary">View all 8 projects &rarr;</a>
       </div>
     </div>
 
-    <!-- TNEB TARIFF CALCULATOR — CIVIC TECH -->
-    <div class="tneb-card reveal" id="tneb-card" style="margin-bottom:20px" aria-label="TNEB Tariff Calculator Project">
-      <!-- Screenshot gallery strip: 5 clickable shots -->
-      <div class="tneb-shots" data-gallery-group="tneb" role="list" aria-label="TNEB Calculator Screenshots">
-        <div class="tneb-shot" role="listitem" tabindex="0" data-tneb-idx="0"
-             aria-label="Open screenshot: Dashboard">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1jYhIr0HKKWs3SczGzmKjeN8VfseXt3ky"
-               alt="TNEB Calculator — Dashboard overview showing the main interface" loading="lazy"/>
-          <span class="tneb-shot-lbl">Dashboard</span>
-          <span class="tneb-shot-zoom" aria-hidden="true">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(245,158,11,.85)" stroke-width="2.5">
-              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-              <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
-            </svg>
-          </span>
-        </div>
-        <div class="tneb-shot" role="listitem" tabindex="0" data-tneb-idx="1"
-             aria-label="Open screenshot: Calculator Interface">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1SIzzMliG0m-QQIPQyv-sATm6BnmG6orp"
-               alt="TNEB Calculator — Bill Calculation Interface with unit input" loading="lazy"/>
-          <span class="tneb-shot-lbl">Calculator</span>
-          <span class="tneb-shot-zoom" aria-hidden="true">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(245,158,11,.85)" stroke-width="2.5">
-              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-              <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
-            </svg>
-          </span>
-        </div>
-        <div class="tneb-shot" role="listitem" tabindex="0" data-tneb-idx="2"
-             aria-label="Open screenshot: Old vs New Tariff Comparison">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1Qsn7Qudzn_aLQJs4v5qu_2UglIvn8nCY"
-               alt="TNEB Calculator — Old vs New 2026 tariff side-by-side comparison" loading="lazy"/>
-          <span class="tneb-shot-lbl">Comparison</span>
-          <span class="tneb-shot-zoom" aria-hidden="true">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(245,158,11,.85)" stroke-width="2.5">
-              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-              <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
-            </svg>
-          </span>
-        </div>
-        <div class="tneb-shot" role="listitem" tabindex="0" data-tneb-idx="3"
-             aria-label="Open screenshot: Billing Breakdown">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1_hKoKcfC8F_Aqc4dDMVRBRDA_Hw6HnIE"
-               alt="TNEB Calculator — Detailed billing breakdown with slab-by-slab analysis" loading="lazy"/>
-          <span class="tneb-shot-lbl">Bill Breakdown</span>
-          <span class="tneb-shot-zoom" aria-hidden="true">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(245,158,11,.85)" stroke-width="2.5">
-              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-              <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
-            </svg>
-          </span>
-        </div>
-        <div class="tneb-shot" role="listitem" tabindex="0" data-tneb-idx="4"
-             aria-label="Open screenshot: Slab Structure">
-          <img decoding="async" src="https://lh3.googleusercontent.com/d/1OYTn6X-FK_lmJ4h4BLkWdj5jsmcBMvhl"
-               alt="TNEB Calculator — Tariff slab structure chart and savings visualisation" loading="lazy"/>
-          <span class="tneb-shot-lbl">Slab Structure</span>
-          <span class="tneb-shot-zoom" aria-hidden="true">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(245,158,11,.85)" stroke-width="2.5">
-              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-              <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
-            </svg>
-          </span>
-        </div>
-      </div>
-
-      <!-- Body -->
-      <div class="tneb-body">
-
-        <!-- Top: title + badges -->
-        <div class="tneb-top tneb-reveal">
-          <div>
-            <p class="tneb-eyebrow">Civic Tech · Interactive Tool · 2026</p>
-            <h3 class="tneb-title">TNEB Tariff Comparison <span class="amber">Calculator</span></h3>
-            <p class="tneb-subtitle">A real-world civic utility built for Tamil Nadu electricity consumers — compares the Old vs New 2026 TVK government tariff structures side-by-side, clarifying confusion around the new tariff announcement. Fully client-side, zero backend, deployed publicly.</p>
-          </div>
-          <div class="tneb-badge-col">
-            <span class="tneb-badge">No Backend · 100% Client-Side</span>
-            <span class="tneb-badge">Slab-by-Slab Engine</span>
-            <span class="tneb-badge">TNEB / TANGEDCO · TN</span>
-          </div>
-        </div>
-
-        <!-- Statistics panel -->
-        <div class="tneb-stats tneb-reveal">
-          <div class="tneb-stat">
-            <div class="tneb-stat-label">Type</div>
-            <div class="tneb-stat-value amber">Civic Tech</div>
-          </div>
-          <div class="tneb-stat">
-            <div class="tneb-stat-label">Platform</div>
-            <div class="tneb-stat-value">Web · Mobile</div>
-          </div>
-          <div class="tneb-stat">
-            <div class="tneb-stat-label">Status</div>
-            <div class="tneb-stat-value green">Live ✓</div>
-          </div>
-          <div class="tneb-stat">
-            <div class="tneb-stat-label">Mobile</div>
-            <div class="tneb-stat-value green">Friendly ✓</div>
-          </div>
-          <div class="tneb-stat">
-            <div class="tneb-stat-label">Updated</div>
-            <div class="tneb-stat-value">2026</div>
-          </div>
-        </div>
-
-        <!-- Achievement highlights -->
-        <div class="tneb-achievements tneb-reveal" aria-label="Project achievements">
-          <span class="tneb-ach"><span class="tneb-ach-icon">⚡</span>Real-world civic utility for TN consumers</span>
-          <span class="tneb-ach"><span class="tneb-ach-icon">📱</span>Fully responsive across all devices</span>
-          <span class="tneb-ach"><span class="tneb-ach-icon">🧮</span>Mathematically validated slab engine</span>
-          <span class="tneb-ach"><span class="tneb-ach-icon">🎨</span>Cyberpunk aesthetic with Canvas lightning</span>
-        </div>
-
-        <!-- Key features -->
-        <div class="tneb-features tneb-reveal" aria-label="Key features">
-          <span class="tneb-feat lit">Old vs New Tariff Engine</span>
-          <span class="tneb-feat lit">Circular Savings Meter</span>
-          <span class="tneb-feat lit">Real-Time Calculation</span>
-          <span class="tneb-feat lit">Bar + Doughnut Charts</span>
-          <span class="tneb-feat">Dark / Light Theme Toggle</span>
-          <span class="tneb-feat">Export PDF / Screenshot</span>
-          <span class="tneb-feat">Two-Way Slider Sync</span>
-          <span class="tneb-feat">Modal Slab Breakdown</span>
-          <span class="tneb-feat">Custom Cursor + Ring</span>
-          <span class="tneb-feat">GSAP Scroll Animations</span>
-          <span class="tneb-feat">Lightning Canvas BG</span>
-          <span class="tneb-feat">Mobile Compatible</span>
-        </div>
-
-        <!-- Project timeline -->
-        <div class="tneb-reveal">
-          <div class="tneb-stack-label">// Development Timeline</div>
-          <div class="tneb-timeline" role="list" aria-label="Project development phases">
-            <div class="tneb-tl-step"><div class="tneb-tl-dot">💡</div><div class="tneb-tl-info"><div class="tneb-tl-name">Idea</div></div></div>
-            <div class="tneb-tl-line"></div>
-            <div class="tneb-tl-step"><div class="tneb-tl-dot">🎨</div><div class="tneb-tl-info"><div class="tneb-tl-name">Design</div></div></div>
-            <div class="tneb-tl-line"></div>
-            <div class="tneb-tl-step"><div class="tneb-tl-dot">⚙️</div><div class="tneb-tl-info"><div class="tneb-tl-name">Build</div></div></div>
-            <div class="tneb-tl-line"></div>
-            <div class="tneb-tl-step"><div class="tneb-tl-dot">🧪</div><div class="tneb-tl-info"><div class="tneb-tl-name">Test</div></div></div>
-            <div class="tneb-tl-line"></div>
-            <div class="tneb-tl-step"><div class="tneb-tl-dot" style="background:var(--amber-dim2);border-color:var(--amber-border2)">🚀</div><div class="tneb-tl-info"><div class="tneb-tl-name" style="color:var(--amber)">Live</div></div></div>
-          </div>
-        </div>
-
-        <!-- Tech stack -->
-        <div class="tneb-stack-wrap tneb-reveal">
-          <div class="tneb-stack-label">// Technology Stack</div>
-          <div class="tneb-stack" role="list" aria-label="Technologies used">
-            <span class="tneb-tech" role="listitem">HTML5</span>
-            <span class="tneb-tech" role="listitem">CSS3</span>
-            <span class="tneb-tech" role="listitem">Vanilla JS</span>
-            <span class="tneb-tech" role="listitem">Canvas API</span>
-            <span class="tneb-tech" role="listitem">Chart.js</span>
-            <span class="tneb-tech" role="listitem">GSAP</span>
-            <span class="tneb-tech" role="listitem">Glassmorphism</span>
-            <span class="tneb-tech" role="listitem">Orbitron · JetBrains Mono</span>
-          </div>
-        </div>
-
-        <!-- Quick action buttons -->
-        <div class="tneb-quick-actions tneb-reveal">
-          <a href="https://tnebcalc.pages.dev/" target="_blank" rel="noopener noreferrer" class="tneb-qa primary" aria-label="Open TNEB Calculator live project">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Open Project
-          </a>
-          <button class="tneb-qa secondary" onclick="tnebOpenGallery(0)" aria-label="View TNEB screenshots gallery">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            View Screenshots
-          </button>
-          <button class="tneb-qa secondary tneb-share-btn" onclick="tnebShare()" aria-label="Share this project">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-            Share
-          </button>
-          <button class="tneb-qa secondary tneb-copy-btn" onclick="tnebCopyLink()" aria-label="Copy project link">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            Copy Link
-          </button>
-        </div>
-      </div>
-
-      <!-- Footer: validation + CTA -->
-      <div class="tneb-foot">
-        <div class="tneb-validation" aria-label="Built-in calculation validation">
-          Built-in Validation ·
-          <span>oldBill(264) = ₹535.80</span> ·
-          <span>newBill(264) = ₹300.80</span> ·
-          <span>newBill(200) = ₹0.00</span> ·
-          Bills converge &gt;500 units
-        </div>
-        <a href="https://tnebcalc.pages.dev/" target="_blank" rel="noopener noreferrer" class="tneb-demo-btn" aria-label="Try the TNEB Calculator live">
-          <span class="live-dot" style="width:6px;height:6px;background:var(--amber);box-shadow:0 0 0 0 rgba(245,158,11,.5);animation:live-pulse-amber 2s ease-in-out infinite"></span>
-          Try Live Calculator
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- Toast container -->
+<!-- Toast container -->
     <div class="tneb-toast-wrap" id="tneb-toasts" aria-live="polite" aria-atomic="true"></div>
 
   </div>
@@ -3343,7 +3174,7 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
     <div class="about-grid">
       <div class="about-left">
         <div class="about-photo-card reveal">
-          <div class="about-photo-fallback" id="pf2" style="display:flex"><img decoding="async" src="/logo.svg" alt="Barath M" style="width:40%;height:auto;opacity:.6"></div>
+          <div class="about-photo-fallback" id="pf2" style="display:flex"><img decoding="async" src="/assets/logo.svg" alt="Barath M" style="width:40%;height:auto;opacity:.6"></div>
           <div class="about-name-box">
             <div class="about-fn">Barath M</div>
             <div class="about-role">Class XI · Science Stream · CBSE</div>
@@ -3412,7 +3243,7 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
           <div class="tl-item past"><p class="tl-yr">2023</p><p class="tl-ev"><strong>IMO International Rank 2 · 59/60</strong> — peak mathematical achievement. Solar System Simulation built in Unity + C#.</p></div>
           <div class="tl-item past"><p class="tl-yr">2024</p><p class="tl-ev"><strong>IMO + NSO + NCO Gold Medals.</strong> English Typewriting Lower — First Class with Distinction.</p></div>
           <div class="tl-item past"><p class="tl-yr">2025</p><p class="tl-ev"><strong>Aryabhata Ganit Challenge — Merit, Top 100.</strong> English Typewriting Higher — First Class with Distinction. Astrological Web App built.</p></div>
-          <div class="tl-item past"><p class="tl-yr">2026</p><p class="tl-ev"><strong>Joined Private school in Chetpet for Class XI.</strong> Generative AI Mastermind cert. NCO Distinction + Zonal Top 25. AI Movie Teaser created. <strong>NutriGreen AI</strong> — full-stack AI nutrition platform with Google Gemini integration. <strong>TNEB Tariff Calculator</strong> — civic tech tool with Chart.js, GSAP, and Canvas lightning effects.</p></div>
+          <div class="tl-item past"><p class="tl-yr">2026</p><p class="tl-ev"><strong>Joined Private school in Chetpet for Class XI.</strong> Generative AI Mastermind cert. NCO Distinction + Zonal Top 25. AI Movie Teaser created. <strong>NutriGreen AI</strong> — full-stack AI nutrition platform with Google Gemini integration. <strong>TNEB Tariff Calculator</strong> — civic tech tool with Chart.js, GSAP, and Canvas lightning effects. <strong>P&amp;C Quick Calculator</strong> — JEE Mathematics tool for permutations, combinations and factorials, with a smartboard mode. <strong>Hyperbola &amp; Ellipse Calculators</strong> — interactive conic-section workbenches for JEE Main &amp; Advanced.</p></div>
           <div class="tl-item fut"><p class="tl-yr">2028</p><p class="tl-ev">Class XII completion. JEE Main + Advanced.</p></div>
           <div class="tl-item fut"><p class="tl-yr">2029+</p><p class="tl-ev">Engineering degree.</p></div>
           <div class="tl-item fut"><p class="tl-yr">Future</p><p class="tl-ev">Public service, via the civil services route.</p></div>
@@ -3751,7 +3582,7 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
       <div class="footer-links-col">
         <h4>Navigate</h4>
         <a href="#hero">Home</a>
-        <a href="#projects">Projects</a>
+        <a href="/projects">Projects</a>
         <a href="#achievements">Achievements</a>
         <a href="#certs">Certifications</a>
         <a href="#skills">Skills</a>
@@ -3763,11 +3594,12 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
         <h4>Projects</h4>
         <a href="https://nutrigreenai.pages.dev/" target="_blank" rel="noopener">NutriGreen AI ↗</a>
         <a href="https://astrotamil.pages.dev/" target="_blank" rel="noopener">AstroTamil ↗</a>
-        <a href="#projects">Hyperbola Calculator</a>
-        <a href="#projects">Ellipse Calculator</a>
-        <a href="#projects">Solar System Sim</a>
-        <a href="#projects">TNEB Calculator</a>
-        <a href="#projects">AI Movie Teaser</a>
+        <a href="/projects#hyperbola">Hyperbola Calculator</a>
+        <a href="/projects#ellipse">Ellipse Calculator</a>
+        <a href="/projects#solar-system">Solar System Sim</a>
+        <a href="/projects#tneb-card">TNEB Calculator</a>
+        <a href="https://pccalc.pages.dev/" target="_blank" rel="noopener">P&amp;C Calculator ↗</a>
+<a href="/projects#ai-teaser">AI Movie Teaser</a>
       </div>
       <div class="footer-links-col">
         <h4>Actions</h4>
@@ -3916,6 +3748,21 @@ function tnebCopyLink(){
   navigator.clipboard.writeText(url).then(()=>tnebToast('✓ Link copied to clipboard','green')).catch(()=>tnebToast('Could not copy URL','red'));
 }
 function tnebOpenGallery(idx){ window.openGallery(window.TNEB_GALLERY||[], idx); }
+
+/* ── P&C CALCULATOR CARD ── */
+function pcShare(){
+  const url = 'https://pccalc.pages.dev/';
+  if(navigator.share){
+    navigator.share({title:'P&C Quick Calculator — JEE Mathematics',url}).catch(()=>{});
+  } else {
+    navigator.clipboard.writeText(url).then(()=>tnebToast('✓ Project URL copied','green')).catch(()=>tnebToast('Could not copy','red'));
+  }
+}
+function pcCopyLink(){
+  const url = 'https://pccalc.pages.dev/';
+  navigator.clipboard.writeText(url).then(()=>tnebToast('✓ Link copied to clipboard','green')).catch(()=>tnebToast('Could not copy URL','red'));
+}
+function pcOpenGallery(){ tnebToast('Screenshots will be uploaded soon','amber',2800); }
 
 /* ── TNEB shot keyboard & click ── */
 document.querySelectorAll('[data-tneb-idx]').forEach(el=>{
