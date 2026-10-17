@@ -5344,6 +5344,181 @@ window.ELLIPSE_PROJECT_DATA = {
 </script>
 
 <script>
+/* Consent-aware portfolio analytics client */
+(function () {
+  'use strict';
+
+  const STORAGE_KEY = 'bm_a';
+  const SESSION_TIMEOUT = 30 * 60 * 1000;
+
+  let enabled = false;
+  let visitorId = null;
+  let sessionId = null;
+  let sessionStartedAt = 0;
+  let pageViewSent = false;
+
+  function createId() {
+    if (typeof crypto.randomUUID === 'function') {
+      return crypto.randomUUID();
+    }
+
+    if (typeof crypto.getRandomValues !== 'function') {
+      return null;
+    }
+
+    const bytes = crypto.getRandomValues(new Uint8Array(16));
+    bytes[6] = (bytes[6] & 0x0f) | 0x40;
+    bytes[8] = (bytes[8] & 0x3f) | 0x80;
+
+    const hex = Array.from(
+      bytes,
+      (byte) => byte.toString(16).padStart(2, '0')
+    ).join('');
+
+    return [
+      hex.slice(0, 8),
+      hex.slice(8, 12),
+      hex.slice(12, 16),
+      hex.slice(16, 20),
+      hex.slice(20)
+    ].join('-');
+  }
+
+  function readStoredIds() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+
+      const value = JSON.parse(raw);
+
+      if (
+        value?.v !== 1 ||
+        typeof value.vid !== 'string' ||
+        typeof value.sid !== 'string' ||
+        !Number.isFinite(value.sidAt)
+      ) {
+        return null;
+      }
+
+      return value;
+    } catch {
+      return null;
+    }
+  }
+
+  function saveIds() {
+    try {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          v: 1,
+          vid: visitorId,
+          sid: sessionId,
+          sidAt: sessionStartedAt
+        })
+      );
+
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  function initializeIds() {
+    const now = Date.now();
+    const stored = readStoredIds();
+
+    visitorId = stored?.vid || createId();
+
+    if (!visitorId) return false;
+
+    if (
+      stored?.sid &&
+      now - stored.sidAt < SESSION_TIMEOUT
+    ) {
+      sessionId = stored.sid;
+      sessionStartedAt = stored.sidAt;
+    } else {
+      sessionId = createId();
+      sessionStartedAt = now;
+    }
+
+    if (!sessionId) return false;
+
+    return saveIds();
+  }
+
+  function sendEvent(event, data = {}) {
+    if (!enabled || !visitorId || !sessionId) return;
+
+    const payload = {
+      v: 1,
+      visitorId,
+      sessionId,
+      event,
+      path: location.pathname || '/',
+      referrer: document.referrer || null,
+      data
+    };
+
+    fetch('/api/analytics', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload),
+      keepalive: true
+    }).catch(() => {
+      // Analytics failures must not disrupt the portfolio.
+    });
+  }
+
+  function startTracking() {
+    if (enabled) return;
+
+    const consent = window.BMCookieConsent?.get();
+
+    if (consent?.analytics !== true) return;
+
+    if (!initializeIds()) return;
+
+    enabled = true;
+
+    if (!pageViewSent) {
+      pageViewSent = true;
+      sendEvent('page_view');
+    }
+  }
+
+  function stopTracking() {
+    enabled = false;
+    pageViewSent = false;
+    visitorId = null;
+    sessionId = null;
+    sessionStartedAt = 0;
+
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      // Tracking remains disabled even if storage is unavailable.
+    }
+  }
+
+  window.addEventListener('bm:consent', (event) => {
+    if (event.detail?.analytics === true) {
+      startTracking();
+    } else {
+      stopTracking();
+    }
+  });
+
+  // Consent may have been granted before this script loaded.
+  startTracking();
+})();
+</script>
+
+<script>
 /* ══════════════════════════════════════════════════════
    NEW FEATURES — COMPREHENSIVE PORTFOLIO ENHANCEMENTS
    Script is at end of <body> so DOM is fully available.
