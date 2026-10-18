@@ -343,23 +343,23 @@
         This Privacy Policy explains how <strong>barath.pages.dev</strong> (this portfolio website, operated by Barath M) collects, uses, and handles information when you visit. This is a personal portfolio site — no accounts, no purchases, no user-generated content.
       </p>
       <div class="info-card">
-        <p><strong>Short version:</strong> This site uses essential cookies to function and optional analytics cookies to understand visitor behaviour. No personal data is sold or shared with third parties. You are in control.</p>
+        <p><strong>Short version:</strong> This site uses necessary browser storage to remember your choices. Optional preferences remember your appearance setting. If you opt in to analytics, the site records page views and session activity, including the IP address supplied to the server by Cloudflare.</p>
       </div>
     </section>
 
     <section>
       <h2>Information Collected</h2>
-      <p>This site does <strong>not</strong> collect any personally identifiable information automatically. The only data collected falls into two categories:</p>
+      <p>This site collects limited technical information automatically. Optional analytics is sent only after you accept analytics cookies:</p>
       <ul>
         <li><strong>Essential data</strong> — minimal technical information required for the site to load and function correctly (e.g. your browser type, IP address via server logs managed by Cloudflare Pages).</li>
-        <li><strong>Analytics data</strong> — aggregated, anonymised data about how visitors interact with pages (e.g. pages visited, time on page, general location). This is only collected if you accept optional cookies.</li>
+        <li><strong>Analytics data</strong> — page views linked to random visitor and session identifiers, along with the IP address provided in Cloudflare's <code>CF-Connecting-IP</code> request header. The IP is stored server-side in the session record to support analytics and is not sent back to your browser or exposed through the analytics API. This is only collected after analytics consent.</li>
       </ul>
       <p>The <strong>contact form</strong> on this site collects your name, email address, and message. This information is used solely to respond to your inquiry and is not stored long-term or shared with any third party.</p>
     </section>
 
     <section>
       <h2>Cookies</h2>
-      <p>Cookies are small text files stored in your browser. This site uses two categories of cookies:</p>
+      <p>The site uses browser storage for saved choices and analytics identifiers. It does not use advertising or marketing trackers.</p>
 
       <table class="cookie-table">
         <thead>
@@ -372,21 +372,27 @@
         </thead>
         <tbody>
           <tr>
-            <td><strong>Essential</strong></td>
+            <td><strong>Strictly necessary</strong></td>
             <td>Required for the site to function. Cannot be disabled.</td>
-            <td>Cookie consent preference, session state</td>
+            <td>Consent choice</td>
             <td><span class="badge badge-required">Required</span></td>
+          </tr>
+          <tr>
+            <td><strong>Preferences</strong></td>
+            <td>Remembers your selected appearance on this device.</td>
+            <td>Light or dark theme</td>
+            <td><span class="badge badge-optional">Optional</span></td>
           </tr>
           <tr>
             <td><strong>Analytics</strong></td>
             <td>Helps understand how visitors use the site so it can be improved.</td>
-            <td>Page views, session duration, referrer source</td>
+            <td>Page views, session activity, referrer source, server-side IP address</td>
             <td><span class="badge badge-optional">Optional</span></td>
           </tr>
         </tbody>
       </table>
 
-      <p>You can change your cookie preferences at any time by clearing your browser cookies and revisiting the site, which will display the consent banner again.</p>
+      <p>You can change or withdraw optional preferences at any time using Cookie Preferences in the portfolio footer. Your consent choice is kept in browser storage; if browser storage is unavailable, your selection applies only until you leave the page.</p>
     </section>
 
     <section>
@@ -399,16 +405,16 @@
       <h2>Your Rights</h2>
       <p>You have the right to:</p>
       <ul>
-        <li>Opt out of optional analytics cookies via the cookie banner</li>
+        <li>Change or withdraw optional preferences using Cookie Preferences in the portfolio footer</li>
         <li>Request deletion of any contact form data you submitted</li>
-        <li>Know what data is held about you (none beyond what you voluntarily provide)</li>
+        <li>Ask what consented analytics records are stored, including the session IP address linked to a random visitor and session identifier</li>
       </ul>
       <p>To exercise any of these rights, use the contact form on the portfolio or reach out directly.</p>
     </section>
 
     <section>
       <h2>Data Retention</h2>
-      <p>Contact form submissions are retained only for the duration necessary to respond to your inquiry. Analytics data (if consented) is aggregated and anonymised — no individual records are stored. Cookie preference data is stored in your browser only.</p>
+      <p>Contact form submissions are retained only for the duration necessary to respond to your inquiry. Consented analytics session and event records are stored in the site's Cloudflare D1 database. The project currently defines no automatic analytics deletion schedule or fixed retention period. Cookie preference data is stored in your browser only.</p>
     </section>
 
     <section>
@@ -435,7 +441,7 @@
 
   <footer>
     <p>
-      <a href="/">← Barath M — Portfolio</a> &nbsp;·&nbsp; Privacy Policy &nbsp;·&nbsp; Chennai, Tamil Nadu, India
+      <a href="/">← Barath M — Portfolio</a> &nbsp;·&nbsp; Privacy Policy &nbsp;·&nbsp; <a href="/#cookie-settings-link">Cookie Preferences</a> &nbsp;·&nbsp; Chennai, Tamil Nadu, India
     </p>
   </footer>
 

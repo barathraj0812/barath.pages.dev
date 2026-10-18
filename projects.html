@@ -7,8 +7,8 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Projects — Barath M | AI Apps, JEE Math Tools, Civic Tech &amp; Games</title>
-<meta name="description" content="All 8 projects by Barath M: NutriGreen AI, AstroTamil, Hyperbola and Ellipse Calculators, P&amp;C Quick Calculator, TNEB Tariff Calculator, Solar System Game and AI Movie Teaser."/>
-<meta name="keywords" content="Barath M, portfolio, student developer, AI applications, IMO rank 2, olympiad, NutriGreen AI, Gemini API, AstroTamil, Vedic astrology app, P&amp;C calculator, hyperbola calculator, ellipse calculator, conic sections, Chennai, CBSE, JEE"/>
+<meta name="description" content="All 9 projects by Barath M: NutriGreen AI, AstroTamil, Hyperbola and Ellipse Calculators, P&amp;C Quick Calculator, PHYSICA Projectile Motion Lab, TNEB Tariff Calculator, Solar System Game and AI Movie Teaser."/>
+<meta name="keywords" content="Barath M, portfolio, student developer, AI applications, IMO rank 2, olympiad, NutriGreen AI, Gemini API, AstroTamil, Vedic astrology app, P&amp;C calculator, hyperbola calculator, ellipse calculator, projectile motion simulator, physics lab, conic sections, Chennai, CBSE, JEE"/>
 <meta name="author" content="Barath M"/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://barath.pages.dev/projects"/>
@@ -16,12 +16,12 @@
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://barath.pages.dev/projects"/>
 <meta property="og:title" content="Projects — Barath M"/>
-<meta property="og:description" content="All 8 projects by Barath M: NutriGreen AI, AstroTamil, Hyperbola and Ellipse Calculators, P&amp;C Quick Calculator, TNEB Tariff Calculator, Solar System Game and AI Movie Teaser."/>
+<meta property="og:description" content="All 9 projects by Barath M: NutriGreen AI, AstroTamil, Hyperbola and Ellipse Calculators, P&amp;C Quick Calculator, PHYSICA Projectile Motion Lab, TNEB Tariff Calculator, Solar System Game and AI Movie Teaser."/>
 <meta property="og:image" content="https://barath.pages.dev/assets/og-image.png"/>
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Projects — Barath M"/>
-<meta name="twitter:description" content="All 8 projects by Barath M: NutriGreen AI, AstroTamil, Hyperbola and Ellipse Calculators, P&amp;C Quick Calculator, TNEB Tariff Calculator, Solar System Game and AI Movie Teaser."/>
+<meta name="twitter:description" content="All 9 projects by Barath M: NutriGreen AI, AstroTamil, Hyperbola and Ellipse Calculators, P&amp;C Quick Calculator, PHYSICA Projectile Motion Lab, TNEB Tariff Calculator, Solar System Game and AI Movie Teaser."/>
 <meta name="twitter:image" content="https://barath.pages.dev/assets/og-image.png"/>
 <!-- Theme color for mobile browser chrome -->
 <meta name="theme-color" content="#060D1A" id="theme-color-meta"/>
@@ -1129,6 +1129,12 @@ footer{border-top:1px solid var(--border);padding:28px 32px;position:relative;z-
 .proj-link-pending{color:var(--text3);border-bottom:1px dashed var(--border2);cursor:default}
 .proj-link-pending:hover{border-color:var(--border2);gap:7px}
 #hc-live-link[hidden],#hc-live-pending[hidden],#ec-live-link[hidden],#ec-live-pending[hidden]{display:none}
+/* Physics Lab (PHYSICA) — placeholder tile variant: projectile arc + launch point */
+.at-shot.at-shot-ph.proj{background:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 62' preserveAspectRatio='xMidYMid slice' fill='none' stroke='%233B82F6'%3E%3Cpath d='M0 52H100M10 0V62' stroke-opacity='.10' stroke-dasharray='2 3'/%3E%3Cpath d='M10 52Q45 -14 80 52' stroke-opacity='.34' stroke-width='1.2'/%3E%3Ccircle cx='10' cy='52' r='2' stroke-opacity='.4'/%3E%3Ccircle cx='45' cy='19' r='2.4' stroke-opacity='.4'/%3E%3C/svg%3E") center/cover no-repeat,
+  radial-gradient(ellipse at 50% 40%,rgba(59,130,246,.08),transparent 70%),var(--bg2)}
+#pl-live-link[hidden],#pl-live-pending[hidden]{display:none}
+
 
 /* Card body */
 .tneb-body{padding:26px 28px;flex:1;display:flex;flex-direction:column;gap:16px}
@@ -1318,7 +1324,7 @@ footer{border-top:1px solid var(--border);padding:28px 32px;position:relative;z-
 
 /* Screenshot strip - clickable gallery */
 .pc-shots{
-  display:grid;grid-template-columns:repeat(5,1fr);gap:2px;
+  display:grid;grid-template-columns:repeat(2,1fr);gap:2px;
   background:rgba(167,139,250,.06);border-bottom:1px solid rgba(167,139,250,.1)}
 .pc-shot img{
   width:100%;height:100%;object-fit:cover;display:block;
@@ -1477,11 +1483,14 @@ footer{border-top:1px solid var(--border);padding:28px 32px;position:relative;z-
 .pc-shot-ico{font-family:'JetBrains Mono',monospace;font-size:1.05rem;color:var(--violet);opacity:.85;letter-spacing:.02em}
 .pc-shot-soon{font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);line-height:1.5}
 .pc-shot .pc-shot-lbl{position:static;color:var(--violet)}
+.pc-shot.has-img{padding:0;outline:none;background:none;display:block;cursor:zoom-in}
+.pc-shot.has-img::after{display:block;content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(6,13,26,.65) 0%,transparent 55%);pointer-events:none}
+.pc-shot.has-img .pc-shot-lbl{position:absolute;bottom:7px;left:9px;z-index:2}
 .pc-stat-value.green{color:#22C55E}
 [data-theme="light"] .pc-title{color:var(--text)}
 [data-theme="light"] .pc-foot{background:rgba(240,244,250,.7)}
 @media(max-width:900px){
-  .pc-shots{grid-template-columns:1fr 1fr 1fr}
+  .pc-shots{grid-template-columns:1fr 1fr}
   .pc-stats{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:640px){
@@ -2013,6 +2022,20 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
 }
 </script>
 
+<!-- Structured data — PHYSICA Projectile Motion Laboratory (SoftwareApplication) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PHYSICA — Projectile Motion Laboratory",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Web",
+  "url": "https://physicslabs.pages.dev/",
+  "description": "An interactive projectile motion laboratory with live simulation, optional quadratic air resistance, graphs, data table, worked equations and CSV export.",
+  "author": { "@type": "Person", "name": "Barath M" }
+}
+</script>
+
 <!-- Additive structured data for NCC Achievements — does not replace or alter the
      existing SoftwareApplication schema above. No personally identifiable
      information (registration/enrolment numbers, unit, DOB, etc.) is included. -->
@@ -2181,14 +2204,15 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
     <div class="sec-hdr reveal">
       <p class="sec-eyebrow">// Portfolio</p>
       <h2 class="sec-title reveal title-reveal">All Projects</h2>
-      <p class="sec-sub">Eight projects across AI applications, JEE maths tools, civic tech, games and generative AI — grouped by category. Use the filters to narrow down.</p>
+      <p class="sec-sub">Nine projects across AI applications, JEE maths tools, physics simulation, civic tech, games and generative AI — grouped by category. Use the filters to narrow down.</p>
       <div class="divider"></div>
     </div>
 
         <div class="pj-filters reveal" role="tablist" aria-label="Filter projects by category">
-      <button class="pj-chip on" data-filter="all" role="tab" aria-selected="true">All<b>8</b></button>
+      <button class="pj-chip on" data-filter="all" role="tab" aria-selected="true">All<b>9</b></button>
       <button class="pj-chip" data-filter="ai" role="tab" aria-selected="false">AI &amp; Full-Stack<b>2</b></button>
       <button class="pj-chip" data-filter="math" role="tab" aria-selected="false">JEE Maths Tools<b>3</b></button>
+      <button class="pj-chip" data-filter="physics" role="tab" aria-selected="false">Physics Labs<b>1</b></button>
       <button class="pj-chip" data-filter="civic" role="tab" aria-selected="false">Civic Tech<b>1</b></button>
       <button class="pj-chip" data-filter="games" role="tab" aria-selected="false">Games &amp; Creative AI<b>2</b></button>
     </div>
@@ -2565,31 +2589,14 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
 <!-- P&C QUICK CALCULATOR — EDUCATION TECH -->
     <div class="pc-card reveal" id="pc-card" style="margin-bottom:20px" aria-label="P&amp;C Quick Calculator Project">
       <!-- Screenshot strip: placeholders until images are uploaded -->
-      <div class="pc-shots" role="list" aria-label="P&amp;C Calculator Screenshots (coming soon)">
-        <div class="pc-shot" role="listitem" aria-label="Calculator screenshot — will be uploaded soon">
-          <span class="pc-shot-ico" aria-hidden="true">8C3</span>
-          <span class="pc-shot-soon">Screenshot<br>uploading soon</span>
-          <span class="pc-shot-lbl">Calculator</span>
+      <div class="pc-shots" role="list" aria-label="P&amp;C Calculator Screenshots">
+        <div class="pc-shot has-img" role="listitem">
+          <img decoding="async" src="https://lh3.googleusercontent.com/d/1c1PGd2OLSaqxMg9Xs0LBUlfgNKQID93W" alt="P&amp;C Quick Calculator — Homescreen" loading="lazy"/>
+          <span class="pc-shot-lbl">Homescreen</span>
         </div>
-        <div class="pc-shot" role="listitem" aria-label="Exact Result screenshot — will be uploaded soon">
-          <span class="pc-shot-ico" aria-hidden="true">= 56</span>
-          <span class="pc-shot-soon">Screenshot<br>uploading soon</span>
-          <span class="pc-shot-lbl">Exact Result</span>
-        </div>
-        <div class="pc-shot" role="listitem" aria-label="Identities screenshot — will be uploaded soon">
-          <span class="pc-shot-ico" aria-hidden="true">nCr · nPr</span>
-          <span class="pc-shot-soon">Screenshot<br>uploading soon</span>
+        <div class="pc-shot has-img" role="listitem">
+          <img decoding="async" src="https://lh3.googleusercontent.com/d/1jTDO67T1mBN5A1D0lj7wJn0zWPNzyscJ" alt="P&amp;C Quick Calculator — Identities" loading="lazy"/>
           <span class="pc-shot-lbl">Identities</span>
-        </div>
-        <div class="pc-shot" role="listitem" aria-label="Smartboard Mode screenshot — will be uploaded soon">
-          <span class="pc-shot-ico" aria-hidden="true">▣</span>
-          <span class="pc-shot-soon">Screenshot<br>uploading soon</span>
-          <span class="pc-shot-lbl">Smartboard Mode</span>
-        </div>
-        <div class="pc-shot" role="listitem" aria-label="Multi-Calculator screenshot — will be uploaded soon">
-          <span class="pc-shot-ico" aria-hidden="true">＋</span>
-          <span class="pc-shot-soon">Screenshot<br>uploading soon</span>
-          <span class="pc-shot-lbl">Multi-Calculator</span>
         </div>
       </div>
 
@@ -2706,9 +2713,85 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
 
     </div>
 
+    <div class="pj-group" data-cat="physics">
+      <div class="pj-cat-head reveal">
+        <p class="sec-eyebrow">// 03 · Physics Labs</p>
+        <h3>Physics Labs</h3>
+        <p>Interactive simulations that pair a live experiment with the equations, graphs and data behind it.</p>
+      </div>
+    <div class="pj-anchor" id="physica">
+<!-- PHYSICA — PROJECTILE MOTION LABORATORY — same pattern as Hyperbola / Ellipse Calculator.
+         Live URL: ctaUrl in window.PHYSICA_PROJECT_DATA. Screenshot tiles are placeholders:
+         swap each .at-shot-ph tile for <div class="at-shot" data-gallery-caption="..."><img .../><span class="at-shot-lbl">..</span></div>. -->
+    <div class="solar-featured reveal" id="physica-card">
+      <div class="solar-info">
+        <p class="proj-cat">Interactive Physics · Mechanics · Simulation Lab</p>
+        <h3 class="proj-title"><span>PHYSICA — Projectile Motion Laboratory</span></h3>
+        <p class="proj-desc">A digital physics laboratory for projectile motion. Set the launch speed, angle, height and gravity, optionally switch on quadratic air resistance, and watch the trajectory play out live while velocity, acceleration and position update on every frame. The same model drives the graphs, the data table and the worked equations, so every number on screen can be traced back to its formula.</p>
+        <div class="proj-tags">
+          <span class="ptag hi">JavaScript</span><span class="ptag hi">Canvas API</span>
+          <span class="ptag hi">Runge–Kutta (RK4)</span><span class="ptag">Vite</span>
+          <span class="ptag">CSV Export</span><span class="ptag">No Backend</span>
+        </div>
+        <div class="proj-chal">
+          <h4>Engineering Highlights</h4>
+          <div class="chal-list">
+            <div class="chal-item">Ideal model solved analytically, with an optional quadratic-drag model integrated by fourth-order Runge–Kutta at a fixed 0.01 s step</div>
+            <div class="chal-item">Adjustable launch speed, angle, height and gravity, plus object mass, drag coefficient, frontal area and air density, all range-validated</div>
+            <div class="chal-item">Live simulation with play, pause, speed control and a time scrubber, and optional velocity and acceleration vector overlays</div>
+            <div class="chal-item">Linked analysis views — graphs, results, data table and step-by-step equations — that you can inspect by clicking or dragging along any graph</div>
+            <div class="chal-item">Theoretical results for flight time, time to apex, maximum height and range, with worked equations that use your current values</div>
+            <div class="chal-item">One-click CSV export of the current run, with accessible controls and live status messages</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:12px">
+          <a id="pl-live-link" href="#" target="_blank" rel="noopener" class="proj-link" hidden>
+            <span class="live-dot blue" style="width:6px;height:6px;margin-right:2px"></span>
+            Try Live App
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+          <span id="pl-live-pending" class="proj-link proj-link-pending" role="note">Live link coming soon</span>
+          <button onclick="window.openProjectModal(window.PHYSICA_PROJECT_DATA)" class="btn-secondary" style="padding:8px 16px;font-size:.78rem">
+            Learn More
+          </button>
+        </div>
+      </div>
+      <div class="at-shots" data-gallery-group="physica-lab">
+        <div class="at-shot at-shot-ph proj" role="img" aria-label="PHYSICA — Simulation (screenshot coming soon)">
+          <span class="at-shot-soon">Uploading soon</span>
+          <span class="at-shot-lbl">Simulation</span>
+        </div>
+        <div class="at-shot at-shot-ph proj" role="img" aria-label="PHYSICA — Analysis Graphs (screenshot coming soon)">
+          <span class="at-shot-soon">Uploading soon</span>
+          <span class="at-shot-lbl">Analysis Graphs</span>
+        </div>
+        <div class="at-shot at-shot-ph proj" role="img" aria-label="PHYSICA — Data Table (screenshot coming soon)">
+          <span class="at-shot-soon">Uploading soon</span>
+          <span class="at-shot-lbl">Data Table</span>
+        </div>
+        <div class="at-shot at-shot-ph proj" role="img" aria-label="PHYSICA — Equations (screenshot coming soon)">
+          <span class="at-shot-soon">Uploading soon</span>
+          <span class="at-shot-lbl">Equations</span>
+        </div>
+        <div class="at-shot at-shot-ph proj" role="img" aria-label="PHYSICA — Air Resistance (screenshot coming soon)">
+          <span class="at-shot-soon">Uploading soon</span>
+          <span class="at-shot-lbl">Air Resistance</span>
+        </div>
+        <div class="at-shot at-shot-ph proj" role="img" aria-label="PHYSICA — Mobile View (screenshot coming soon)">
+          <span class="at-shot-soon">Uploading soon</span>
+          <span class="at-shot-lbl">Mobile View</span>
+        </div>
+      </div>
+    </div>
+
+    
+    </div>
+
+    </div>
+
     <div class="pj-group" data-cat="civic">
       <div class="pj-cat-head reveal">
-        <p class="sec-eyebrow">// 03 · Civic Tech</p>
+        <p class="sec-eyebrow">// 04 · Civic Tech</p>
         <h3>Civic Tech</h3>
         <p>A tool built to solve a real, everyday problem for households.</p>
       </div>
@@ -2920,7 +3003,7 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
 
     <div class="pj-group" data-cat="games">
       <div class="pj-cat-head reveal">
-        <p class="sec-eyebrow">// 04 · Games &amp; Creative AI</p>
+        <p class="sec-eyebrow">// 05 · Games &amp; Creative AI</p>
         <h3>Games &amp; Creative AI</h3>
         <p>Interactive simulations and generative AI storytelling experiments.</p>
       </div>
@@ -3057,6 +3140,7 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
         <a href="https://astrotamil.pages.dev/" target="_blank" rel="noopener">AstroTamil ↗</a>
         <a href="/projects#hyperbola">Hyperbola Calculator</a>
         <a href="/projects#ellipse">Ellipse Calculator</a>
+        <a href="/projects#physica">PHYSICA Physics Lab</a>
         <a href="/projects#solar-system">Solar System Sim</a>
         <a href="/projects#tneb-card">TNEB Calculator</a>
         <a href="https://pccalc.pages.dev/" target="_blank" rel="noopener">P&amp;C Calculator ↗</a>
@@ -3064,6 +3148,7 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
       </div>
       <div class="footer-links-col">
         <h4>Actions</h4>
+        <button type="button" id="cookie-settings-link" aria-controls="cookie-banner" aria-expanded="false">Cookie Preferences</button>
         <button id="footer-print-btn" onclick="window.print()" style="all:unset;cursor:pointer;display:block;font-size:.8rem;color:var(--text2);margin-bottom:7px;transition:color .2s" onmouseover="this.style.color='var(--blue)'" onmouseout="this.style.color='var(--text2)'">Print / PDF</button>
         <button id="footer-share-btn" style="all:unset;cursor:pointer;display:block;font-size:.8rem;color:var(--text2);margin-bottom:7px;transition:color .2s" onmouseover="this.style.color='var(--blue)'" onmouseout="this.style.color='var(--text2)'" onclick="sharePortfolio(this)">Share Portfolio</button>
         <button style="all:unset;cursor:pointer;display:block;font-size:.8rem;color:var(--text2);margin-bottom:7px;transition:color .2s" onmouseover="this.style.color='var(--blue)'" onmouseout="this.style.color='var(--text2)'" onclick="document.getElementById('kbd-overlay').classList.add('open')">Keyboard Shortcuts</button>
@@ -3176,7 +3261,7 @@ window.TNEB_GALLERY = [
   {src:'https://lh3.googleusercontent.com/d/1OYTn6X-FK_lmJ4h4BLkWdj5jsmcBMvhl', caption:'Slab Structure & Savings', alt:'TNEB Calculator — Tariff slab structure chart and savings visualisation'},
 ];
 
-/* Session analytics (no personal data) */
+/* Session interaction counters (kept in page memory) */
 const _analytics = {screenshotsViewed:0, zoomUsed:0, fullscreenUsed:0};
 
 /* ── TOAST SYSTEM ── */
@@ -3966,8 +4051,39 @@ window.ELLIPSE_PROJECT_DATA = {
   ctaUrl: 'https://ellipsecalc.pages.dev/'
 };
 
+/* PHYSICA — Projectile Motion Laboratory "Learn More" dialog content.
+   ctaUrl drives both the card's "Try Live App" link and the dialog's launch button. */
+window.PHYSICA_PROJECT_DATA = {
+  eyebrow: 'Interactive Physics · Mechanics · Simulation Lab',
+  title: 'PHYSICA — Projectile Motion Laboratory',
+  tagline: 'A Digital Laboratory for Exploring Projectile Motion',
+  overview: 'PHYSICA is a client-side physics laboratory for studying projectile motion. Students set the launch conditions, run the experiment live, and then analyse it through graphs, a data table and worked equations that all come from the same underlying model. It can compare the ideal, drag-free case with a realistic quadratic air-resistance model.',
+  capabilities: [
+    'Launch parameters: initial speed, launch angle, launch height and gravity magnitude, with range validation',
+    'Optional air resistance: quadratic drag with adjustable mass, drag coefficient, frontal area and air density (defaults approximate a baseball)',
+    'Live canvas simulation with play, pause and restart, 0.25× to faster playback speeds and a time scrubber',
+    'Velocity, horizontal and vertical components, and acceleration vector overlays on the trajectory',
+    'Live readouts for time, position, velocity, speed and acceleration',
+    'Theoretical results: flight time, time to apex, maximum height and horizontal range',
+    'Analysis views for graphs, results, data table and step-by-step equations, with click-or-drag inspection of any graph',
+    'Worked equations that substitute the current launch values, plus symbols, units and model assumptions',
+    'CSV export of the current run, and a one-click reset to defaults'
+  ],
+  highlights: [
+    'One shared model drives the simulation, graphs, table, results and equations',
+    'Ideal motion solved analytically; drag motion integrated with fourth-order Runge–Kutta at a fixed 0.01 s step',
+    'Time-stepping adapts near high drag so the integration stays stable',
+    'Ground impact located by interpolation between steps for an accurate flight time and range',
+    'Responsive layout with a collapsible navigation sidebar for phones and tablets',
+    'Labelled controls, ARIA live status messages and keyboard-operable analysis tabs'
+  ],
+  tech: ['JavaScript', 'Canvas API', 'Runge–Kutta Integration', 'Vite', 'CSV Export', 'Responsive Design'],
+  ctaText: 'Launch PHYSICA',
+  ctaUrl: 'https://physicslabs.pages.dev/'
+};
+
 /* Reveal each project's live link once its ctaUrl is set (card link + "coming soon" note share a prefix). */
-[['hc', window.HYPERBOLA_PROJECT_DATA], ['ec', window.ELLIPSE_PROJECT_DATA]].forEach(function(p){
+[['hc', window.HYPERBOLA_PROJECT_DATA], ['ec', window.ELLIPSE_PROJECT_DATA], ['pl', window.PHYSICA_PROJECT_DATA]].forEach(function(p){
   var a = document.getElementById(p[0] + '-live-link'), n = document.getElementById(p[0] + '-live-pending');
   if(!a || !n || !p[1].ctaUrl) return;
   a.href = p[1].ctaUrl; a.hidden = false; n.hidden = true;
@@ -4472,8 +4588,8 @@ window.ELLIPSE_PROJECT_DATA = {
 </script>
 
 <!-- ── COOKIE CONSENT BANNER ──────────────────────────────────────────── -->
-<div id="cookie-banner" role="dialog" aria-modal="true" aria-label="Cookie consent" style="display:none">
-  <div class="ck-inner">
+<div id="cookie-banner" class="ck-banner" role="region" aria-label="Privacy preferences" aria-live="polite" hidden>
+  <div class="ck-inner" id="ck-summary">
     <div class="ck-top">
       <div class="ck-icon">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -4482,38 +4598,49 @@ window.ELLIPSE_PROJECT_DATA = {
         </svg>
       </div>
       <div class="ck-text">
-        <p class="ck-title">This site uses cookies</p>
+        <h2 class="ck-title" id="ck-title">Your privacy choices</h2>
         <p class="ck-desc">
-          I use essential cookies to keep things running and optional analytics to understand how visitors interact with my portfolio. No data is sold or shared with third parties.
+          Necessary browser storage remembers your choice. Optional analytics records page visits and session activity; when enabled, Cloudflare provides an IP address that is stored server-side with the session. Analytics is off until you choose it.
           <a href="/privacy-policy.html" class="ck-link">Learn more</a>
         </p>
       </div>
     </div>
+    <div class="ck-actions">
+      <button class="ck-btn ck-btn--deny" id="ck-deny" type="button">Reject Optional</button>
+      <button class="ck-btn ck-btn--save" id="ck-manage" type="button">Manage Preferences</button>
+      <button class="ck-btn ck-btn--accept" id="ck-accept" type="button">Accept All</button>
+    </div>
+  </div>
+  <div class="ck-inner ck-details" id="ck-details" hidden>
+    <h3 class="ck-title" tabindex="-1" id="ck-details-title">Cookie Preferences</h3>
     <div class="ck-toggle-row">
-      <label class="ck-toggle-wrap">
+      <div class="ck-toggle-wrap">
         <span class="ck-toggle-label">
-          <span class="ck-toggle-name">Essential</span>
-          <span class="ck-toggle-sub">Required for the site to function</span>
+          <span class="ck-toggle-name">Strictly Necessary Storage</span>
+          <span class="ck-toggle-sub">Stores your consent choice for future visits. This cannot be disabled here.</span>
         </span>
-        <span class="ck-toggle ck-toggle--locked" aria-label="Essential cookies always on">
-          <span class="ck-toggle-knob"></span>
+        <span class="ck-required-badge">Always on</span>
+      </div>
+      <label class="ck-toggle-wrap" for="ck-preferences">
+        <span class="ck-toggle-label">
+          <span class="ck-toggle-name">Preferences</span>
+          <span class="ck-toggle-sub">Remembers your light or dark appearance choice on this device.</span>
         </span>
+        <input type="checkbox" id="ck-preferences" class="ck-toggle-input">
+        <span class="ck-toggle" aria-hidden="true"><span class="ck-toggle-knob"></span></span>
       </label>
-      <label class="ck-toggle-wrap">
+      <label class="ck-toggle-wrap" for="ck-analytics">
         <span class="ck-toggle-label">
           <span class="ck-toggle-name">Analytics</span>
-          <span class="ck-toggle-sub">Help me improve this portfolio</span>
+          <span class="ck-toggle-sub">Sends page views and session activity. Cloudflare's IP address is stored with the session in the server database. <a href="/privacy-policy.html" class="ck-link">Privacy policy</a></span>
         </span>
-        <input type="checkbox" id="ck-analytics" class="ck-toggle-input" checked>
-        <span class="ck-toggle" aria-hidden="true">
-          <span class="ck-toggle-knob"></span>
-        </span>
+        <input type="checkbox" id="ck-analytics" class="ck-toggle-input">
+        <span class="ck-toggle" aria-hidden="true"><span class="ck-toggle-knob"></span></span>
       </label>
     </div>
     <div class="ck-actions">
-      <button class="ck-btn ck-btn--deny" id="ck-deny">Decline optional</button>
-      <button class="ck-btn ck-btn--save" id="ck-save">Save preferences</button>
-      <button class="ck-btn ck-btn--accept" id="ck-accept">Accept all</button>
+      <button class="ck-btn ck-btn--deny" id="ck-back" type="button">Back</button>
+      <button class="ck-btn ck-btn--save" id="ck-save" type="button">Save Preferences</button>
     </div>
   </div>
 </div>
@@ -4526,7 +4653,14 @@ window.ELLIPSE_PROJECT_DATA = {
   background:rgba(8,15,28,.97);border:1px solid var(--border2);
   border-radius:var(--r3);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
   box-shadow:0 24px 64px rgba(0,0,0,.6),0 0 0 1px rgba(59,130,246,.07);
+  max-height:calc(100vh - 32px);overflow-y:auto;overscroll-behavior:contain;
   opacity:0;transition:opacity .4s var(--ease),transform .4s var(--ease);pointer-events:none}
+#cookie-settings-link{
+  all:unset;display:block;min-height:34px;padding:7px 0;margin:0 0 7px;
+  box-sizing:border-box;font-size:.8rem;color:var(--text2);cursor:pointer}
+#cookie-settings-link:hover{color:var(--blue)}
+#cookie-settings-link:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+#cookie-banner[hidden],.ck-details[hidden]{display:none}
 #cookie-banner.ck-visible{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:all}
 #cookie-banner.ck-hiding{opacity:0;transform:translateX(-50%) translateY(16px)}
 
@@ -4539,6 +4673,7 @@ window.ELLIPSE_PROJECT_DATA = {
   display:flex;align-items:center;justify-content:center;color:var(--blue);margin-top:2px}
 .ck-text{flex:1}
 .ck-title{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:#fff;margin-bottom:6px}
+.ck-details .ck-title{margin-top:0}
 .ck-desc{font-size:.78rem;color:var(--text2);line-height:1.65}
 .ck-link{color:var(--blue);text-decoration:none;border-bottom:1px solid rgba(59,130,246,.3);
   transition:border-color .2s}
@@ -4555,9 +4690,14 @@ window.ELLIPSE_PROJECT_DATA = {
 .ck-toggle-wrap:not(:has(.ck-toggle--locked)):hover{background:rgba(59,130,246,.06)}
 .ck-toggle-label{display:flex;flex-direction:column;gap:2px}
 .ck-toggle-name{font-size:.8rem;font-weight:600;color:var(--text)}
-.ck-toggle-sub{font-size:.7rem;color:var(--text3)}
+.ck-toggle-sub{font-size:.75rem;color:var(--text2);line-height:1.5}
 
-.ck-toggle-input{position:absolute;opacity:0;width:0;height:0}
+.ck-toggle-input{position:absolute;opacity:0;width:1px;height:1px;margin:0;clip-path:inset(50%);overflow:hidden;white-space:nowrap}
+.ck-toggle-input:focus-visible + .ck-toggle{outline:2px solid var(--blue);outline-offset:3px}
+.ck-required-badge{flex-shrink:0;color:var(--blue);font-size:.68rem;font-weight:600}
+.ck-details .ck-title{margin-bottom:16px}
+.ck-details .ck-toggle-row{margin-bottom:16px}
+.ck-details .ck-toggle-sub{line-height:1.5}
 .ck-toggle{
   flex-shrink:0;width:40px;height:22px;border-radius:11px;
   background:var(--surface2);border:1px solid var(--border2);
@@ -4591,6 +4731,9 @@ window.ELLIPSE_PROJECT_DATA = {
   .ck-inner{padding:20px 18px 18px}
   .ck-actions{gap:7px}
   .ck-btn{min-width:0;font-size:.7rem;padding:8px 10px}
+  #cookie-banner .ck-actions{display:grid;grid-template-columns:1fr 1fr}
+  #ck-accept{grid-column:1/-1}
+  #cookie-banner{bottom:12px}
 }
 </style>
 
@@ -4599,55 +4742,143 @@ window.ELLIPSE_PROJECT_DATA = {
 (function(){
   const STORAGE_KEY = 'cookie_consent_v1';
   const banner      = document.getElementById('cookie-banner');
+  const footerBtn   = document.getElementById('cookie-settings-link');
+  const summary     = document.getElementById('ck-summary');
+  const details     = document.getElementById('ck-details');
+  const detailsTitle = document.getElementById('ck-details-title');
+  const manageBtn   = document.getElementById('ck-manage');
+  const backBtn     = document.getElementById('ck-back');
   const acceptBtn   = document.getElementById('ck-accept');
   const denyBtn     = document.getElementById('ck-deny');
   const saveBtn     = document.getElementById('ck-save');
+  const preferencesChk = document.getElementById('ck-preferences');
   const analyticsChk = document.getElementById('ck-analytics');
+  let memoryConsent = null;
+  const volatileIds = {};
+  let hideTimer = null;
+  let openedFromFooter = false;
 
-  function getConsent(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)); }catch(e){ return null; } }
-  function setConsent(obj){ localStorage.setItem(STORAGE_KEY, JSON.stringify({...obj, ts: Date.now()})); }
-
-  function hideBanner(){
-    if(!banner) return;
-    banner.classList.remove('ck-visible');
-    banner.classList.add('ck-hiding');
-    setTimeout(()=>{ banner.style.display='none'; banner.classList.remove('ck-hiding'); }, 420);
+  function getConsent(){
+    if(memoryConsent) return memoryConsent;
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if(saved && typeof saved === 'object' && saved.essential === true && typeof saved.analytics === 'boolean'){
+        return {essential:true, analytics:saved.analytics, preferences:saved.preferences === true};
+      }
+    } catch(e) {}
+    return memoryConsent;
   }
 
-  function showBanner(){
+  function setConsent(analytics, preferences){
+    memoryConsent = {essential:true, analytics:analytics === true, preferences:preferences === true};
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({...memoryConsent, ts:Date.now()})); } catch(e) {}
+    window.dispatchEvent(new CustomEvent('bmc-consent-change', {detail:memoryConsent}));
+    return memoryConsent;
+  }
+
+  function syncControls(prefs){
+    if(preferencesChk) preferencesChk.checked = prefs.preferences === true;
+    if(analyticsChk) analyticsChk.checked = prefs.analytics === true;
+  }
+
+  function sendPageView(){
+    try {
+      if(getConsent()?.analytics !== true) return;
+      const getId = (storage, key) => {
+        try {
+          let id = storage.getItem(key);
+          if(!id){ id = crypto.randomUUID(); storage.setItem(key, id); }
+          return id;
+        } catch(e) {
+          return volatileIds[key] || (volatileIds[key] = crypto.randomUUID());
+        }
+      };
+      fetch('/api/analytics', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        credentials:'same-origin',
+        keepalive:true,
+        body:JSON.stringify({
+          v:1,
+          visitorId:getId(localStorage,'analytics_visitor_v1'),
+          sessionId:getId(sessionStorage,'analytics_session_v1'),
+          event:'page_view',
+          path:location.pathname,
+          referrer:document.referrer || null,
+          data:{}
+        })
+      }).catch(()=>{});
+    } catch(e) { /* Analytics must not interfere with the page. */ }
+  }
+
+  function hideBanner(restoreFocus=true){
     if(!banner) return;
-    banner.style.display='block';
+    clearTimeout(hideTimer);
+    banner.classList.remove('ck-visible');
+    banner.classList.add('ck-hiding');
+    const shouldRestoreFocus = restoreFocus && openedFromFooter;
+    openedFromFooter = false;
+    hideTimer = setTimeout(()=>{
+      banner.classList.remove('ck-hiding');
+      banner.hidden = true;
+      if(footerBtn) footerBtn.setAttribute('aria-expanded', 'false');
+      if(shouldRestoreFocus && footerBtn) footerBtn.focus();
+    }, 420);
+  }
+
+  function showBanner(showDetails=false){
+    if(!banner) return;
+    clearTimeout(hideTimer);
+    hideTimer = null;
+    banner.classList.remove('ck-hiding');
+    banner.hidden = false;
+    if(footerBtn) footerBtn.setAttribute('aria-expanded', 'true');
+    if(summary) summary.hidden = showDetails;
+    if(details) details.hidden = !showDetails;
+    syncControls(getConsent() || {essential:true, analytics:false, preferences:false});
     requestAnimationFrame(()=>{ requestAnimationFrame(()=>{ banner.classList.add('ck-visible'); }); });
   }
 
-  /* Apply consent (enable/disable scripts here as needed) */
-  function applyConsent(prefs){
-    // e.g. if(prefs.analytics){ /* init GA */ }
-    console.log('[Cookies] consent applied:', prefs);
+  function openPreferences(){
+    showBanner(true);
+    requestAnimationFrame(()=>detailsTitle?.focus());
   }
+
+  window.BMCookieConsent = {get:getConsent, open:openPreferences};
 
   const existing = getConsent();
   if(existing){
-    applyConsent(existing);
+    if(existing.analytics === true) sendPageView();
   } else {
-    /* Show after a short delay so page load feels settled */
-    setTimeout(showBanner, 1400);
+    setTimeout(()=>showBanner(false), 1400);
   }
 
+  if(footerBtn) footerBtn.addEventListener('click', ()=>{
+    openedFromFooter = true;
+    openPreferences();
+  });
+  if(manageBtn) manageBtn.addEventListener('click', openPreferences);
+  if(backBtn) backBtn.addEventListener('click', ()=>{
+    showBanner(false);
+    requestAnimationFrame(()=>manageBtn?.focus());
+  });
+  if(location.hash === '#cookie-settings-link') openPreferences();
+
   if(acceptBtn) acceptBtn.addEventListener('click', ()=>{
-    const prefs = { essential:true, analytics:true };
-    setConsent(prefs); applyConsent(prefs); hideBanner();
+    const prefs = setConsent(true, true);
+    syncControls(prefs); sendPageView(); hideBanner();
   });
 
   if(denyBtn) denyBtn.addEventListener('click', ()=>{
-    const prefs = { essential:true, analytics:false };
-    if(analyticsChk) analyticsChk.checked = false;
-    setConsent(prefs); applyConsent(prefs); hideBanner();
+    const prefs = setConsent(false, false);
+    syncControls(prefs); hideBanner();
   });
 
   if(saveBtn) saveBtn.addEventListener('click', ()=>{
-    const prefs = { essential:true, analytics: analyticsChk ? analyticsChk.checked : false };
-    setConsent(prefs); applyConsent(prefs); hideBanner();
+    const prefs = setConsent(analyticsChk?.checked, preferencesChk?.checked);
+    syncControls(prefs);
+    if(prefs.analytics) sendPageView();
+    hideBanner();
   });
 })();
 </script>
@@ -4777,9 +5008,16 @@ if(_sb)_sb.addEventListener('click',function(){sharePortfolio(this);});
   const ROOT  = document.documentElement;
   const KEY   = 'bm-theme';
 
+  function persistTheme(theme){
+    try {
+      if(window.BMCookieConsent?.get()?.preferences === true) localStorage.setItem(KEY, theme);
+      else localStorage.removeItem(KEY);
+    } catch(e) {}
+  }
+
   function applyTheme(theme){
     ROOT.setAttribute('data-theme', theme);
-    localStorage.setItem(KEY, theme);
+    persistTheme(theme);
     if(theme === 'light'){
       if(sunIcon)  sunIcon.style.display  = 'none';
       if(moonIcon) moonIcon.style.display = '';
@@ -4791,8 +5029,16 @@ if(_sb)_sb.addEventListener('click',function(){sharePortfolio(this);});
     }
   }
 
-  const saved = localStorage.getItem(KEY) || 'dark';
+  let saved = 'dark';
+  try {
+    if(window.BMCookieConsent?.get()?.preferences === true) saved = localStorage.getItem(KEY) || 'dark';
+  } catch(e) {}
   applyTheme(saved);
+
+  window.addEventListener('bmc-consent-change', event=>{
+    if(event.detail?.preferences) persistTheme(ROOT.getAttribute('data-theme') || 'dark');
+    else { try { localStorage.removeItem(KEY); } catch(e) {} }
+  });
 
   btn.addEventListener('click', ()=>{
     const current = ROOT.getAttribute('data-theme') || 'dark';
@@ -6342,7 +6588,7 @@ if(_sb)_sb.addEventListener('click',function(){sharePortfolio(this);});
     try{history.replaceState(null,'',c.dataset.filter==='all'?'/projects':'/projects#'+c.dataset.filter)}catch(e){}
   })});
   var h=location.hash.slice(1);
-  if(['ai','math','civic','games'].indexOf(h)>-1)apply(h);
+  if(['ai','math','physics','civic','games'].indexOf(h)>-1)apply(h);
 })();
 </script>
 </body>

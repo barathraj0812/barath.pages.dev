@@ -143,6 +143,38 @@ function getReferrerHost(value, requestUrl) {
   }
 }
 
+function getClientIp(request) {
+  const value = request.headers.get("CF-Connecting-IP")?.trim();
+
+  if (!value || value.length > 45) {
+    return null;
+  }
+
+  // Cloudflare supplies an IP literal here. Validate it before storage so an
+  // absent or malformed header becomes SQL NULL rather than fabricated data.
+  if (/^[0-9a-f:.]+$/i.test(value) && value.includes(":")) {
+    try {
+      const parsed = new URL(`http://[${value}]/`);
+      if (parsed.hostname.startsWith("[") && parsed.hostname.endsWith("]")) {
+        return value;
+      }
+    } catch {
+      return null;
+    }
+    return null;
+  }
+
+  const octets = value.split(".");
+  if (
+    octets.length === 4 &&
+    octets.every((octet) => /^\d{1,3}$/.test(octet) && Number(octet) <= 255)
+  ) {
+    return value;
+  }
+
+  return null;
+}
+
 export async function onRequestPost(context) {
   const { request, env } = context;
 
@@ -222,7 +254,11 @@ export async function onRequestPost(context) {
     return json({ error: "Invalid analytics event" }, 400);
   }
 
-  if (!env.DB) {
+  if (
+    !env?.DB ||
+    typeof env.DB.prepare !== "function" ||
+    typeof env.DB.batch !== "function"
+  ) {
     return json({ error: "Analytics unavailable" }, 503);
   }
 
@@ -251,6 +287,7 @@ export async function onRequestPost(context) {
     /^[A-Z]{2}$/.test(request.cf.country)
       ? request.cf.country
       : null;
+  const ipAddress = getClientIp(request);
 
   try {
     const statements = [
@@ -268,9 +305,10 @@ export async function onRequestPost(context) {
       env.DB.prepare(`
         INSERT INTO sessions (
           visitor_id, session_id, started_at, last_activity,
-          landing_page, country, referrer_host, device_class
+          landing_page, country, referrer_host, device_class,
+          ip_address
         )
-        SELECT ?, ?, ?, ?, ?, ?, ?, ?
+        SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?
         WHERE EXISTS (
           SELECT 1 FROM visitors WHERE visitor_id = ?
         )
@@ -290,6 +328,7 @@ export async function onRequestPost(context) {
         country,
         referrerHost,
         deviceClass,
+        ipAddress,
         visitorId,
         sessionId,
         visitorId
