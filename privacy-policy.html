@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy Policy — Barath M</title>
-  <meta name="description" content="Privacy Policy for barath.pages.dev — how cookies and data are handled on this portfolio." />
+  <meta name="description" content="Privacy Policy for barath.pages.dev — what data is collected, how cookie consent works, how long data is kept, and how to exercise your rights." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -18,7 +18,7 @@
       --accent-dim: rgba(124,106,247,0.15);
       --text-primary: #e8e6f0;
       --text-secondary: #8a879f;
-      --text-muted: #4a4860;
+      --text-muted: #7d7a94;
       --green: #4ade80;
       --green-dim: rgba(74,222,128,0.12);
     }
@@ -26,6 +26,11 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:hover { text-decoration: underline; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
     body {
       background: var(--bg);
@@ -62,6 +67,9 @@
       pointer-events: none;
       z-index: 0;
     }
+
+    .skip-link { position: absolute; left: 12px; top: -48px; z-index: 200; background: var(--accent); color: #0a0a0f; padding: 8px 14px; border-radius: 2px; font-size: 12px; text-decoration: none; }
+    .skip-link:focus { top: 10px; }
 
     /* ── NAV ── */
     nav {
@@ -100,6 +108,7 @@
     }
     .nav-back:hover { color: var(--accent); }
     .nav-back::before { content: '←'; }
+    .nav-back:hover, .nav-logo:hover, footer a:hover { text-decoration: none; }
 
     /* ── MAIN WRAPPER ── */
     main {
@@ -206,7 +215,7 @@
     }
 
     .cookie-table td {
-      padding: 10px 12px;
+      padding: 12px;
       color: var(--text-secondary);
       border-bottom: 1px solid var(--border);
       vertical-align: top;
@@ -217,6 +226,7 @@
     .cookie-table tr:hover td { background: var(--surface); }
 
     .badge {
+      white-space: nowrap;
       display: inline-block;
       padding: 2px 8px;
       border-radius: 2px;
@@ -280,7 +290,7 @@
       border-radius: 4px;
       padding: 24px;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 16px;
     }
 
@@ -289,7 +299,8 @@
       flex-shrink: 0;
     }
 
-    .contact-block p { margin: 0; }
+    .contact-block p { margin: 0 0 8px; }
+    .contact-block p:last-child { margin-bottom: 0; }
 
     .contact-block a {
       color: var(--accent);
@@ -317,49 +328,54 @@
 
     @media (max-width: 600px) {
       .cookie-table { display: block; overflow-x: auto; }
+      .cookie-table th, .cookie-table td { white-space: normal; min-width: 120px; }
       .contact-block { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
 
-  <nav>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <nav aria-label="Site">
     <a href="/" class="nav-logo">BR.</a>
     <a href="/" class="nav-back">Back to Portfolio</a>
   </nav>
 
-  <main>
+  <main id="main">
     <div class="page-header">
       <div class="page-tag">// Legal</div>
       <h1>Privacy Policy</h1>
       <p class="meta">
-        Last updated: <span>June 2026</span> &nbsp;·&nbsp; Effective: <span>June 2026</span> &nbsp;·&nbsp; Site: <span>barath.pages.dev</span>
+        Last updated: <span>19 October 2026</span> &nbsp;·&nbsp; Effective: <span>19 October 2026</span> &nbsp;·&nbsp; Site: <span>barath.pages.dev</span>
       </p>
     </div>
 
     <section>
       <h2>Overview</h2>
       <p>
-        This Privacy Policy explains how <strong>barath.pages.dev</strong> (this portfolio website, operated by Barath M) collects, uses, and handles information when you visit. This is a personal portfolio site — no accounts, no purchases, no user-generated content.
+        This Privacy Policy explains how <strong>barath.pages.dev</strong> (this portfolio website, operated by Barath M from Chennai, India) collects, uses, and protects personal data when you visit. This is a personal portfolio site — no accounts, no purchases, no user-generated content.
       </p>
       <div class="info-card">
-        <p><strong>Short version:</strong> This site uses necessary browser storage to remember your choices. Optional preferences remember your appearance setting. If you opt in to analytics, the site records page views and session activity, including the IP address supplied to the server by Cloudflare.</p>
+        <p><strong>Short version:</strong> Essential storage keeps the site working. Optional analytics run <strong>only if you click Accept</strong>. Nothing is sold and there are no ads. You can say no, or change your mind, at any time.</p>
       </div>
     </section>
 
     <section>
       <h2>Information Collected</h2>
-      <p>This site collects limited technical information automatically. Optional analytics is sent only after you accept analytics cookies:</p>
+      <p>Personal data is collected in only three ways:</p>
       <ul>
-        <li><strong>Essential data</strong> — minimal technical information required for the site to load and function correctly (e.g. your browser type, IP address via server logs managed by Cloudflare Pages).</li>
-        <li><strong>Analytics data</strong> — page views linked to random visitor and session identifiers, along with the IP address provided in Cloudflare's <code>CF-Connecting-IP</code> request header. The IP is stored server-side in the session record to support analytics and is not sent back to your browser or exposed through the analytics API. This is only collected after analytics consent.</li>
+        <li><strong>Essential data</strong> — technical information needed to load the site (e.g. your IP address and browser type, via server logs managed by Cloudflare Pages), plus your cookie choice and theme preference, which stay in your own browser.</li>
+        <li><strong>Analytics data</strong> — collected <strong>only if you accept optional cookies</strong>: a random visitor ID and session ID, pages visited, time on page, clicks and other interactions, referrer, device and browser type, approximate location (country and region), and IP address. This data is tied to a random ID rather than your name, but it can be linked to your browser, so it is treated as personal data.</li>
+        <li><strong>Contact form</strong> — your name, email address, and message. Used solely to respond to your inquiry.</li>
       </ul>
-      <p>The <strong>contact form</strong> on this site collects your name, email address, and message. This information is used solely to respond to your inquiry and is not stored long-term or shared with any third party.</p>
+      <p>No passwords, payment details, or precise location are collected. There is no advertising and no tracking across other websites.</p>
+      <p>The <a href="#github-activity">GitHub Activity section</a> does not add to this collection, but it does make your browser contact GitHub and a third-party data provider. What they may receive is explained in that section.</p>
     </section>
 
     <section>
       <h2>Cookies</h2>
-      <p>The site uses browser storage for saved choices and analytics identifiers. It does not use advertising or marketing trackers.</p>
+      <p>Cookies are small text files stored in your browser. This site uses two categories of cookies and similar browser storage:</p>
 
       <table class="cookie-table">
         <thead>
@@ -372,68 +388,96 @@
         </thead>
         <tbody>
           <tr>
-            <td><strong>Strictly necessary</strong></td>
+            <td><strong>Essential</strong></td>
             <td>Required for the site to function. Cannot be disabled.</td>
-            <td>Consent choice</td>
+            <td>Cookie consent choice, theme preference</td>
             <td><span class="badge badge-required">Required</span></td>
           </tr>
           <tr>
-            <td><strong>Preferences</strong></td>
-            <td>Remembers your selected appearance on this device.</td>
-            <td>Light or dark theme</td>
-            <td><span class="badge badge-optional">Optional</span></td>
-          </tr>
-          <tr>
             <td><strong>Analytics</strong></td>
-            <td>Helps understand how visitors use the site so it can be improved.</td>
-            <td>Page views, session activity, referrer source, server-side IP address</td>
+            <td>Helps understand how visitors use the site so it can be improved. Set only after you accept.</td>
+            <td>Random visitor ID, session ID</td>
             <td><span class="badge badge-optional">Optional</span></td>
           </tr>
         </tbody>
       </table>
 
-      <p>You can change or withdraw optional preferences at any time using Cookie Preferences in the portfolio footer. Your consent choice is kept in browser storage; if browser storage is unavailable, your selection applies only until you leave the page.</p>
+      <ul>
+        <li>Nothing in the analytics category is created or sent before you click <strong>Accept</strong>.</li>
+        <li>If you decline, or ignore the banner, analytics stay off and the site works exactly the same.</li>
+        <li>The <a href="#github-activity">GitHub Activity section</a> does not set cookies and its code does not write to localStorage or sessionStorage.</li>
+        <li><strong>To change your mind:</strong> clear cookies and site data for barath.pages.dev. The consent banner will appear again and your visitor ID is removed from your browser. To also delete records already collected, make a request under <em>Your Rights</em>.</li>
+      </ul>
     </section>
 
     <section>
       <h2>Third-Party Services</h2>
-      <p>This site is hosted on <strong>Cloudflare Pages</strong>, which may process basic request data (such as IP addresses) as part of its infrastructure. Cloudflare's privacy policy applies to this processing: <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">cloudflare.com/privacypolicy</a>.</p>
+      <p>These providers process data on my behalf, only to run the site. Your data is never sold, and it may be processed outside India.</p>
+      <ul>
+        <li><strong>Cloudflare</strong> — hosts the site (Pages), runs the analytics and contact form back end, stores analytics records, and provides the Turnstile spam check. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">cloudflare.com/privacypolicy</a></li>
+        <li><strong>Google</strong> — stores contact form submissions in Google Sheets, and serves the site’s fonts, so your IP address reaches Google when a page loads, before any cookie choice. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a></li>
+      </ul>
       <p>External links on this site (GitHub, itch.io, live apps) lead to third-party websites. This policy does not cover those sites — please review their respective privacy policies.</p>
+    </section>
+
+    <section id="github-activity">
+      <h2>GitHub Activity Section</h2>
+      <p>The portfolio has a GitHub Activity section showing public information about the GitHub account <strong>barathraj0812</strong>: a contribution graph, recent public activity, and repository statistics. This information is about that account, not about visitors. It comes from two outside services. They are separate from the providers listed above and do not work on my behalf in the way described there.</p>
+      <ul>
+        <li><strong>GitHub (api.github.com)</strong> — supplies the public profile, repository and recent public event data. <a href="https://docs.github.com/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub Privacy Statement</a></li>
+        <li><strong>github-contributions-api.jogruber.de</strong> — supplies the daily contribution calendar. It is an independent open-source service, not run by GitHub or by me. Its source code is at <a href="https://github.com/grubersjoe/github-contributions-api" target="_blank" rel="noopener noreferrer">github.com/grubersjoe/github-contributions-api</a>. I have not found a privacy policy published for this service, so I cannot describe how it handles request data.</li>
+      </ul>
+      <p><strong>When requests are made.</strong> Your browser asks these services for data when you scroll close to the GitHub Activity section, not when the site first loads. If your browser cannot detect that, the requests are made as soon as the page loads. They are repeated if you press “Try again” after an error.</p>
+      <p><strong>What the services may receive.</strong> The requests go directly from your browser to these services, not through this site’s own back end. Like any web request, they can expose your IP address, browser and device details (user-agent) and other request metadata to the service, which may record them under its own practices. I do not receive or control those records. The requests contain the GitHub username above and fixed parameters. This site adds no visitor identifier and does not send your analytics visitor or session ID. The requests are sent without cookies and without a referrer, but your browser still sends the standard <code>Origin</code> header, which shows that the request comes from barath.pages.dev.</p>
+      <p><strong>Storage.</strong> The data is held in the page’s memory while the page is open and is gone when you close or reload it. This section does not use cookies, localStorage, sessionStorage or other persistent storage. Your browser may still keep responses in its ordinary HTTP cache, and I do not control how those services or your browser cache them.</p>
+      <p><strong>Analytics and consent.</strong> These requests are not analytics, and the cookie banner does not control them. They happen whether you accepted or declined analytics. Nothing in the Analytics or Cookies sections above has changed.</p>
+      <p><strong>Availability.</strong> The contribution calendar depends on the third-party service, which reads the public GitHub profile and, according to its documentation, caches results for about an hour. It may be slow, rate-limited or unavailable, and its data may be incomplete or out of date. GitHub also limits anonymous requests from a single IP address. If data cannot be loaded, the section says so instead of showing empty values.</p>
+      <p><strong>Your choices.</strong> This site has no setting to switch these requests off. Because the section sits between Achievements and About, scrolling down the page normally triggers them. You can use your browser’s settings or a content blocker to block these hosts or scripts, though other features of the site may also stop working, and I cannot guarantee the result. Because I do not hold what these services record, I cannot access or delete it. Please contact them under their own policies for that.</p>
     </section>
 
     <section>
       <h2>Your Rights</h2>
       <p>You have the right to:</p>
       <ul>
-        <li>Change or withdraw optional preferences using Cookie Preferences in the portfolio footer</li>
-        <li>Request deletion of any contact form data you submitted</li>
-        <li>Ask what consented analytics records are stored, including the session IP address linked to a random visitor and session identifier</li>
+        <li>Withdraw consent and opt out of analytics at any time</li>
+        <li>Know what personal data is held about you and get a copy</li>
+        <li>Have your data corrected or deleted, including contact form messages and analytics records</li>
+        <li>Raise a complaint if you are unhappy with how your data is handled — it will be looked into and answered</li>
       </ul>
-      <p>To exercise any of these rights, use the contact form on the portfolio or reach out directly.</p>
+      <p>To exercise any of these rights, use the contact form on the portfolio and start your message with “Privacy request”. You will get a reply within 30 days, free of charge. You may be asked to confirm it is you, and analytics records can only be found if your visitor ID is still in your browser.</p>
     </section>
 
     <section>
       <h2>Data Retention</h2>
-      <p>Contact form submissions are retained only for the duration necessary to respond to your inquiry. Consented analytics session and event records are stored in the site's Cloudflare D1 database. The project currently defines no automatic analytics deletion schedule or fixed retention period. Cookie preference data is stored in your browser only.</p>
+      <ul>
+        <li><strong>Contact messages</strong> — kept until you ask for them to be deleted.</li>
+        <li><strong>Analytics records</strong> — kept until you withdraw consent and ask for them to be deleted.</li>
+        <li><strong>Server logs</strong> — held by Cloudflare under its own policy.</li>
+        <li><strong>GitHub Activity requests</strong> — not stored by this site. Any records kept by GitHub or the contribution-data service follow their own policies.</li>
+        <li><strong>Cookie and theme preferences</strong> — stored in your browser only.</li>
+      </ul>
     </section>
 
     <section>
-      <h2>Children's Privacy</h2>
-      <p>This site does not knowingly collect personal information from children under 13. If you believe a child has submitted information via the contact form, please get in touch and it will be deleted promptly.</p>
+      <h2>Children’s Privacy</h2>
+      <p>This site is not directed at children. If you are under 18, please decline analytics and ask a parent or guardian before using the contact form. If you believe a child has submitted information, please get in touch and it will be deleted promptly.</p>
     </section>
 
     <section>
       <h2>Changes to This Policy</h2>
-      <p>This Privacy Policy may be updated occasionally. The <strong>Last updated</strong> date at the top of this page will always reflect the most recent version. Continued use of the site after changes constitutes acceptance of the updated policy.</p>
+      <p>This Privacy Policy may be updated occasionally. The <strong>Last updated</strong> date at the top of this page will always reflect the most recent version. If a change materially affects how your data is used, you will be asked for consent again. Continuing to use the site is never treated as consent to analytics.</p>
     </section>
 
     <section>
       <h2>Contact</h2>
       <div class="contact-block">
-        <div class="icon">✉</div>
-        <p>
-          Questions about this Privacy Policy? Use the <a href="/#contact">contact form on the portfolio</a> and select <em>"Other"</em> as the topic. Messages are reviewed regularly and you can expect a reply within a few days.
-        </p>
+        <div class="icon" aria-hidden="true">✉</div>
+        <div>
+          <p>
+            Questions, privacy requests, or complaints? Use the <a href="/#contact">contact form on the portfolio</a>, select <em>“Other”</em> as the topic, and start your message with <strong>“Privacy request”</strong>.
+          </p>
+          <p>Barath M, Chennai, Tamil Nadu, India. Replies within 30 days, usually sooner.</p>
+        </div>
       </div>
     </section>
 
@@ -441,7 +485,7 @@
 
   <footer>
     <p>
-      <a href="/">← Barath M — Portfolio</a> &nbsp;·&nbsp; Privacy Policy &nbsp;·&nbsp; <a href="/#cookie-settings-link">Cookie Preferences</a> &nbsp;·&nbsp; Chennai, Tamil Nadu, India
+      <a href="/">← Barath M — Portfolio</a> &nbsp;·&nbsp; Privacy Policy &nbsp;·&nbsp; Chennai, Tamil Nadu, India
     </p>
   </footer>
 
