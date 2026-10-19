@@ -2132,6 +2132,7 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
       <li><a href="#achievements">Achievements</a></li>
       <li><a href="/projects">Projects</a></li>
       <li class="nav-gh"><a href="#github">GitHub</a></li>
+      <li class="nav-dt"><a href="#devterm">Terminal</a></li>
       <li><a href="#certs">Certifications</a></li>
       <li><a href="#goals">Goals</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -2168,6 +2169,7 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
   <a href="#achievements" onclick="closeMob()">Achievements</a>
   <a href="/projects" onclick="closeMob()">Projects</a>
   <a href="#github" onclick="closeMob()">GitHub</a>
+  <a href="#devterm" onclick="closeMob()">Terminal</a>
   <a href="#certs" onclick="closeMob()">Certifications</a>
   <a href="#goals" onclick="closeMob()">Goals</a>
   <a href="#contact" onclick="closeMob()">Contact</a>
@@ -3285,6 +3287,288 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
     <p class="gh-fine">When this section scrolls into view, your browser requests data from api.github.com (profile, repositories, public events) and github-contributions-api.jogruber.de (contribution calendar), so those services can see your IP address and browser details. This page does not save the responses in cookies or local/session storage; your browser's normal HTTP cache may keep them briefly. See the <a href="/privacy-policy.html">privacy policy</a>.</p>
   </div>
 </section>
+<style>
+#devterm{padding:100px 0;border-top:1px solid var(--border)}
+.dt-win{background:#070d18;border:1px solid var(--border2);border-radius:var(--r2);box-shadow:0 12px 32px rgba(0,0,0,.28);overflow:hidden;color:#cfe3f5;font-family:'JetBrains Mono',monospace;font-size:.82rem;max-width:860px}
+  .dt-win .dt-bar{display:flex;align-items:center;gap:12px;padding:9px 14px;background:#0b1424;border-bottom:1px solid rgba(82,184,212,.16)}
+  .dt-win .dt-dots{display:flex;gap:6px}  .dt-win .dt-dots i{width:10px;height:10px;border-radius:50%;background:#2a3a55}
+  .dt-win .dt-tabs{display:flex;gap:4px;margin-left:auto}
+  .dt-win .dt-tab{font:inherit;font-size:.72rem;color:#8fa6c4;background:none;border:1px solid transparent;border-radius:6px;padding:6px 12px;min-height:32px;cursor:pointer}
+  .dt-win .dt-tab[aria-pressed=true]{color:#52B8D4;border-color:rgba(82,184,212,.4);background:rgba(82,184,212,.08)}
+#devterm button:focus-visible,#devterm input:focus-visible,#devterm a:focus-visible,  .dt-win .dt-log:focus-visible{outline:2px solid #52B8D4;outline-offset:2px}
+  .dt-win .dt-log{height:340px;overflow-y:auto;padding:14px 16px;line-height:1.65;overflow-wrap:anywhere;white-space:pre-wrap}
+  .dt-win .dt-l{animation:dtIn .18s ease-out}
+  .dt-win .dt-cmd{color:#7ee0a8}  .dt-win .dt-cmd b{color:#52B8D4;font-weight:500}
+  .dt-win .dt-err{color:#ff8f8f}  .dt-win .dt-sys{color:#7a90b0;font-style:italic}
+  .dt-win .dt-log a,  .dt-win .dt-chatlog a{color:#52B8D4;text-decoration:underline;text-underline-offset:3px}
+  .dt-win .dt-row{display:flex;align-items:center;gap:8px;padding:10px 16px;border-top:1px solid rgba(82,184,212,.12)}
+  .dt-win .dt-ps{flex:none;color:#7ee0a8;white-space:nowrap}
+  .dt-win input{flex:1;min-width:0;font:inherit;background:transparent;border:0;color:#e6f1ff;caret-color:#52B8D4;padding:6px 0}
+  .dt-win .dt-send,  .dt-win .dt-clr{font:inherit;font-size:.72rem;color:#52B8D4;background:rgba(82,184,212,.1);border:1px solid rgba(82,184,212,.35);border-radius:6px;padding:7px 12px;min-height:36px;cursor:pointer}
+  .dt-win .dt-chatlog{height:340px;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;font-family:'DM Sans',system-ui,sans-serif;font-size:.9rem}
+  .dt-win .dt-m{max-width:88%;padding:9px 13px;border-radius:12px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;animation:dtIn .18s ease-out}
+  .dt-win .dt-m.u{align-self:flex-end;background:rgba(82,184,212,.16);color:#e6f1ff}
+  .dt-win .dt-m.b{align-self:flex-start;background:#101b2e;border:1px solid rgba(82,184,212,.14)}
+  .dt-win .dt-sug{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px}
+  .dt-win .dt-sug button{font:inherit;font-size:.72rem;color:#cfe3f5;background:#101b2e;border:1px solid rgba(82,184,212,.3);border-radius:999px;padding:6px 12px;min-height:34px;cursor:pointer}
+  .dt-win .dt-sug button:hover{border-color:#52B8D4}
+  .dt-win .dt-hint{font-size:.74rem;color:var(--text2);margin-top:12px;max-width:860px}
+[hidden]{display:none!important}
+  .dt-win .dt-slot{min-height:40px}
+  .dt-win .dt-chips,.dt-win .dt-chips{display:flex;flex-wrap:wrap;gap:6px;padding:8px 16px 0}
+.dt-win .dt-chips button{font:inherit;font-size:.72rem;color:#7ee0a8;background:#0b1424;border:1px solid rgba(126,224,168,.3);border-radius:6px;padding:6px 10px;min-height:34px;cursor:pointer}
+.dt-win .dt-x{display:none;font:inherit;color:#8fa6c4;background:none;border:0;font-size:1.1rem;min-width:36px;min-height:36px;cursor:pointer}
+.dt-win.dt-float .dt-x{display:block}
+.dt-win.dt-float{position:fixed;right:16px;bottom:88px;width:min(400px,calc(100vw - 24px));max-width:none;z-index:9995;box-shadow:0 18px 48px rgba(0,0,0,.5)}
+.dt-win.dt-float .dt-log,.dt-win.dt-float .dt-chatlog{height:min(340px,46vh)}
+.dt-fab{position:fixed;right:18px;bottom:20px;z-index:9994;width:56px;height:56px;border-radius:50%;border:1px solid rgba(82,184,212,.5);background:#0b1424;color:#52B8D4;font:600 .8rem 'JetBrains Mono',monospace;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center}
+.dt-fab:hover{background:#101b2e}.dt-fab:focus-visible,.dt-win button:focus-visible,.dt-win input:focus-visible{outline:2px solid #52B8D4;outline-offset:2px}
+.dt-win[hidden]{display:none!important}
+@media(min-width:641px) and (max-width:900px){.nav-links .nav-dt{display:none}}
+@media print{.dt-fab,.dt-win.dt-float{display:none!important}}
+.dt-win .dt-dots{display:flex;gap:8px;align-items:center}
+.dt-win .dt-b{position:relative;width:13px;height:13px;border-radius:50%;border:0;padding:0;cursor:pointer}
+.dt-win .dt-b::before{content:"";position:absolute;inset:-8px}
+.dt-win .dt-b.r{background:#ff5f57}.dt-win .dt-b.y{background:#febc2e}.dt-win .dt-b.g{background:#28c840}.dt-win .dt-b.c{background:#52B8D4}
+.dt-win .dt-b:hover{filter:brightness(1.15)}
+.dt-win.dt-min>div:not(.dt-bar){display:none}
+.dt-win.dt-max .dt-log,.dt-win.dt-max .dt-chatlog{height:min(520px,66vh)}
+.dt-win.dt-float.dt-max{width:min(760px,calc(100vw - 24px))}
+#dt-reopen{font:.78rem 'JetBrains Mono',monospace;color:#52B8D4;background:rgba(82,184,212,.1);border:1px solid rgba(82,184,212,.35);border-radius:6px;padding:9px 14px;min-height:40px;cursor:pointer}
+#dt-reopen[hidden]{display:none}
+.dt-nudge{position:fixed;right:84px;bottom:32px;z-index:9994;background:#0b1424;color:#cfe3f5;border:1px solid rgba(82,184,212,.4);border-radius:10px;padding:8px 12px;font:.76rem 'JetBrains Mono',monospace;box-shadow:0 8px 24px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .3s}
+.dt-nudge.on{opacity:1}
+.dt-win .dt-m.b a[data-run]{color:#7ee0a8}
+@media print{.dt-nudge{display:none!important}}
+@keyframes dtIn{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+@media(max-width:640px){#devterm{padding:70px 0}  .dt-win .dt-log,  .dt-win .dt-chatlog{height:300px}.dt-win{font-size:.76rem}}
+@media(prefers-reduced-motion:reduce){  #devterm *,.dt-win *,.dt-fab{animation:none!important;transition:none!important}}
+@media print{#devterm{display:none!important}}
+</style>
+<section id="devterm" aria-labelledby="dt-title">
+  <div class="container">
+    <div class="sec-hdr reveal">
+      <p class="sec-eyebrow">// Interactive</p>
+      <h2 class="sec-title reveal title-reveal" id="dt-title">Dev Terminal</h2>
+      <p class="sec-sub">Type commands, or switch to Chat and ask in plain words. Both read the same portfolio data and run entirely in your browser.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="dt-slot" id="dt-slot"><div class="dt-win" id="dt-win">
+      <div class="dt-bar"><div class="dt-dots" role="group" aria-label="Window controls"><button class="dt-b r" type="button" data-a="close" aria-label="Close window" title="Close"></button><button class="dt-b y" type="button" data-a="min" aria-label="Minimize window" title="Minimize"></button><button class="dt-b g" type="button" data-a="max" aria-label="Maximize window" title="Maximize"></button><button class="dt-b c" type="button" data-a="clr" aria-label="Clear this window" title="Clear"></button></div>
+        <div class="dt-tabs" role="group" aria-label="Interface mode">
+          <button class="dt-tab" id="dt-t-term" type="button" aria-pressed="true">Terminal</button>
+          <button class="dt-tab" id="dt-t-chat" type="button" aria-pressed="false">Chat</button>
+        </div>
+      </div>
+      <div id="dt-term">
+        <div class="dt-log" id="dt-log" role="log" aria-live="polite" tabindex="0" aria-label="Terminal output"></div>
+        <div class="dt-chips" id="dt-chips"></div>
+        <div class="dt-row" id="dt-form"><label class="dt-ps" for="dt-in">barath@portfolio:~$</label><input id="dt-in" type="text" autocapitalize="none" autocorrect="off" spellcheck="false" aria-label="Terminal command"><button class="dt-send" type="button" id="dt-run">Run</button></div>
+      </div>
+      <div id="dt-chat" hidden>
+        <div class="dt-chatlog" id="dt-clog" role="log" aria-live="polite" tabindex="0" aria-label="Chat transcript"></div>
+        <div class="dt-sug" id="dt-sug"></div>
+        <div class="dt-row" id="dt-cform"><input id="dt-cin" type="text" placeholder="Ask about projects, skills, contact…" aria-label="Chat message"><button class="dt-send" type="button" id="dt-snd">Send</button><button class="dt-clr" type="button" id="dt-cclr">Clear chat</button></div>
+      </div>
+    </div>
+    <button id="dt-reopen" type="button" hidden>Reopen terminal</button>
+    </div>
+    <p class="dt-hint">This is a scripted assistant that matches keywords against the data on this site. It does not use AI and sends nothing anywhere.</p>
+  </div>
+</section>
+<button class="dt-fab" id="dt-fab" type="button" aria-label="Ask the portfolio assistant" aria-expanded="false">Ask</button>
+<span class="dt-nudge" id="dt-nudge" role="status"></span>
+<script>
+(function(){
+try{
+'use strict';
+var PD={
+ name:'Barath M',handle:'barathraj0812',
+ role:'Student Developer · AI Applications',
+ intro:'Student, developer and independent learner interested in space, simulations, AI and building useful digital experiences.',
+ about:'I build full-stack AI applications, interactive simulations and generative AI experiments, backed by an 8-year Olympiad mathematics record (IMO International Rank 2, 2023).',
+ interests:['Space','Simulations','AI applications','Mathematics'],
+ education:['Class XI, Science stream, private school in Chetpet, Chennai, Tamil Nadu','CBSE Class X: 95%+ (as listed on this site)'],
+ github:'https://github.com/barathraj0812',githubSection:'#github',
+ contact:'No public email or phone is listed. Use the contact form on this site.',contactSection:'#contact',
+ socials:[{n:'GitHub',u:'https://github.com/barathraj0812'}],
+
+ location:'Chennai, Tamil Nadu',
+ timeline:[['2014','Started formal schooling in Chennai'],['2016','Joined previous school in Anna Nagar, Chennai'],['2020','IMO Distinction and Zonal Top 25 (Grade 4); NIELIT HTML course completed'],['2022','IMO Gold Medal'],['2023','IMO International Rank 2 (59/60); built the Solar System Simulation in Unity'],['2024','IMO, NSO and NCO Gold Medals; English Typewriting Lower, First Class with Distinction'],['2025','Aryabhata Ganit Challenge Merit (Top 100); English Typewriting Higher, First Class with Distinction; built an astrology web app']],
+ resume:'',achv:['IMO International Rank 2 (2023, 59/60)','IMO Gold Medal (2022); IMO, NSO and NCO Gold Medals (2024)','Aryabhata Ganit Challenge: Merit, Top 100 (2025)','English Typewriting Lower and Higher: First Class with Distinction'],
+ skills:{
+  'Game development':['Unity 3D','C# scripting','Game UI/UX systems','Simulation architecture','Blender (learning)'],
+  'Web and full-stack':['HTML5/CSS3','JavaScript (ES6+)','Node.js and REST APIs','Frontend architecture','Backend API design','Responsive layouts'],
+  'AI integration':['Google Gemini API','Multimodal AI (image + text)','Prompt engineering','JSON validation and parsing','Async API communication','Python (developing)']},
+ tech:['HTML','CSS','JavaScript','Node.js','Google Gemini API','Unity','C#','Blender','Chart.js','GSAP','Cloudflare Pages'],
+ projects:[
+  {id:'nutrigreen',page:'https://barath.pages.dev/projects#nutrigreen',n:'NutriGreen AI',al:['nutrigreen','nutri green','nutrition app','nutrition tracker'],d:'Full-stack nutrition and calorie tracker. Analyzes food photos with the Gemini multimodal API and builds meal plans.',s:'Live',t:['Node.js','Gemini API','REST','HTML/CSS/JS'],live:'https://nutrigreenai.pages.dev/',repo:'https://github.com/barathraj0812/nutrigreen-ai'},
+  {id:'astrotamil',page:'https://barath.pages.dev/projects#astrotamil',n:'AstroTamil',al:['astrotamil','astro tamil','astrology','vedic'],d:'Vedic astrology web app built with JavaScript and astronomical algorithms.',s:'Live',t:['JavaScript','Astronomical algorithms'],live:'https://astrotamil.pages.dev/'},
+  {id:'pccalc',page:'https://barath.pages.dev/projects#pc-wrap',n:'P&C Calculator',al:['p&c','pc calculator','pccalc','permutation','combination'],d:'Permutations and combinations calculator for JEE maths.',s:'Live',t:['JavaScript'],live:'https://pccalc.pages.dev/'},
+  {id:'solar',n:'Solar System Simulation',al:['solar system','solar sim','unity game'],d:'3D educational game in Unity where you explore planets at an intuitive scale. Built in 2023.',s:'Released on itch.io',t:['Unity 3D','C#','Blender'],live:'https://barathraj08.itch.io/solar-system',page:'https://barath.pages.dev/projects#solar-system'},
+  {id:'physica',n:'PHYSICA Physics Lab',al:['physica','physics lab','projectile'],d:'Projectile motion physics lab.',s:'Listed on projects page',t:['JavaScript'],page:'https://barath.pages.dev/projects#physica'},
+  {id:'hyperbola',n:'Hyperbola Calculator',al:['hyperbola'],d:'Interactive workbench for hyperbolas (JEE Main and Advanced). Classifies the conic from an equation and computes its geometry.',s:'Listed on projects page',t:['JavaScript'],page:'https://barath.pages.dev/projects#hyperbola'},
+  {id:'ellipse',n:'Ellipse Calculator',al:['ellipse'],d:'Ellipse calculator for JEE maths.',s:'Listed on projects page',t:['JavaScript'],page:'https://barath.pages.dev/projects#ellipse'},
+  {id:'tneb',n:'TNEB Calculator',al:['tneb','electricity','tangedco'],d:'Electricity bill calculator for Tamil Nadu consumers that compares the old and new 2026 tariff structures side by side.',s:'Listed on projects page',t:['Chart.js','GSAP'],page:'https://barath.pages.dev/projects#tneb-card'}]
+};
+var $=function(i){return document.getElementById(i)};
+function okUrl(u){return /^https:\/\//.test(u)||/^\/[^\/]/.test(u)||/^#/.test(u)}
+function L(k,t,h,id){return {k:k,t:t,h:h&&okUrl(h)?h:'',id:id}}
+function pdesc(p){var o=[L('o',p.n+' ['+p.s+']'),L('o',p.d),L('o','Tech: '+p.t.join(', '))];
+ if(p.live)o.push(L('l','Open live',p.live));if(p.page)o.push(L('l','View on projects page',p.page));if(p.repo)o.push(L('l','Repository',p.repo));return o}
+var CMDS={
+ help:function(a){a=(a||'').toLowerCase();if(a){var h=HELPS.filter(function(r){return r[0].split(' ')[0]===a})[0];return h?[L('o',h[0]+'  -  '+h[1])]:[L('e','No help for "'+a+'". Type "help".')]}
+  return [L('o','Commands (tap a name to run it):')].concat(HELPS.map(function(r){return /[<\[]/.test(r[0])?L('o','  '+r[0]+'  '+r[1]):L('c','  '+r[1],null,r[0])}))},
+ neofetch:function(){return [['barath@portfolio',''],['Name',PD.name],['Role',PD.role],['Location',PD.location],['Education',PD.education[0]],['Stack',PD.tech.slice(0,6).join(', ')],['Projects',PD.projects.length+' listed'],['GitHub',PD.handle]].map(function(r){return L('o',r[1]?(r[0]+':          ').slice(0,11)+r[1]:r[0]+'\n------------------')})},
+ timeline:function(){return PD.timeline.map(function(r){return L('o',r[0]+'  '+r[1])})},
+ search:function(a){if(!a)return [L('e','Usage: search <text>')];var r=srch(a);return r.length?r:[L('s','Nothing configured matches "'+a+'".')]},
+ goto:function(a){var k=(a||'').toLowerCase().trim(),id=SEC[k],el=id&&document.getElementById(id);if(!el)return [L('e','Usage: goto <section>. Sections: '+Object.keys(SEC).join(', '))];el.scrollIntoView({behavior:window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});return [L('o','Scrolling to '+k+'.')]},
+ theme:function(){var b=document.getElementById('theme-btn');if(!b)return [L('e','Theme switch not found on this page.')];b.click();return [L('o','Theme switched.')]},
+ whoami:function(){return [L('o',PD.name+' · '+PD.role),L('o',PD.intro)]},
+ about:function(){return [L('o',PD.about),L('o','Interests: '+PD.interests.join(', '))]},
+ education:function(){return PD.education.map(function(e){return L('o',e)})},
+ contact:function(){return [L('o',PD.contact),L('l','Go to contact form',PD.contactSection)]},
+ socials:function(){return PD.socials.map(function(s){return L('l',s.n,s.u)})},
+ projects:function(){return PD.projects.map(function(p){return L('p',' ['+p.s+']',p.page||p.live,p.id)})},
+ project:function(a){if(!a)return [L('e','Usage: project <name>. Try "projects" for the list.')];var p=findP(a);return p?pdesc(p):[L('e','No configured project matches "'+a+'". Try "projects".')]},
+ techstack:function(){return [L('o',PD.tech.join(' · '))]},
+ skills:function(){var o=[];for(var g in PD.skills)o.push(L('o',g+': '+PD.skills[g].join(', ')));return o},
+ achievements:function(){return PD.achv.map(function(a){return L('o',a)})},
+ github:function(){return [L('o','GitHub: '+PD.handle),L('l','Open profile',PD.github),L('l','See the GitHub Activity section',PD.githubSection)]},
+ resume:function(){return PD.resume&&okUrl(PD.resume)?[L('l','Open resume',PD.resume)]:[L('s','No resume is configured on this site yet.')]},
+ clear:function(){return null},
+ history:function(){return H.length?H.map(function(c,i){return L('o',(i+1)+'  '+c)}):[L('s','No commands yet.')]},
+ date:function(){return [L('o',new Date().toLocaleString())]},
+ echo:function(a){return [L('o',a)]},
+ exit:function(){return [L('s','Closing time. Scroll on, the rest of the portfolio is above and below.')]},
+ sudo:function(){return [L('o','Nice try. Nobody gets root on a portfolio site.')]}
+};
+var HELPS=[['help [cmd]','list commands or explain one'],['whoami','identity summary'],['about','introduction and interests'],['neofetch','profile snapshot'],['education','education'],['timeline','milestones from the site'],['achievements','olympiad record'],['contact','how to reach me'],['socials','social profiles'],['projects','all projects'],['project <name>','one project'],['search <text>','search projects and skills'],['techstack','technologies'],['skills','skills by category'],['github','GitHub profile'],['goto <section>','scroll the page to a section'],['theme','switch light/dark'],['resume','resume'],['clear','clear output'],['history','session commands'],['date','local date'],['echo <text>','print text'],['exit','leave'],['sudo','try it']];
+var SEC={home:'hero',hero:'hero',about:'about',projects:'projects',achievements:'achievements',awards:'achievements',github:'github',certifications:'certs',certs:'certs',skills:'skills',goals:'goals',contact:'contact',terminal:'devterm'};
+function srch(q){q=q.toLowerCase().trim();var o=[];if(q.length<2)return o;
+ PD.projects.forEach(function(p){if((p.n+' '+p.d+' '+p.t.join(' ')+' '+p.al.join(' ')).toLowerCase().indexOf(q)>-1)o.push(L('p',' ['+p.s+']',p.page||p.live,p.id))});
+ for(var g in PD.skills)PD.skills[g].forEach(function(s){if(s.toLowerCase().indexOf(q)>-1)o.push(L('o','Skill ('+g+'): '+s))});
+ PD.tech.forEach(function(s){if(s.toLowerCase().indexOf(q)>-1)o.push(L('o','Tech: '+s))});return o}
+var AL={'?':'help',commands:'help',who:'whoami',me:'whoami',bio:'about',edu:'education',mail:'contact',email:'contact',social:'socials',work:'projects',awards:'achievements',olympiad:'achievements',medals:'achievements',proj:'projects',tech:'techstack',stack:'techstack',gh:'github',cv:'resume',cls:'clear',quit:'exit',logout:'exit'};
+var H=[],hi=0;
+function findP(q){q=q.toLowerCase().trim();for(var i=0;i<PD.projects.length;i++){var p=PD.projects[i];if(q===p.id||q===p.n.toLowerCase()||p.al.indexOf(q)>-1)return p}
+ for(i=0;i<PD.projects.length;i++){p=PD.projects[i];if(p.n.toLowerCase().indexOf(q)>-1)return p}return null}
+function run(raw){var s=raw.trim().replace(/\s+/g,' ');if(!s)return {c:''};var parts=s.split(' '),n=parts[0].toLowerCase(),arg=s.slice(parts[0].length).trim();
+ n=AL[n]||n;if(!Object.prototype.hasOwnProperty.call(CMDS,n)){var bk=Object.keys(CMDS).concat(Object.keys(AL)),bs=bk.filter(function(k){return parts[0].length>2&&lev(parts[0].toLowerCase(),k)<=1});return {c:s,o:[L('e','Command not found: '+parts[0]+'.'+(bs.length?' Did you mean "'+bs[0]+'"?':' Type "help".'))]}};
+ return {c:s,n:n,o:CMDS[n](n==='echo'?arg:arg)}}
+function render(box,lines,cls){lines.forEach(function(l){var d=document.createElement(cls?'div':'div');d.className=cls?'dt-m b':'dt-l '+({e:'dt-err',s:'dt-sys'}[l.k]||'');
+ if(l.k==='c'){var ac=document.createElement('a');ac.href='#';ac.textContent=l.id;ac.setAttribute('data-run',l.id);d.appendChild(document.createTextNode('  '));d.appendChild(ac);d.appendChild(document.createTextNode(l.t.trim()?'   '+l.t.trim():''))}else if(l.k==='p'){var a0=document.createElement('a');a0.textContent=findP(l.id).n;a0.href=l.h;a0.target='_blank';a0.rel='noopener noreferrer';a0.setAttribute('data-pid',l.id);d.appendChild(a0);d.appendChild(document.createTextNode(l.t))}else if(l.k==='l'||l.h){var a=document.createElement('a');a.textContent=l.t;a.href=l.h;if(/^https:/.test(l.h)){a.target='_blank';a.rel='noopener noreferrer'}d.appendChild(a)}else d.textContent=l.t;box.appendChild(d)})}
+// terminal
+var log=$('dt-log'),inp=$('dt-in');
+function promptLine(){var d=document.createElement('div');d.className='dt-l dt-cmd';var b=document.createElement('b');b.textContent='barath@portfolio:~$';d.appendChild(b);log.appendChild(d)}
+function say(lines){render(log,lines);log.scrollTop=log.scrollHeight}
+say([L('s','Dev terminal ready. Tap a command below, or type one and press Enter.')].concat(CMDS.help()));
+function exec(v){
+ var d=document.createElement('div');d.className='dt-l dt-cmd';var b=document.createElement('b');b.textContent='barath@portfolio:~$ ';d.appendChild(b);d.appendChild(document.createTextNode(v));log.appendChild(d);
+ var r=run(v);if(r.c){H.push(r.c);}hi=H.length;if(r.n==='clear'){log.textContent='';promptLine();return}if(r.o)say(r.o);log.scrollTop=log.scrollHeight}
+inp.addEventListener('keydown',function(e){
+ if(e.key==='Enter'&&!e.isComposing){e.preventDefault();var v=inp.value;inp.value='';exec(v)}
+ else if(e.key==='ArrowUp'){if(H.length){e.preventDefault();hi=Math.max(0,hi-1);inp.value=H[hi]}}
+ else if(e.key==='ArrowDown'){if(H.length){e.preventDefault();hi=Math.min(H.length,hi+1);inp.value=H[hi]||''}}
+ else if(e.key==='Tab'&&/^(project|goto) \S*$/i.test(inp.value)){var pr=inp.value.split(' '),ls=(pr[0].toLowerCase()==='goto'?Object.keys(SEC):PD.projects.map(function(p){return p.id})).filter(function(k){return k.indexOf(pr[1].toLowerCase())===0});
+  if(ls.length){e.preventDefault();var q2=ls[0];ls.forEach(function(c){while(c.indexOf(q2)!==0)q2=q2.slice(0,-1)});inp.value=pr[0]+' '+q2}}
+ else if(e.key==='Tab'&&inp.value&&inp.value.indexOf(' ')<0){var v=inp.value.toLowerCase(),m=Object.keys(CMDS).filter(function(c){return c.indexOf(v)===0});
+  if(m.length){e.preventDefault();var p=m[0];m.forEach(function(c){while(c.indexOf(p)!==0)p=p.slice(0,-1)});inp.value=p+(m.length===1?' ':'')}}});
+log.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-pid]');if(a){exec('project '+a.getAttribute('data-pid'));return}var c=e.target.closest&&e.target.closest('a[data-run]');if(c){e.preventDefault();exec(c.getAttribute('data-run'));inp.focus()}});
+// chat
+var clog=$('dt-clog'),cin=$('dt-cin'),SUG=['Who are you?','Show projects','Tech stack','Achievements','GitHub activity','Contact'];
+function norm(s){return ' '+s.toLowerCase().replace(/[^a-z0-9&+# ]+/g,' ').replace(/\s+/g,' ').trim()+' '}
+var RULES=[
+ ['help',[/ (what|which) (can|do) you (do|know|answer)/,/ (help|commands|options|menu) /]],
+ ['whoami',[/ who (are|r) (you|u) /,/ introduce yourself /]],
+ ['about',[/ about (yourself|you|him|barath) /,/ (interests|hobbies|passionate) /,/ (background|bio) /]],
+ ['education',[/ (education|school|class|grade|study|studying|qualification|qualifications|studies) /]],
+ ['projects',[/ (projects?|portfolio|apps?|builds?|building|built|made|work) /,/ what (are|r) you (building|making|working on) /]],
+ ['techstack',[/ (tech|technologies|technology|stack|tools|frameworks?|languages?) /,/ (what|which) .*(use|using) /]],
+ ['skills',[/ (skills?|skilled|good at|expertise|abilities|strengths) /]],
+ ['achievements',[/ (achievements?|awards?|olympiad|medals?|rank|imo|accomplishments?) /]],
+ ['timeline',[/ (timeline|journey|milestones|story so far) /]],
+ ['theme',[/ (dark mode|light mode|theme|dark theme|light theme) /]],
+ ['hello',[/ (hi|hello|hey|hii|namaste|vanakkam) /]],
+ ['thanks',[/ (thanks|thank you|thx) /]],
+ ['github',[/ (github|git hub|repos?|repositories|open source|activity|commits?) /]],
+ ['contact',[/ (contact|email|reach|hire|message|get in touch|phone) /]],
+ ['socials',[/ (socials?|linkedin|twitter|instagram|profiles?) /]],
+ ['resume',[/ (resume|cv|curriculum) /]],
+ ['date',[/ (what|today).*(date|day) /,/ (date|time) (today|now) /]]];
+var DICT='projects project skills github contact resume education achievements olympiad technologies technology hello thanks portfolio stack'.split(' ');
+function lev(a,b){if(Math.abs(a.length-b.length)>2)return 9;var d=[],i,j;for(i=0;i<=a.length;i++){d[i]=[i]}for(j=0;j<=b.length;j++)d[0][j]=j;for(i=1;i<=a.length;i++)for(j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[a.length][b.length]}
+function fix(n){return n.split(' ').map(function(w){if(w.length<5||DICT.indexOf(w)>-1)return w;for(var i=0;i<DICT.length;i++)if(lev(w,DICT[i])===1)return DICT[i];return w}).join(' ')}
+var lastP=null;
+function intent(q){var n=fix(norm(q));
+ if(/ (civicai|civic ai|expense|digital physics lab) /.test(n))return {t:'nf'};
+ if(/ (go to|goto|take me|scroll|jump|navigate|bring me) /.test(n)){for(var sk in SEC)if(n.indexOf(' '+sk+' ')>-1)return {t:'goto',s:sk}}
+ if(lastP){var one=/^ (tech|stack|links?|demo|repo|source|more|details) $/.test(n),pro=/ (its|it|this|that|the project) /.test(n);
+  if((one||pro)&&/ (tech|technologies|stack|built|made|tools) /.test(n))return {t:'ptech'};
+  if((one||pro)&&/ (links?|demo|live|try|repo|source|visit) /.test(n))return {t:'plinks'};
+  if((one||pro)&&/ (more|details|elaborate) /.test(n))return {t:'pmore'}}
+ for(var i=0;i<PD.projects.length;i++){var p=PD.projects[i];var ks=[p.id].concat(p.al);for(var j=0;j<ks.length;j++)if(n.indexOf(' '+ks[j]+' ')>-1||(n.indexOf(ks[j])>-1&&ks[j].length>5))return {t:'project',p:p}}
+ var hits=[],best=0;RULES.forEach(function(r){var sc=r[1].filter(function(x){return x.test(n)}).length;if(sc)hits.push([r[0],sc])});
+ if(!hits.length)return {t:'unk'};hits.forEach(function(h){best=Math.max(best,h[1])});
+ var top=hits.filter(function(h){return h[1]===best}).map(function(h){return h[0]});
+ if(top.indexOf('whoami')>-1)return {t:'cmd',c:'whoami'};
+ if(top.length===1){if(top[0]==='hello')return {t:'say',x:'Hello! Ask me about projects, skills, tech stack, achievements, GitHub or contact.'};if(top[0]==='thanks')return {t:'say',x:'You\'re welcome. Ask anything else about this portfolio.'};return {t:'cmd',c:top[0]}}
+ if(top.length===2&&top.indexOf('projects')>-1&&top.indexOf('techstack')>-1)return {t:'cmd',c:'techstack'};
+ if(top.length===2&&top.indexOf('projects')>-1&&top.indexOf('github')>-1)return {t:'cmd',c:'github'};
+ return {t:'amb',o:top}}
+function bot(lines){render(clog,lines,true);clog.scrollTop=clog.scrollHeight}
+function user(t){var d=document.createElement('div');d.className='dt-m u';d.textContent=t;clog.appendChild(d)}
+function ask(q){q=q.trim().slice(0,300);if(!q)return;user(q);var ty=document.createElement('div');ty.className='dt-m b';ty.textContent='…';ty.setAttribute('aria-hidden','true');clog.appendChild(ty);clog.scrollTop=clog.scrollHeight;
+ setTimeout(function(){ty.remove();var r=intent(q),sg=SUG,keep=false;
+  if(r.t==='project'){sawProj=true;lastP=r.p;keep=true;bot(pdesc(r.p));sg=['Its tech','Its links','Show projects']}
+  else if(r.t==='ptech'||r.t==='plinks'||r.t==='pmore'){keep=true;sawProj=true;bot(r.t==='ptech'?[L('o',lastP.n+' uses: '+lastP.t.join(', '))]:r.t==='plinks'?pdesc(lastP).filter(function(l){return l.k==='l'}):pdesc(lastP));sg=['Show projects','Contact']}
+  else if(r.t==='goto'){var g=CMDS.goto(r.s);bot(g);sg=['Show projects','Contact']}
+  else if(r.t==='cmd'){if(r.c==='projects')sawProj=true;bot(CMDS[r.c]());sg=({projects:['Tech stack','Achievements','Contact'],techstack:['Skills','Show projects'],skills:['Tech stack','Show projects'],contact:['GitHub activity','Show projects'],github:['Show projects','Contact'],whoami:['Show projects','Skills','Contact'],about:['Show projects','Skills']})[r.c]||SUG}
+  else if(r.t==='say')bot([L('o',r.x)]);
+  else if(r.t==='nf')bot([L('o','That project is not configured on this site, so I have nothing to say about it. Try "projects".')]);
+  else if(r.t==='amb')bot([L('o','Did you mean one of these? '+r.o.join(', ')+'. Tap a suggestion or rephrase.')]);
+  else{var sr=srch(q.replace(/[^a-z0-9&+# ]/gi,' ').split(' ').filter(function(w){return w.length>3}).sort(function(a,b){return b.length-a.length})[0]||'');
+   if(sr.length)bot([L('o','Here is what matches on this site:')].concat(sr.slice(0,6)));
+   else bot([L('o','I\'m a scripted portfolio assistant, so I can answer questions about the information configured on this website. Try "help", "projects", "techstack", or "contact".')])}
+  if(!keep)lastP=null;setSug(sg)},260)}
+var sawProj=false;
+clog.addEventListener('click',function(e){var rc=e.target.closest&&e.target.closest('a[data-run]');if(rc){e.preventDefault();var cm=rc.getAttribute('data-run');user(cm);var rr=run(cm);if(rr.o)bot(rr.o);return}
+ var a=e.target.closest&&e.target.closest('a[data-pid]');if(a){sawProj=true;var p=findP(a.getAttribute('data-pid'));if(p){user(p.n);bot(pdesc(p))}}});
+function setSug(list){var c=$('dt-sug');c.textContent='';list.forEach(function(s){var b=document.createElement('button');b.type='button';b.textContent=s;b.addEventListener('click',function(){ask(s)});c.appendChild(b)})}
+function greet(){bot([L('o','Hi, I\'m a scripted portfolio assistant. Ask about projects, skills, tech stack, GitHub or contact.')])}
+greet();
+setSug(SUG);
+function sendChat(){var v=cin.value;cin.value='';ask(v);cin.focus()}
+$('dt-snd').addEventListener('click',sendChat);
+cin.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.isComposing){e.preventDefault();sendChat()}});
+$('dt-run').addEventListener('click',function(){var v=inp.value;inp.value='';exec(v);inp.focus()});
+['help','projects','techstack','skills','achievements','github','contact','history','clear'].forEach(function(c){var b=document.createElement('button');b.type='button';b.textContent=c;b.addEventListener('click',function(){exec(c)});$('dt-chips').appendChild(b)});
+$('dt-cclr').addEventListener('click',function(){clog.textContent='';lastP=null;setSug(SUG);greet();cin.focus()});
+// mode switch
+function mode(m){var t=m==='term';$('dt-term').hidden=!t;$('dt-chat').hidden=t;$('dt-t-term').setAttribute('aria-pressed',t);$('dt-t-chat').setAttribute('aria-pressed',!t)}
+var win=$('dt-win'),slot=$('dt-slot'),fab=$('dt-fab'),reo=$('dt-reopen'),closed=false;
+function isFloat(){return win.classList.contains('dt-float')}
+function setClosed(c){closed=c;win.hidden=c;reo.hidden=!c;fab.setAttribute('aria-expanded',String(!c&&isFloat()))}
+function openFloat(m){setClosed(false);win.classList.remove('dt-min');mode(m);document.body.appendChild(win);win.classList.add('dt-float');fab.setAttribute('aria-expanded','true');setTimeout(function(){(m==='chat'?cin:inp).focus()},50)}
+function dock(m){win.classList.remove('dt-float','dt-min');slot.insertBefore(win,reo);setClosed(false);if(m)mode(m)}
+function closeWin(){setClosed(true);if(sawProj){sawProj=false;var h=document.getElementById('hero');if(h)h.scrollIntoView({behavior:'smooth'})}}
+fab.addEventListener('click',function(){(closed||!isFloat())?openFloat('chat'):closeWin()});
+reo.addEventListener('click',function(){dock();});
+win.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.dt-b');if(!b)return;var a=b.getAttribute('data-a');
+ if(a==='close')closeWin();
+ else if(a==='min')win.classList.toggle('dt-min');
+ else if(a==='max'){win.classList.remove('dt-min');win.classList.toggle('dt-max')}
+ else if(a==='clr'){if($('dt-term').hidden)$('dt-cclr').click();else{log.textContent='';promptLine()}}});
+win.addEventListener('keydown',function(e){if(e.key==='Escape'&&isFloat())closeWin()});
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href="#devterm"]');if(a){dock('term')}});
+document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&!e.shiftKey&&!e.altKey&&String(e.key).toLowerCase()==='k'){e.preventDefault();fab.click()}});
+var nd=$('dt-nudge');nd.textContent='Ask me about my projects';
+var nt=setTimeout(function(){if(closed||!isFloat())nd.classList.add('on')},3500),nh=setTimeout(function(){nd.classList.remove('on')},11000);
+fab.addEventListener('click',function(){clearTimeout(nt);clearTimeout(nh);nd.classList.remove('on')});
+$('dt-t-term').addEventListener('click',function(){mode('term')});$('dt-t-chat').addEventListener('click',function(){mode('chat')});
+}catch(err){if(window.console)console.error('devterm',err)}
+})();
+</script>
 <script>
 (function(){
 'use strict';
