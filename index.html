@@ -2131,12 +2131,13 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
       <li><a href="#about">About</a></li>
       <li><a href="#achievements">Achievements</a></li>
       <li><a href="/projects">Projects</a></li>
+      <li class="nav-gh"><a href="#github">GitHub</a></li>
       <li><a href="#certs">Certifications</a></li>
       <li><a href="#goals">Goals</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-right">
-      <span class="nav-coord" id="nav-coord"><span class="nc-dot"></span>01 / 09 · HERO</span>
+      <span class="nav-coord" id="nav-coord"><span class="nc-dot"></span>01 / 10 · HERO</span>
       <button id="print-cv-btn" onclick="window.print()" aria-label="Print portfolio as PDF">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
         Print
@@ -2166,6 +2167,7 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
   <a href="#about" onclick="closeMob()">About</a>
   <a href="#achievements" onclick="closeMob()">Achievements</a>
   <a href="/projects" onclick="closeMob()">Projects</a>
+  <a href="#github" onclick="closeMob()">GitHub</a>
   <a href="#certs" onclick="closeMob()">Certifications</a>
   <a href="#goals" onclick="closeMob()">Goals</a>
   <a href="#contact" onclick="closeMob()">Contact</a>
@@ -3165,6 +3167,353 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
     </div>
   </div>
 </section>
+<!-- GITHUB ACTIVITY -->
+<style>
+#github{padding:100px 0;border-top:1px solid var(--border)}
+#github [hidden]{display:none!important}
+#github .sec-sub a,#github .gh-fine a,#github .gh-msg a,#github .gh-defs a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+#github a:focus-visible,#github button:focus-visible,#github summary:focus-visible,#github .gh-cal-scroll:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+#github .gh-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}
+#github .gh-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:20px}
+#github .gh-stat dt{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text2);margin-bottom:8px}
+#github .gh-stat dd.gh-num{font-family:'Syne',sans-serif;font-size:1.7rem;font-weight:700;color:var(--blue);line-height:1.1}
+#github .gh-stat dd.gh-sub{font-size:.72rem;color:var(--text2);line-height:1.5;margin-top:8px}
+#github .gh-msg{font-size:.84rem;color:var(--text2);line-height:1.7;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-bottom:14px}
+#github .gh-retry{font:inherit;font-size:.78rem;background:var(--blue-dim);border:1px solid var(--blue-dim2);color:var(--blue);border-radius:6px;padding:8px 14px;min-height:36px;cursor:pointer}
+#github .gh-retry:hover{background:var(--blue-dim2)}
+#github .gh-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:26px 28px;margin-bottom:20px}
+#github .gh-card-hd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 16px;margin-bottom:16px}
+#github .gh-card h3{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:600;color:var(--text)}
+#github .gh-card-meta{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--text2)}
+#github .gh-cal-scroll{overflow-x:auto;padding-bottom:10px}
+#github .gh-cal-inner{--c:11px;--g:3px;display:grid;grid-template-columns:auto 1fr;column-gap:8px;row-gap:6px;width:max-content;min-width:100%}
+#github .gh-cal-months{grid-row:1;grid-column:2;display:grid;grid-auto-columns:var(--c);column-gap:var(--g);height:14px;position:relative}
+#github .gh-mo{font-size:.62rem;color:var(--text2);white-space:nowrap;line-height:14px;grid-row:1}
+#github .gh-cal-days{grid-row:2;grid-column:1;display:grid;grid-template-rows:repeat(7,var(--c));row-gap:var(--g);font-size:.58rem;color:var(--text2);position:sticky;left:0;background:var(--surface);z-index:1;padding-right:4px}
+#github .gh-cal-days span{line-height:var(--c)}
+#github .gh-cal-grid{grid-row:2;grid-column:2;display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,var(--c));grid-auto-columns:var(--c);gap:var(--g)}
+#github .gh-cell{display:block;width:var(--c);height:var(--c);border-radius:2px;box-sizing:border-box;background:var(--surface2);border:1px solid var(--border)}
+#github .gh-cell.gh-pad{visibility:hidden}
+#github .gh-cell.l1,#github .gh-cell.l2,#github .gh-cell.l3{background:var(--blue);border-color:transparent}
+#github .gh-cell.l1{opacity:.3}#github .gh-cell.l2{opacity:.55}#github .gh-cell.l3{opacity:.8}
+#github .gh-cell.l4{background:var(--violet);border-color:transparent}
+#github .gh-readout{font-size:.78rem;color:var(--text);min-height:1.4em;margin-top:10px}
+#github .gh-legend{display:flex;align-items:center;gap:4px;font-size:.68rem;color:var(--text2);margin-top:8px}
+#github .gh-legend .gh-cell{width:11px;height:11px}
+#github .gh-note{font-size:.76rem;color:var(--text2);line-height:1.7;margin-top:10px}
+#github .gh-months{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px 16px;font-size:.78rem;color:var(--text2);margin-top:10px}
+#github details summary{cursor:pointer;font-size:.78rem;color:var(--blue);margin-top:12px;min-height:32px;display:flex;align-items:center}
+#github .gh-events{list-style:none;min-height:360px}
+#github .gh-ev{display:grid;grid-template-columns:72px 1fr;gap:14px;padding:14px 0;border-top:1px solid var(--border)}
+#github .gh-ev:first-child{border-top:0;padding-top:0}
+#github .gh-ev-type{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;text-align:center;align-self:start;padding:4px 6px;border-radius:4px;color:var(--blue);background:var(--blue-dim);border:1px solid var(--blue-dim2)}
+#github .gh-ev-link{color:var(--text);text-decoration:none;font-size:.88rem;line-height:1.5;overflow-wrap:anywhere}
+#github .gh-ev-link:hover{color:var(--blue);text-decoration:underline}
+#github .gh-ev-detail{font-size:.78rem;color:var(--text2);margin-top:2px;overflow-wrap:anywhere}
+#github .gh-ev-meta{font-size:.74rem;color:var(--text2);margin-top:4px}
+#github .gh-ev-meta a{color:var(--text2);text-decoration:underline;text-underline-offset:3px}
+#github .gh-ev-meta a:hover{color:var(--blue)}
+#github .gh-more{display:inline-block;margin-top:14px;font-size:.8rem;color:var(--blue);text-decoration:none}
+#github .gh-more:hover{text-decoration:underline}
+#github .gh-defs{font-size:.78rem;color:var(--text2);line-height:1.7}
+#github .gh-defs p{margin-top:8px}
+#github .gh-fine{font-size:.72rem;color:var(--text2);line-height:1.7;margin-top:18px;max-width:760px}
+@media(max-width:900px){#github .gh-stats{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){#github .gh-cal-inner{--c:14px}}
+@media(max-width:640px){#github{padding:70px 0}#github .gh-card{padding:20px}#github .gh-ev{grid-template-columns:1fr;gap:6px}#github .gh-ev-type{justify-self:start;min-width:64px}}
+@media(prefers-reduced-motion:reduce){#github *{transition:none!important;animation:none!important}}
+@media print{#github{display:none!important}}
+/* Nav guard: 8 links can crowd the bar at tablet widths; the link stays in the mobile menu and footer */
+@media(min-width:641px) and (max-width:860px){.nav-links .nav-gh{display:none}}
+</style>
+<section id="github" aria-labelledby="gh-title">
+  <div class="container">
+    <div class="sec-hdr reveal">
+      <p class="sec-eyebrow">// Open Source</p>
+      <h2 class="sec-title reveal title-reveal" id="gh-title">GitHub Activity</h2>
+      <p class="sec-sub">Live public data from <a href="https://github.com/barathraj0812" target="_blank" rel="noopener">github.com/barathraj0812</a>. Public repositories and public activity only; nothing on this section is written by hand.</p>
+      <div class="divider"></div>
+    </div>
+
+    <noscript><p class="gh-msg">This section needs JavaScript. See the profile directly at <a href="https://github.com/barathraj0812" target="_blank" rel="noopener">github.com/barathraj0812</a>.</p></noscript>
+
+    <dl class="gh-stats reveal d1" id="gh-stats" aria-busy="true">
+      <div class="gh-stat"><dt>Public repositories</dt><dd class="gh-num" id="gh-s-repos">…</dd><dd class="gh-sub">Owned by this account; forks included</dd></div>
+      <div class="gh-stat"><dt>Stars received</dt><dd class="gh-num" id="gh-s-stars">…</dd><dd class="gh-sub" id="gh-s-stars-sub">Original (non-fork) public repositories owned by this account</dd></div>
+      <div class="gh-stat"><dt>Followers</dt><dd class="gh-num" id="gh-s-followers">…</dd></div>
+      <div class="gh-stat"><dt>Following</dt><dd class="gh-num" id="gh-s-following">…</dd></div>
+    </dl>
+    <p class="gh-msg" id="gh-stats-msg" role="status" hidden></p>
+
+    <div class="gh-card reveal d2" id="gh-cal-card" aria-busy="true">
+      <div class="gh-card-hd">
+        <h3>Contribution graph</h3>
+        <span class="gh-card-meta" id="gh-cal-total"></span>
+      </div>
+      <p class="gh-msg" id="gh-cal-msg" role="status">Loading contribution data…</p>
+      <div id="gh-cal-view" hidden>
+        <div class="gh-cal-scroll" id="gh-cal-scroll" role="region" aria-label="Contribution calendar, scrolls horizontally" tabindex="0">
+          <div class="gh-cal-inner">
+            <div class="gh-cal-months" id="gh-cal-months" aria-hidden="true"></div>
+            <div class="gh-cal-days" aria-hidden="true"><span></span><span>Mon</span><span></span><span>Wed</span><span></span><span>Fri</span><span></span></div>
+            <div class="gh-cal-grid" id="gh-cal-grid" role="img"></div>
+          </div>
+        </div>
+        <p class="gh-readout" id="gh-readout">Hover over or tap a day to see its count.</p>
+        <div class="gh-legend" aria-hidden="true">Less <span class="gh-cell"></span><span class="gh-cell l1"></span><span class="gh-cell l2"></span><span class="gh-cell l3"></span><span class="gh-cell l4"></span> More</div>
+        <p class="gh-note" id="gh-cal-note"></p>
+        <details><summary>Monthly totals</summary><ul class="gh-months" id="gh-cal-list"></ul></details>
+      </div>
+      <p class="gh-fine">Daily counts come from an unofficial service that mirrors the contribution calendar on the GitHub profile. Counts can include private contributions only if the profile is set to show them. A missing graph means the data could not be loaded, not that there was no activity.</p>
+    </div>
+
+    <div class="gh-card reveal d3" id="gh-ev-card" aria-busy="true">
+      <div class="gh-card-hd">
+        <h3>Recent public activity</h3>
+        <span class="gh-card-meta">Latest events, not lifetime contributions</span>
+      </div>
+      <p class="gh-msg" id="gh-ev-msg" role="status">Loading recent activity…</p>
+      <ul class="gh-events" id="gh-ev-list" hidden></ul>
+      <a class="gh-more" href="https://github.com/barathraj0812" target="_blank" rel="noopener">View all activity on GitHub ↗</a>
+    </div>
+
+    <details class="gh-defs reveal">
+      <summary>How these numbers are counted</summary>
+      <p><strong>Public repositories</strong> is GitHub's count of public repositories owned by the account, including forks. <strong>Stars received</strong> adds up stars on the original (non-fork) public repositories owned by the account only; forks, organization repositories and stars the account has given to others are not included. <strong>Recent public activity</strong> is GitHub's public event feed, which only reaches back about 90 days, can lag behind real activity, and omits private work. It is not a lifetime total. The contribution graph covers the last 12 months.</p>
+    </details>
+
+    <p class="gh-fine">When this section scrolls into view, your browser requests data from api.github.com (profile, repositories, public events) and github-contributions-api.jogruber.de (contribution calendar), so those services can see your IP address and browser details. This page does not save the responses in cookies or local/session storage; your browser's normal HTTP cache may keep them briefly. See the <a href="/privacy-policy.html">privacy policy</a>.</p>
+  </div>
+</section>
+<script>
+(function(){
+'use strict';
+var sec=document.getElementById('github');
+if(!sec||!window.fetch||!window.Promise) return;
+var USER='barathraj0812',PROFILE='https://github.com/'+USER,API='https://api.github.com',
+    CAL='https://github-contributions-api.jogruber.de/v4/'+USER+'?y=last',
+    MAX_EVENTS=6,REPO_RE=/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/,SHA_RE=/^[0-9a-f]{40}$/,DATE_RE=/^\d{4}-\d{2}-\d{2}$/;
+var cache={}; /* in-memory only: nothing is written to cookies, localStorage or sessionStorage */
+
+function $(id){return document.getElementById(id);}
+function h(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
+function link(href,txt,cls){var x=h('a',cls,txt);x.href=href;x.target='_blank';x.rel='noopener noreferrer';return x;}
+function fmt(n){return n.toLocaleString('en');}
+function busy(id,on){var e=$(id);if(e)e.setAttribute('aria-busy',on?'true':'false');}
+function memo(k,fn){if(!cache[k])cache[k]=fn().catch(function(e){delete cache[k];throw e;});return cache[k];}
+
+function getJSON(url,accept){
+  var ctl=window.AbortController?new AbortController():null;
+  var timer=setTimeout(function(){if(ctl)ctl.abort();},12000);
+  return fetch(url,{headers:{'Accept':accept},credentials:'omit',referrerPolicy:'no-referrer',signal:ctl?ctl.signal:undefined})
+    .then(function(r){
+      clearTimeout(timer);
+      if(!r.ok){
+        var e=new Error('HTTP '+r.status);e.status=r.status;
+        e.limited=(r.status===403||r.status===429)&&r.headers.get('x-ratelimit-remaining')==='0';
+        e.reset=Number(r.headers.get('x-ratelimit-reset'))||0;
+        throw e;
+      }
+      return r.json();
+    },function(e){clearTimeout(timer);throw e;});
+}
+function why(e,what){
+  if(e&&e.limited){
+    var t=e.reset?new Date(e.reset*1000).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):'';
+    return 'GitHub\u2019s limit for anonymous requests has been reached'+(t?'. Try again after '+t:'')+'.';
+  }
+  return 'Couldn\u2019t load '+what+' from GitHub right now.';
+}
+function setMsg(id,text,retry,href,hrefText){
+  var m=$(id);m.textContent='';
+  if(!text){m.hidden=true;return;}
+  m.hidden=false;m.appendChild(h('span',null,text));
+  if(retry){var b=h('button','gh-retry','Try again');b.type='button';b.addEventListener('click',function(){retry();});m.appendChild(b);}
+  if(href)m.appendChild(link(href,hrefText));
+}
+
+/* ── Stats ── */
+function fetchUser(){
+  return getJSON(API+'/users/'+USER,'application/vnd.github+json').then(function(d){
+    if(!d||typeof d!=='object'||!isFinite(d.public_repos)||!isFinite(d.followers)||!isFinite(d.following))throw new Error('shape');
+    return d;
+  });
+}
+function fetchRepos(){ /* paginates: 100 per page, up to 10 pages */
+  var all=[],page=1;
+  function next(){
+    return getJSON(API+'/users/'+USER+'/repos?type=owner&per_page=100&page='+page,'application/vnd.github+json').then(function(d){
+      if(!Array.isArray(d))throw new Error('shape');
+      all=all.concat(d);
+      if(d.length===100){if(page>=10)return {repos:all,truncated:true};page++;return next();}
+      return {repos:all,truncated:false};
+    });
+  }
+  return next();
+}
+function loadStats(){
+  busy('gh-stats',true);setMsg('gh-stats-msg','Loading GitHub statistics\u2026');
+  ['gh-s-repos','gh-s-stars','gh-s-followers','gh-s-following'].forEach(function(id){$(id).textContent='\u2026';});
+  Promise.allSettled([memo('user',fetchUser),memo('repos',fetchRepos)]).then(function(r){
+    var err=null;
+    if(r[0].status==='fulfilled'){
+      var u=r[0].value;
+      $('gh-s-repos').textContent=fmt(u.public_repos);
+      $('gh-s-followers').textContent=fmt(u.followers);
+      $('gh-s-following').textContent=fmt(u.following);
+    }else{err=r[0].reason;['gh-s-repos','gh-s-followers','gh-s-following'].forEach(function(id){$(id).textContent='\u2014';});}
+    if(r[1].status==='fulfilled'){
+      var own=r[1].value.repos.filter(function(x){return x&&x.fork===false;});
+      var stars=own.reduce(function(s,x){return s+(isFinite(x.stargazers_count)?x.stargazers_count:0);},0);
+      var cut=r[1].value.truncated;
+      $('gh-s-stars').textContent=(cut?'\u2265 ':'')+fmt(stars);
+      $('gh-s-stars-sub').textContent='Across '+fmt(own.length)+' original (non-fork) public repositories owned by this account'+(cut?'; only the first 1,000 repositories were counted':'');
+    }else{err=err||r[1].reason;$('gh-s-stars').textContent='\u2014';}
+    busy('gh-stats',false);
+    setMsg('gh-stats-msg',err?why(err,'some statistics'):'',err?loadStats:null);
+  });
+}
+
+/* ── Recent public events ── */
+function clip(s,n){s=String(s||'').split('\n')[0].trim();return s.length>n?s.slice(0,n-1)+'\u2026':s;}
+function safeUrl(u){try{var x=new URL(u);return x.protocol==='https:'&&x.hostname==='github.com'?x.href:null;}catch(e){return null;}}
+function describe(ev){
+  var p=ev.payload||{},repo=ev.repo&&ev.repo.name,t=Date.parse(ev.created_at);
+  if(typeof repo!=='string'||!REPO_RE.test(repo))return null;
+  var base='https://github.com/'+repo,o={repo:repo,time:isFinite(t)?t:null,detail:''};
+  if(ev.type==='PushEvent'){
+    var n=typeof p.size==='number'?p.size:(Array.isArray(p.commits)?p.commits.length:null);
+    var br=typeof p.ref==='string'&&p.ref.indexOf('refs/heads/')===0?p.ref.slice(11):null;
+    o.type='Push';
+    o.text='Pushed '+(n!=null?n+(n===1?' commit':' commits'):'commits')+(br?' to '+br:'');
+    var zero=/^0+$/.test(p.before||'');
+    o.url=SHA_RE.test(p.head||'')?(SHA_RE.test(p.before||'')&&!zero?base+'/compare/'+p.before+'...'+p.head:base+'/commit/'+p.head):base;
+    if(Array.isArray(p.commits)&&p.commits[0]&&typeof p.commits[0].message==='string')o.detail=clip(p.commits[0].message,110);
+    return o;
+  }
+  if(ev.type==='PullRequestEvent'&&p.pull_request&&isFinite(p.number)){
+    var pr=p.pull_request,v=p.action==='closed'&&pr.merged?'Merged':{opened:'Opened',closed:'Closed',reopened:'Reopened'}[p.action];
+    if(!v)return null;
+    o.type='PR';o.text=v+' pull request #'+p.number+(pr.title?': '+clip(pr.title,100):'');
+    o.url=safeUrl(pr.html_url)||base+'/pull/'+p.number;return o;
+  }
+  if(ev.type==='IssuesEvent'&&p.issue&&isFinite(p.issue.number)){
+    var vi={opened:'Opened',closed:'Closed',reopened:'Reopened'}[p.action];
+    if(!vi)return null;
+    o.type='Issue';o.text=vi+' issue #'+p.issue.number+(p.issue.title?': '+clip(p.issue.title,100):'');
+    o.url=safeUrl(p.issue.html_url)||base+'/issues/'+p.issue.number;return o;
+  }
+  if(ev.type==='CreateEvent'&&p.ref_type==='repository'){o.type='Repo';o.text='Created repository '+repo;o.url=base;return o;}
+  return null;
+}
+var RTF=window.Intl&&Intl.RelativeTimeFormat?new Intl.RelativeTimeFormat('en',{numeric:'auto'}):null;
+function rel(t){
+  var s=(t-Date.now())/1000,a=Math.abs(s),U=[['year',31536000],['month',2592000],['day',86400],['hour',3600],['minute',60]];
+  for(var i=0;i<U.length;i++){if(a>=U[i][1])return RTF?RTF.format(Math.round(s/U[i][1]),U[i][0]):new Date(t).toLocaleDateString('en');}
+  return 'just now';
+}
+function renderEvent(d){
+  var li=h('li','gh-ev'),main=h('div','gh-ev-main'),meta=h('p','gh-ev-meta');
+  li.appendChild(h('span','gh-ev-type',d.type));
+  main.appendChild(link(d.url,d.text,'gh-ev-link'));
+  if(d.detail)main.appendChild(h('p','gh-ev-detail',d.detail));
+  meta.appendChild(link('https://github.com/'+d.repo,d.repo));
+  if(d.time!=null){
+    var tm=h('time',null,rel(d.time));tm.dateTime=new Date(d.time).toISOString();
+    tm.title=new Date(d.time).toLocaleString('en',{dateStyle:'medium',timeStyle:'short'});
+    meta.appendChild(document.createTextNode(' \u00b7 '));meta.appendChild(tm);
+  }
+  main.appendChild(meta);li.appendChild(main);return li;
+}
+function loadEvents(){
+  var list=$('gh-ev-list');busy('gh-ev-card',true);list.hidden=true;setMsg('gh-ev-msg','Loading recent activity\u2026');
+  memo('events',function(){
+    return getJSON(API+'/users/'+USER+'/events/public?per_page=100','application/vnd.github+json').then(function(d){if(!Array.isArray(d))throw new Error('shape');return d;});
+  }).then(function(evs){
+    var items=[];
+    for(var i=0;i<evs.length&&items.length<MAX_EVENTS;i++){var d=null;try{d=describe(evs[i]||{});}catch(e){}if(d)items.push(d);}
+    list.textContent='';items.forEach(function(d){list.appendChild(renderEvent(d));});
+    busy('gh-ev-card',false);
+    if(items.length){list.hidden=false;setMsg('gh-ev-msg','');}
+    else setMsg('gh-ev-msg',evs.length?'GitHub\u2019s recent public feed has no pushes, pull requests, issues or new repositories to show.':'GitHub returned no recent public events for this account. The feed only reaches back about 90 days and can lag behind real activity.');
+  },function(e){busy('gh-ev-card',false);setMsg('gh-ev-msg',why(e,'recent activity'),loadEvents,PROFILE,'Open the GitHub profile \u2197');});
+}
+
+/* ── Contribution calendar ── */
+function fetchCal(){
+  return getJSON(CAL,'application/json').then(function(d){
+    var c=d&&d.contributions;if(!Array.isArray(c))throw new Error('shape');
+    var limit=new Date(Date.now()+14*3600000).toISOString().slice(0,10),out=[],prev=null;
+    for(var i=0;i<c.length;i++){
+      var x=c[i];
+      if(!x||!DATE_RE.test(x.date)||!isFinite(x.count)||x.count<0||!(x.level>=0&&x.level<=4&&x.level%1===0))throw new Error('shape');
+      if(x.date>limit)continue; /* never draw future days as zero-activity days */
+      var t=Date.parse(x.date+'T00:00:00Z');
+      if(!isFinite(t)||(prev!==null&&t-prev!==864e5))throw new Error('shape');
+      prev=t;out.push({date:x.date,t:t,count:x.count,level:x.level});
+    }
+    if(out.length<28)throw new Error('shape');
+    return out;
+  });
+}
+function fd(t,o){o.timeZone='UTC';return new Date(t).toLocaleDateString('en',o);}
+function drawCal(days){
+  var grid=$('gh-cal-grid'),total=0,max=0,maxDay=null,sums={},cnt={},order=[];
+  days.forEach(function(d){
+    total+=d.count;if(d.count>max){max=d.count;maxDay=d;}
+    var k=d.date.slice(0,7);if(!(k in sums)){sums[k]=0;cnt[k]=0;order.push(k);}sums[k]+=d.count;cnt[k]++;
+  });
+  var pad=new Date(days[0].t).getUTCDay(),W=Math.ceil((pad+days.length)/7),first=days[0],last=days[days.length-1];
+  grid.textContent='';
+  for(var i=0;i<pad;i++){var p=h('span','gh-cell gh-pad');p.setAttribute('aria-hidden','true');grid.appendChild(p);}
+  days.forEach(function(d){
+    var c=h('span','gh-cell l'+d.level),l=(d.count===0?'No contributions':d.count+(d.count===1?' contribution':' contributions'))+' on '+fd(d.t,{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+    c.title=l;c.setAttribute('data-l',l);grid.appendChild(c);
+  });
+  var mrow=$('gh-cal-months'),marks=[],lastM=-1;
+  mrow.textContent='';mrow.style.gridTemplateColumns='repeat('+W+',var(--c))';
+  for(var w=0;w<W;w++){
+    var di=Math.max(w*7-pad,0);if(di>=days.length)break;
+    var m=new Date(days[di].t).getUTCMonth();if(m!==lastM){marks.push({w:w,t:days[di].t});lastM=m;}
+  }
+  if(marks.length>1&&marks[1].w-marks[0].w<3)marks.shift();
+  marks.forEach(function(k){var s=h('span','gh-mo',fd(k.t,{month:'short'}));s.style.gridColumn=(k.w+1)+' / span '+Math.min(3,W-k.w);mrow.appendChild(s);});
+  var span=fd(first.t,{month:'short',day:'numeric',year:'numeric'})+' to '+fd(last.t,{month:'short',day:'numeric',year:'numeric'});
+  $('gh-cal-total').textContent=fmt(total)+(total===1?' contribution':' contributions')+' \u00b7 '+span;
+  grid.setAttribute('aria-label','Contribution calendar for '+span+': '+fmt(total)+' contributions in total.');
+  $('gh-cal-note').textContent=max>0?'Busiest day: '+fd(maxDay.t,{month:'short',day:'numeric',year:'numeric'})+' with '+fmt(max)+(max===1?' contribution.':' contributions.'):'No contributions were recorded in this period.';
+  var ul=$('gh-cal-list');ul.textContent='';
+  order.forEach(function(k){
+    var y=+k.slice(0,4),mo=+k.slice(5,7),full=new Date(Date.UTC(y,mo,0)).getUTCDate();
+    ul.appendChild(h('li',null,fd(Date.UTC(y,mo-1,1),{month:'short',year:'numeric'})+': '+fmt(sums[k])+(cnt[k]<full?' (partial month)':'')));
+  });
+  var ro=$('gh-readout');ro.textContent='Hover over or tap a day to see its count.';
+  if(!grid.__gh){
+    grid.__gh=true;
+    var show=function(e){var c=e.target.closest?e.target.closest('.gh-cell[data-l]'):null;if(c)ro.textContent=c.getAttribute('data-l');};
+    grid.addEventListener('pointerover',show);grid.addEventListener('click',show);
+  }
+}
+function loadCal(){
+  $('gh-cal-view').hidden=true;$('gh-cal-total').textContent='';busy('gh-cal-card',true);setMsg('gh-cal-msg','Loading contribution data\u2026');
+  memo('cal',fetchCal).then(function(days){
+    drawCal(days);setMsg('gh-cal-msg','');$('gh-cal-view').hidden=false;busy('gh-cal-card',false);
+    var sc=$('gh-cal-scroll');sc.scrollLeft=sc.scrollWidth; /* start at the most recent weeks */
+  },function(e){
+    busy('gh-cal-card',false);
+    setMsg('gh-cal-msg','Contribution data is unavailable right now, so no graph is shown. This does not mean there was no activity.',loadCal,PROFILE,'View the graph on GitHub \u2197');
+  });
+}
+
+/* ── Start once, when the section is near the viewport ── */
+var started=false;
+function start(){if(started)return;started=true;loadStats();loadCal();loadEvents();}
+if('IntersectionObserver' in window){
+  new IntersectionObserver(function(es,o){if(es.some(function(e){return e.isIntersecting;})){o.disconnect();start();}},{rootMargin:'400px 0px'}).observe(sec);
+}else start();
+})();
+</script>
+
 <section id="about">
   <div class="container">
     <div class="sec-hdr reveal">
@@ -3598,6 +3947,7 @@ footer{border-top:1px solid var(--border);padding:40px 32px 28px;position:relati
         <h4>Navigate</h4>
         <a href="#hero">Home</a>
         <a href="/projects">Projects</a>
+        <a href="#github">GitHub Activity</a>
         <a href="#achievements">Achievements</a>
         <a href="#certs">Certifications</a>
         <a href="#skills">Skills</a>
@@ -3685,7 +4035,7 @@ const nav=document.getElementById('main-nav');
 if(nav)window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>28),{passive:true});
 
 /* Active nav link */
-const sectionIds=['hero','about-mini','projects','achievements','certs','skills','about','goals','contact'];
+const sectionIds=['hero','about-mini','projects','achievements','github','certs','skills','about','goals','contact'];
 const sectionEls=sectionIds.map(id=>document.getElementById(id)).filter(Boolean); // resolved once, not per scroll event
 const links=document.querySelectorAll('.nav-links a');
 const linkTargets=Array.from(links).map(a=>({a,href:a.getAttribute('href').replace('#','')})); // parsed once, not per scroll event
@@ -6978,6 +7328,7 @@ if(_sb)_sb.addEventListener('click',function(){sharePortfolio(this);});
     {id:'skills',label:'SKILLS'},
     {id:'projects',label:'PROJECTS'},
     {id:'achievements',label:'ACHIEVEMENTS'},
+    {id:'github',label:'GITHUB'},
     {id:'about',label:'PROFILE'},
     {id:'goals',label:'GOALS'},
     {id:'contact',label:'CONTACT'}
